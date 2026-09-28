@@ -10,41 +10,91 @@ export const metadata: Metadata = {
     "150+ gelöste Project-Euler-Probleme, Top 0,5% weltweit - algorithmische Mathematik in Java, Rust, Python, Mathematica und Matlab.",
 };
 
-const RUST_SAMPLE = `// Vereinfachter Ausschnitt aus der Lösung von Problem 822
-// ("Factorish numbers"): Fac(n) ist der größte Teiler a von n mit
-// gcd(a, n / a) = 1. Für Primzahlpotenzen n = p^k gilt Fac(n) = n;
-// für zusammengesetzte n mit teilerfremden Faktoren wird a rekursiv
-// über die kleinsten Primfaktoren bestimmt.
-fn smallest_prime_factors(limit: usize) -> Vec<u32> {
-    let mut spf = vec![0u32; limit + 1];
-    for i in 2..=limit {
-        if spf[i] == 0 {
-            let mut j = i;
-            while j <= limit {
-                if spf[j] == 0 {
-                    spf[j] = i as u32;
+const RUST_SAMPLE = `use my_macros::problem;
+use crate::util::modulo::pow;
+
+#[problem(822)]
+fn solve() -> u64 {
+    // Berechne S(10^4, 10^16) mod 1234567891
+    // Problem: Liste [2,3,...,n], in jeder Runde wird das kleinste Element quadriert
+    g(10u64.pow(4), 10u64.pow(16))
+}
+
+const MOD: u64 = 1234567891;
+
+/// Berechnet S(n, m): Summe der Liste nach m Runden
+///
+/// Hauptidee: Statt die Zahlen selbst zu speichern (die riesig werden),
+/// speichern wir log2(log2(x)). Bei Quadrierung: x -> x^2 wird daraus einfach +1
+fn g(n: u64, m: u64) -> u64 {
+    let f = 2.0f64.log2();
+    let mut list: Vec<f64> = (2..=n)
+        .map(|x| f64::log2(f64::log2(x as f64)) / f)
+        .collect();
+    let mut count = vec![0; (n - 1) as usize];
+    let mut k = 0;
+
+    // ===== PHASE 1: Pattern-Erkennung =====
+    loop {
+        for _ in 0..n - 1 {
+            let mut smallest = f64::INFINITY;
+            let mut min_idx = 0;
+            for i in 0..list.len() {
+                if list[i] < smallest {
+                    smallest = list[i];
+                    min_idx = i;
                 }
-                j += i;
             }
+            count[min_idx] += 1;
+            list[min_idx] += 1.0;
+        }
+        k += 1;
+        if count.iter().all(|&x| x > 0) {
+            break;
         }
     }
-    spf
-}
 
-/// Größter Teiler a von n mit gcd(a, n / a) = 1: das Produkt der
-/// Primpotenzen des größten Primfaktors von n.
-fn fac(mut n: u64, spf: &[u32]) -> u64 {
-    let p = spf[n as usize] as u64;
-    let mut a = 1;
-    while n % p == 0 {
-        a *= p;
-        n /= p;
+    // ===== PHASE 2: Rest-Runden =====
+    for _ in 0..(m % (n - 1)) {
+        let mut smallest = f64::INFINITY;
+        let mut min_idx = 0;
+        for i in 0..list.len() {
+            if list[i] < smallest {
+                smallest = list[i];
+                min_idx = i;
+            }
+        }
+        count[min_idx] += 1;
+        list[min_idx] += 1.0;
     }
-    a
+
+    // ===== PHASE 3: Wiederholungen =====
+    let r = m / (n - 1) - k;
+
+    // ===== PHASE 4: Endergebnis =====
+    (2..=n)
+        .enumerate()
+        .map(|(i, x)| n_pow_2k_mod(x, count[i] + r, MOD))
+        .fold(0u64, |acc, c| (acc + c) % MOD)
 }
 
-fn sum_fac(limit: u64, spf: &[u32]) -> u64 {
-    (2..=limit).map(|n| fac(n, spf)).sum()
+/// Berechnet x^(2^k) mod p effizient
+fn n_pow_2k_mod(n: u64, k: u64, p: u64) -> u64 {
+    if n % p == 0 {
+        return 0;
+    }
+    let phi = p - 1;
+    let mut e = 1u64;
+    let mut base = 2u64;
+    let mut exp = k;
+    while exp > 0 {
+        if exp % 2 == 1 {
+            e = (e as u128 * base as u128 % phi as u128) as u64;
+        }
+        base = (base as u128 * base as u128 % phi as u128) as u64;
+        exp /= 2;
+    }
+    pow(n, e, p)
 }
 `;
 
@@ -105,62 +155,97 @@ export default function ProjectEulerPage() {
         <h2>Beispielaufgaben</h2>
 
         <div className={styles.problem}>
-          <h3>Problem 12 - Highly divisible triangular number</h3>
+          <h3>Problem 938 - Exhausting a Colour</h3>
           <p>
-            Die n-te Dreieckszahl ist die Summe der ersten n natürlichen
-            Zahlen:
+            Ein Kartendeck enthält <Math tex="R" /> rote und{" "}
+            <Math tex="B" /> schwarze Karten. Eine Karte wird zufällig
+            gleichverteilt gezogen und entfernt, danach eine zweite Karte
+            aus den verbleibenden Karten:
           </p>
-          <Math display tex="T_n = \\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}" />
+          <ul className={styles.rules}>
+            <li>Sind beide Karten rot, werden sie verworfen.</li>
+            <li>Sind beide Karten schwarz, werden beide zurückgelegt.</li>
+            <li>
+              Bei unterschiedlichen Farben wird die rote Karte zurückgelegt
+              und die schwarze verworfen.
+            </li>
+          </ul>
           <p>
-            Gesucht ist die erste Dreieckszahl mit mehr als 500 Teilern. Der
-            Schlüssel ist, die Teileranzahl nicht durch Ausprobieren zu
-            zählen, sondern multiplikativ aus der Primfaktorzerlegung
-            herzuleiten: Da{" "}
-            <Math tex="\\gcd(n, n+1) = 1" />, lassen sich{" "}
-            <Math tex="n" /> und <Math tex="n+1" /> getrennt faktorisieren
-            und die Teilerzahlen anschließend multiplizieren.
+            Das Spiel endet, sobald alle verbleibenden Karten dieselbe Farbe
+            haben. Sei <Math tex="P(R,B)" /> die Wahrscheinlichkeit, dass
+            diese Farbe schwarz ist. Gegeben:{" "}
+            <Math tex="P(2,2) = 0{,}4666666667" />,{" "}
+            <Math tex="P(10,9) = 0{,}4118903397" />,{" "}
+            <Math tex="P(34,25) = 0{,}3665688069" />.
           </p>
-        </div>
-
-        <div className={styles.problem}>
-          <h3>Problem 187 - Semiprimes</h3>
           <p>
-            Eine Zahl <Math tex="n" /> heißt semiprim, wenn sie sich als
-            Produkt genau zweier - nicht notwendig verschiedener -
-            Primzahlen schreiben lässt:
-          </p>
-          <Math display tex="n = p \\cdot q, \\qquad p \\le q \\text{ prim}" />
-          <p>
-            Gefragt ist die Anzahl der Semiprimzahlen unterhalb von{" "}
-            <Math tex="10^{8}" />. Statt jede Zahl einzeln zu testen, wird
-            für jede Primzahl <Math tex="p \\le \\sqrt{10^{8}}" /> gezählt,
-            wie viele Primzahlen <Math tex="q \\ge p" /> die Bedingung{" "}
-            <Math tex="p \\cdot q < 10^{8}" /> erfüllen - eine Kombination
-            aus Primzahlsieb und Zählargument.
+            Gesucht: <Math tex="P(24690, 12345)" />, auf 10
+            Nachkommastellen genau.
           </p>
         </div>
 
         <div className={styles.problem}>
-          <h3>Problem 822 - Factorish numbers</h3>
+          <h3>Problem 926 - Total Roundness</h3>
           <p>
-            Für eine natürliche Zahl <Math tex="n" /> sei{" "}
-            <Math tex="\\operatorname{Fac}(n)" /> der größte Teiler{" "}
-            <Math tex="a" /> von <Math tex="n" />, für den{" "}
-            <Math tex="a" /> und <Math tex="n / a" /> teilerfremd sind:
+            Eine <strong>runde Zahl</strong> endet in einer gegebenen Basis
+            auf eine oder mehrere Nullen. Die <strong>Rundheit</strong>{" "}
+            einer Zahl <Math tex="n" /> in Basis <Math tex="b" /> ist die
+            Anzahl der Nullen am Ende der Basis-<Math tex="b" />
+            -Darstellung von <Math tex="n" />. Beispiel:{" "}
+            <Math tex="20" /> hat Rundheit <Math tex="2" /> in Basis{" "}
+            <Math tex="2" /> (<Math tex="10100_2" />).
+          </p>
+          <p>
+            Die <strong>Gesamtrundheit</strong>{" "}
+            <Math tex="R(n)" /> ist die Summe der Rundheit von{" "}
+            <Math tex="n" /> über alle Basen <Math tex="b > 1" />. Beispiel:{" "}
+            <Math tex="R(20) = 6" />. Gegeben:{" "}
+            <Math tex="R(10!) = 312" />.
+          </p>
+          <p>
+            Gesucht: <Math tex="R(10\\,000\\,000!)" /> modulo{" "}
+            <Math tex="10^9 + 7" />.
+          </p>
+        </div>
+
+        <div className={styles.problem}>
+          <h3>Problem 822 - Square the Smallest</h3>
+          <p>
+            Eine Liste enthält anfangs die Zahlen{" "}
+            <Math tex="2, 3, \\ldots, n" />. In jeder Runde wird die{" "}
+            <strong>kleinste Zahl</strong> der Liste durch ihr{" "}
+            <strong>Quadrat</strong> ersetzt (bei mehreren gleich kleinen
+            Zahlen nur eine). Beispiel für <Math tex="n=5" />:
           </p>
           <Math
             display
-            tex="\\operatorname{Fac}(n) = \\max\\{\\, a \\mid n \\;:\\; \\gcd(a,\\, n/a) = 1 \\,\\}"
+            tex="[2,3,4,5] \\to [4,3,4,5] \\to [4,9,4,5] \\to [16,9,4,5]"
           />
           <p>
-            Gesucht ist{" "}
-            <Math tex="S(N) = \\sum_{n=2}^{N} \\operatorname{Fac}(n) \\bmod 10^{9}" />{" "}
-            für sehr große <Math tex="N" />. Der praktikable Ansatz nutzt
-            ein Sieb der kleinsten Primfaktoren, um{" "}
-            <Math tex="\\operatorname{Fac}(n)" /> für jedes{" "}
-            <Math tex="n" /> in konstanter Zeit auf dessen größte
-            Primzahlpotenz zurückzuführen. Der folgende Ausschnitt (Rust)
-            zeigt den Kern dieses Ansatzes:
+            <Math tex="S(n,m)" /> ist die Summe aller Zahlen nach{" "}
+            <Math tex="m" /> Runden. Gegeben: <Math tex="S(5,3) = 34" />,{" "}
+            <Math tex="S(10,100) \\equiv 845339386 \\pmod{1234567891}" />.
+          </p>
+          <p>
+            Gesucht: <Math tex="S(10^4, 10^{16})" /> modulo{" "}
+            <Math tex="1234567891" /> - naiv simuliert wären das{" "}
+            <Math tex="10^{16}" /> Runden, also praktisch unmöglich.
+          </p>
+          <p>
+            Der Trick: Statt die (schnell riesig werdenden) Zahlen selbst zu
+            speichern, wird nur{" "}
+            <Math tex="\\log_2(\\log_2(x))" /> verfolgt - eine Quadrierung{" "}
+            <Math tex="x \\to x^2" /> erhöht diesen Wert einfach um{" "}
+            <Math tex="1" />, und die Sortierreihenfolge bleibt erhalten.
+            Nach anfänglichem Chaos stabilisiert sich die Reihenfolge, in
+            der Elemente quadriert werden, zu einem sich wiederholenden
+            Zyklus, sodass sich <Math tex="10^{16}" /> Runden auf wenige
+            hundert simulierte Runden plus eine geschlossene Formel für den
+            Rest reduzieren. Für die finale modulare Exponentiation mit
+            astronomisch großen Exponenten sorgt der kleine Satz von Fermat
+            dafür, dass sich der Exponent modulo <Math tex="p-1" />{" "}
+            reduzieren lässt. Der folgende Ausschnitt (Rust) zeigt die
+            vollständige Lösung:
           </p>
           <CodeBlock code={RUST_SAMPLE} lang="rust" />
         </div>
