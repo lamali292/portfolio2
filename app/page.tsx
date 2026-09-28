@@ -1,8 +1,11 @@
 import { siteConfig } from "@/lib/site-config";
 import { minorProjects } from "@/lib/minor-projects";
 import { projects } from "@/lib/projects";
+import { headlineStats } from "@/lib/headline-stats";
 import MinorProjectCard from "@/components/MinorProjectCard";
 import ProjectCard from "@/components/ProjectCard";
+import StatBanner from "@/components/StatBanner";
+import CvSection from "@/components/CvSection";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -47,6 +50,10 @@ export default function Home() {
           </li>
         </ul>
       </section>
+
+      <CvSection />
+
+      <StatBanner stats={headlineStats} />
 
       <section className={styles.projects}>
         <h2 className={styles.projectsHeading}>Projekte</h2>
