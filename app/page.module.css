@@ -1,7 +1,12 @@
+.page {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
 .hero {
   max-width: 40rem;
-  margin: 4rem auto;
-  padding: 0 1.5rem;
+  margin: 0 auto 3.5rem;
 }
 
 .hero h1 {
@@ -27,6 +32,21 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.projects {
+  margin-bottom: 3.5rem;
+}
+
+.projectsHeading {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.25rem;
 }
 
 .otherProjects {
