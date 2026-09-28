@@ -1,0 +1,10 @@
+.figure {
+  margin: 0 0 1.5rem;
+}
+
+.caption {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.4rem;
+  text-align: center;
+}
