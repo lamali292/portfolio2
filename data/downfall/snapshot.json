@@ -1,29 +1,17 @@
 {
   "summary": {
-    "trackedRuns": 139881,
-    "spRuns": 91833,
-    "mpRuns": 48048,
-    "usertimeHours": 122395.9,
-    "usertimeYears": 13.96,
+    "trackedRuns": 283930,
+    "spRuns": 189205,
+    "mpRuns": 94725,
+    "usertimeHours": 248438.8,
+    "usertimeYears": 28.34,
     "avgSessionMinutes": 52.5,
-    "windowStart": "2026-08-07",
-    "windowEnd": "2026-08-31",
-    "sourceSnapshotDate": "2026-09-01",
-    "note": "Statischer Snapshot aus dem Downfall-Data-Dashboard (Postgres-Materialized-Views, alle 3h per GitHub Actions aktualisiert). Zeitraum dieses Snapshots: 2026-08-07 bis 2026-08-31."
+    "windowStart": "2026-08-09",
+    "windowEnd": "2026-09-28",
+    "sourceSnapshotDate": "2026-09-28",
+    "note": "Statischer Snapshot aus dem Downfall-Data-Dashboard (Postgres, live abgefragt via Wizard-Skript). Zeitraum dieses Snapshots: 2026-08-09 bis 2026-09-28."
   },
   "runsOverTime": [
-    {
-      "day": "2026-08-07",
-      "runs": 1340,
-      "sp_runs": 777,
-      "mp_runs": 563
-    },
-    {
-      "day": "2026-08-08",
-      "runs": 4406,
-      "sp_runs": 2672,
-      "mp_runs": 1734
-    },
     {
       "day": "2026-08-09",
       "runs": 5112,
@@ -158,9 +146,177 @@
     },
     {
       "day": "2026-08-31",
-      "runs": 5213,
-      "sp_runs": 3600,
-      "mp_runs": 1613
+      "runs": 5540,
+      "sp_runs": 3814,
+      "mp_runs": 1726
+    },
+    {
+      "day": "2026-09-01",
+      "runs": 5532,
+      "sp_runs": 3692,
+      "mp_runs": 1840
+    },
+    {
+      "day": "2026-09-02",
+      "runs": 5397,
+      "sp_runs": 3560,
+      "mp_runs": 1837
+    },
+    {
+      "day": "2026-09-03",
+      "runs": 5141,
+      "sp_runs": 3371,
+      "mp_runs": 1770
+    },
+    {
+      "day": "2026-09-04",
+      "runs": 5423,
+      "sp_runs": 3518,
+      "mp_runs": 1905
+    },
+    {
+      "day": "2026-09-05",
+      "runs": 6168,
+      "sp_runs": 3747,
+      "mp_runs": 2421
+    },
+    {
+      "day": "2026-09-06",
+      "runs": 6053,
+      "sp_runs": 3786,
+      "mp_runs": 2267
+    },
+    {
+      "day": "2026-09-07",
+      "runs": 5593,
+      "sp_runs": 3610,
+      "mp_runs": 1983
+    },
+    {
+      "day": "2026-09-08",
+      "runs": 5031,
+      "sp_runs": 3236,
+      "mp_runs": 1795
+    },
+    {
+      "day": "2026-09-09",
+      "runs": 4881,
+      "sp_runs": 3194,
+      "mp_runs": 1687
+    },
+    {
+      "day": "2026-09-10",
+      "runs": 4687,
+      "sp_runs": 3209,
+      "mp_runs": 1478
+    },
+    {
+      "day": "2026-09-11",
+      "runs": 4775,
+      "sp_runs": 3104,
+      "mp_runs": 1671
+    },
+    {
+      "day": "2026-09-12",
+      "runs": 5253,
+      "sp_runs": 3208,
+      "mp_runs": 2045
+    },
+    {
+      "day": "2026-09-13",
+      "runs": 5269,
+      "sp_runs": 3240,
+      "mp_runs": 2029
+    },
+    {
+      "day": "2026-09-14",
+      "runs": 4094,
+      "sp_runs": 2795,
+      "mp_runs": 1299
+    },
+    {
+      "day": "2026-09-15",
+      "runs": 4058,
+      "sp_runs": 2746,
+      "mp_runs": 1312
+    },
+    {
+      "day": "2026-09-16",
+      "runs": 3828,
+      "sp_runs": 2707,
+      "mp_runs": 1121
+    },
+    {
+      "day": "2026-09-17",
+      "runs": 3636,
+      "sp_runs": 2552,
+      "mp_runs": 1084
+    },
+    {
+      "day": "2026-09-18",
+      "runs": 3899,
+      "sp_runs": 2556,
+      "mp_runs": 1343
+    },
+    {
+      "day": "2026-09-19",
+      "runs": 4497,
+      "sp_runs": 2835,
+      "mp_runs": 1662
+    },
+    {
+      "day": "2026-09-20",
+      "runs": 4552,
+      "sp_runs": 2950,
+      "mp_runs": 1602
+    },
+    {
+      "day": "2026-09-21",
+      "runs": 4649,
+      "sp_runs": 3176,
+      "mp_runs": 1473
+    },
+    {
+      "day": "2026-09-22",
+      "runs": 4362,
+      "sp_runs": 3102,
+      "mp_runs": 1260
+    },
+    {
+      "day": "2026-09-23",
+      "runs": 4687,
+      "sp_runs": 3309,
+      "mp_runs": 1378
+    },
+    {
+      "day": "2026-09-24",
+      "runs": 5346,
+      "sp_runs": 3834,
+      "mp_runs": 1512
+    },
+    {
+      "day": "2026-09-25",
+      "runs": 6722,
+      "sp_runs": 4747,
+      "mp_runs": 1975
+    },
+    {
+      "day": "2026-09-26",
+      "runs": 9433,
+      "sp_runs": 6622,
+      "mp_runs": 2811
+    },
+    {
+      "day": "2026-09-27",
+      "runs": 9872,
+      "sp_runs": 7090,
+      "mp_runs": 2782
+    },
+    {
+      "day": "2026-09-28",
+      "runs": 6630,
+      "sp_runs": 5111,
+      "mp_runs": 1519
     }
   ],
   "cardsByCharacter": [

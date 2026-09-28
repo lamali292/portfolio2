@@ -6,19 +6,23 @@ Spire 2 mod) run telemetry, backing the STS2 Data Analysis page
 
 ## Provenance
 
-Source: `../sts2mods/Downfall-Data/public/{cards,relics,characters,activity}.json`
-(sibling repo, not part of this git history), generated 2026-09-01 by that
-repo's GitHub Actions workflow, which queries the production Postgres
-(Hetzner-hosted) database every 3 hours and writes JSON snapshots from these
-materialized views:
+Two sources feed this snapshot, both real production data, never fixtures:
 
-- `card_stats_by_group` (→ `cards.json`)
-- `relic_stats` (→ `relics.json`)
-- `char_ascension_by_version`, `char_daily_by_version` (→ `characters.json`)
-- `runs_per_day`, `runs_per_hour` (→ `activity.json`)
-
-This is real production data, not a fixture — see that repo's `CLAUDE.md`
-for the full field-level design rationale.
+- **`cardsByCharacter`, `relicsTop`, `relicsBottom`**: from
+  `../sts2mods/Downfall-Data/public/{cards,relics}.json` (sibling repo, not
+  part of this git history), generated 2026-09-01 by that repo's GitHub
+  Actions workflow, which queries the production Postgres (Hetzner-hosted)
+  database every 3 hours and writes JSON snapshots from the
+  `card_stats_by_group` and `relic_stats` materialized views. See that
+  repo's `CLAUDE.md` for the full field-level design rationale.
+- **`summary`, `runsOverTime`**: pulled directly and live from the
+  production Postgres `runs_per_day` materialized view via a one-off
+  read-only query (the `ci_reader` role, scoped via `GRANT SELECT` to just
+  the views this page needs), run 2026-09-28, covering the window
+  `windowStart`–`windowEnd` in `summary`. This is a live pull, not a
+  `Downfall-Data` static-site export — that pipeline's own snapshot on disk
+  was stale (last updated 2026-09-01), so it couldn't supply the current
+  runs/usertime figures on its own.
 
 ## How `snapshot.json` was built
 
@@ -33,14 +37,14 @@ from the summed counts (see `lib/downfall-data.ts`).
 Aggregations performed:
 
 - **`summary`** — total tracked runs and solo/multiplayer split, summed
-  from `activity.json`'s `day` bucket across all characters/version groups;
-  `usertimeYears` is derived as `trackedRuns × avgSessionMinutes`, per the
-  site's documented ~45–60 min/run average (see `CONTEXT.md`). This
-  snapshot only covers its own window (`windowStart`–`windowEnd`), not the
-  full live-site figure used in the static stat banner (issue #10, which
-  draws on `docs/content/facts.md`) — the two are different data pulls by
-  design.
-- **`runsOverTime`** — `activity.json`'s `day` bucket, summed across
+  from `runs_per_day`'s `bucket` column across all characters/version
+  groups; `usertimeYears` is derived as `trackedRuns × avgSessionMinutes`,
+  per the site's documented ~45–60 min/run average (see `CONTEXT.md`). This
+  snapshot's window (`windowStart`–`windowEnd`) now matches the window
+  behind the static stat banner's figures in `docs/content/facts.md`
+  (Aug 9 – Sep 28), though the two remain separate data pulls and may drift
+  again if one is refreshed without the other.
+- **`runsOverTime`** — `runs_per_day`'s `bucket` column, summed across
   character and version_group per calendar day.
 - **`cardsByCharacter`** — `cards.json` rows summed across all cards and
   version groups per character, still as raw counts; pick rate and win
@@ -57,7 +61,10 @@ summed raw count from the source files above.
 ## Regenerating
 
 There is no build-time regeneration wired up yet (that's part of a future
-live-data slice, issue #12). To refresh this snapshot manually against a
-newer `Downfall-Data` pull, re-run the aggregation described above against
-the updated `public/*.json` files and update `sourceSnapshotDate` /
-`windowStart` / `windowEnd` accordingly.
+live-data slice, issue #12). To refresh `cardsByCharacter`/`relicsTop`/
+`relicsBottom` manually against a newer `Downfall-Data` pull, re-run the
+aggregation described above against the updated `public/*.json` files. To
+refresh `summary`/`runsOverTime`, re-run the one-off read-only query
+described in Provenance above (a `GRANT SELECT ... TO ci_reader` on
+`runs_per_day` plus a query over the desired window) and update
+`sourceSnapshotDate`/`windowStart`/`windowEnd` accordingly.
