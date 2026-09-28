@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import FeatureImage from "@/components/FeatureImage";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
+import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -129,30 +133,15 @@ const featureSections: FeatureSection[] = [
 
 export default function BotcPage() {
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <h1>Blood on the Clocktower – Grimoire-App</h1>
-        <p className={styles.lead}>
-          Eine Android-App zur Unterstützung beim Spielen von Blood on the
-          Clocktower. Die App ermöglicht es Spielleitern, Skripte und Rollen
-          zu verwalten, Spieler zu organisieren und den Spielstatus effizient
-          zu verfolgen.
-        </p>
-      </header>
+    <ProjectPage>
+      <ProjectHero
+        title="Blood on the Clocktower – Grimoire-App"
+        lead="Eine Android-App zur Unterstützung beim Spielen von Blood on the Clocktower. Die App ermöglicht es Spielleitern, Skripte und Rollen zu verwalten, Spieler zu organisieren und den Spielstatus effizient zu verfolgen."
+      >
+        <TechChips items={technologies} />
+      </ProjectHero>
 
-      <section className={styles.section} aria-label="Verwendete Technologien">
-        <h2>Verwendete Technologien</h2>
-        <ul className={styles.chips}>
-          {technologies.map((tech) => (
-            <li key={tech} className={styles.chip}>
-              {tech}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>Über das Spiel</h2>
+      <ProjectSection heading="Über das Spiel">
         <p>
           Blood on the Clocktower ist aktuell das ausgereifteste Social
           Deduction Game auf dem Markt (ähnlich wie Werwolf). Eine informierte
@@ -174,11 +163,10 @@ export default function BotcPage() {
           Rollen und Spielstatus zu verwalten. Diese App digitalisiert dieses
           Konzept und macht es zugänglicher und einfacher zu handhaben.
         </p>
-      </section>
+      </ProjectSection>
 
       {featureSections.map((feature) => (
-        <section className={styles.section} key={feature.title}>
-          <h2>{feature.title}</h2>
+        <ProjectSection heading={feature.title} key={feature.title}>
           <div className={styles.featureBody}>
             <div className={styles.featureText}>
               {feature.paragraphs.map((paragraph, i) => (
@@ -191,11 +179,10 @@ export default function BotcPage() {
               ))}
             </div>
           </div>
-        </section>
+        </ProjectSection>
       ))}
 
-      <section className={styles.section}>
-        <h2>Technische Umsetzung</h2>
+      <ProjectSection heading="Technische Umsetzung">
         <div className={styles.techGrid}>
           <div>
             <h3>Frontend</h3>
@@ -217,17 +204,16 @@ export default function BotcPage() {
             </ul>
           </div>
         </div>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Code &amp; Download</h2>
+      <ProjectSection heading="Code & Download">
         <p>
           Der Quellcode und die App sind aus urheberrechtlichen Gründen nicht
           öffentlich verfügbar. Das Projekt dient ausschließlich dem privaten
           Gebrauch und der Portfolio-Präsentation. Die Rechte an &bdquo;Blood
           on the Clocktower&ldquo; liegen bei The Pandemonium Institute.
         </p>
-      </section>
-    </article>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

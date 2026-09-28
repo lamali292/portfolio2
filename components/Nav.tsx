@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navLinks } from "@/lib/nav-links";
+import ThemeToggle from "@/components/ThemeToggle";
 import styles from "./Nav.module.css";
 
 export default function Nav() {
@@ -8,13 +9,16 @@ export default function Nav() {
       <Link href="/" className={styles.brand}>
         Laurin Maurice Liebhart
       </Link>
-      <ul className={styles.list}>
-        {navLinks.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href}>{link.label}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.right}>
+        <ul className={styles.list}>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
+        <ThemeToggle />
+      </div>
     </nav>
   );
 }

@@ -1,5 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
+import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 import cardBack from "./images/card_back.png";
@@ -13,32 +16,15 @@ const technologies = ["Flask", "Python", "Spotify Web API / spotipy", "OAuth2"];
 
 export default function SpotifyPage() {
   return (
-    <section className={styles.page}>
-      <Link href="/" className={styles.back}>
-        ← Zurück zur Startseite
-      </Link>
+    <ProjectPage>
+      <ProjectHero
+        title="Webapp – Spotify Musikquiz"
+        lead="Eine browserbasierte Webanwendung für das Musikratespiel Hitster. Die App digitalisiert das physische Kartenspiel und integriert Spotify für nahtlose Musikwiedergabe: Spieler ordnen Songs chronologisch in ihre persönliche Zeitlinie ein, während die App die passenden Songs automatisch über die Spotify Web API abspielt."
+      >
+        <TechChips items={technologies} />
+      </ProjectHero>
 
-      <header className={styles.hero}>
-        <h1>Webapp &ndash; Spotify Musikquiz</h1>
-        <p>
-          Eine browserbasierte Webanwendung für das Musikratespiel Hitster.
-          Die App digitalisiert das physische Kartenspiel und integriert
-          Spotify für nahtlose Musikwiedergabe: Spieler ordnen Songs
-          chronologisch in ihre persönliche Zeitlinie ein, während die App die
-          passenden Songs automatisch über die Spotify Web API abspielt.
-        </p>
-      </header>
-
-      <ul className={styles.chips}>
-        {technologies.map((tech) => (
-          <li key={tech} className={styles.chip}>
-            {tech}
-          </li>
-        ))}
-      </ul>
-
-      <div className={styles.section}>
-        <h2>Digitale Karte im Browser</h2>
+      <ProjectSection heading="Digitale Karte im Browser">
         <p>
           Jede Karte wird als interaktive Webansicht dargestellt. Die
           digitale Version zeigt alle wichtigen Informationen übersichtlich
@@ -70,10 +56,9 @@ export default function SpotifyPage() {
             <figcaption>Aufgedeckte Karte</figcaption>
           </figure>
         </div>
-      </div>
+      </ProjectSection>
 
-      <div className={styles.section}>
-        <h2>Playlist-Auswahl über Spotify</h2>
+      <ProjectSection heading="Playlist-Auswahl über Spotify">
         <p>
           Über die Suchleiste können Spieler gezielt nach Spotify-Playlists
           suchen. Die App greift dabei auf die gesamte Spotify-Bibliothek zu
@@ -101,10 +86,9 @@ export default function SpotifyPage() {
             <figcaption>Suche: Beatles</figcaption>
           </figure>
         </div>
-      </div>
+      </ProjectSection>
 
-      <div className={styles.section}>
-        <h2>Spotify-Integration über OAuth und API</h2>
+      <ProjectSection heading="Spotify-Integration über OAuth und API">
         <p>
           Die App nutzt OAuth für die sichere Authentifizierung mit Spotify.
           Nutzer melden sich einmalig mit ihrem Spotify-Account an und
@@ -133,14 +117,16 @@ export default function SpotifyPage() {
             <figcaption>Verarbeitete API-Daten einer Playlist</figcaption>
           </figure>
         </div>
-      </div>
+      </ProjectSection>
 
-      <p className={styles.note}>
-        Der Quellcode und die App sind aus urheberrechtlichen Gründen nicht
-        öffentlich verfügbar. Das Projekt dient ausschließlich dem privaten
-        Gebrauch und der Portfolio-Präsentation. Die Rechte an „Hitster"
-        liegen bei Jumbo Spiele.
-      </p>
-    </section>
+      <ProjectSection heading="Code & Download">
+        <p>
+          Der Quellcode und die App sind aus urheberrechtlichen Gründen nicht
+          öffentlich verfügbar. Das Projekt dient ausschließlich dem privaten
+          Gebrauch und der Portfolio-Präsentation. Die Rechte an „Hitster"
+          liegen bei Jumbo Spiele.
+        </p>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

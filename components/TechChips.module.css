@@ -3,15 +3,15 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   list-style: none;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-3);
   padding: 0;
 }
 
 .chip {
-  background: #eef2f7;
-  color: #2b5797;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
   border-radius: 999px;
   padding: 0.25rem 0.75rem;
-  font-size: 0.85rem;
+  font-size: var(--font-size-xs);
   font-weight: 500;
 }

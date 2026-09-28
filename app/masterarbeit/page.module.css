@@ -1,77 +1,8 @@
-.page {
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-}
-
-.back {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-}
-
-.hero {
-  padding: 2.5rem 2rem;
-  margin-bottom: 2rem;
-  border-radius: 0.75rem;
-  background: linear-gradient(135deg, #2b5797 0%, #5a3c8a 100%);
-  color: #fff;
-}
-
-.hero h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2rem;
-}
-
-.hero p {
-  margin: 0;
-  font-size: 1.1rem;
-  opacity: 0.95;
-}
-
-.section {
-  margin-bottom: 2rem;
-  padding: 1.75rem 2rem;
-  border: 1px solid #e2e2e2;
-  border-radius: 0.75rem;
-}
-
-.section h2 {
-  margin-top: 0;
-  font-size: 1.4rem;
-}
-
-.section h3 {
-  font-size: 1.15rem;
-  margin-bottom: 0.75rem;
-}
-
-.section p {
-  font-size: 1rem;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.chip {
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-  border-radius: 999px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.9rem;
-}
-
 .paperBox {
   margin-top: 1rem;
   padding: 1rem 1.25rem;
   border-left: 4px solid var(--color-accent);
-  background: #f5f5f5;
+  background: var(--color-surface);
   border-radius: 0.25rem;
 }
 
@@ -84,7 +15,7 @@
 }
 
 .paperMeta {
-  color: #555;
+  color: var(--color-muted);
   font-size: 0.9rem;
 }
 
@@ -102,6 +33,9 @@
 
 .contribution {
   text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
 }
 
 .contribution h3 {
@@ -109,13 +43,9 @@
 }
 
 .contribution p {
-  color: #555;
+  color: var(--color-muted);
   font-size: 0.95rem;
-}
-
-.example {
-  background: linear-gradient(135deg, #2b5797 0%, #5a3c8a 100%);
-  color: #fff;
+  margin: 0;
 }
 
 .example h2 {
@@ -124,20 +54,16 @@
 
 .exampleIntro {
   text-align: center;
-  opacity: 0.9;
+  color: var(--color-muted);
   margin-bottom: 1.75rem !important;
 }
 
 .step {
-  background: rgba(255, 255, 255, 0.95);
-  color: #1a1a1a;
-  border-radius: 0.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   padding: 1.5rem;
   margin-bottom: 1.25rem;
-}
-
-.step h3 {
-  color: #1a1a1a;
 }
 
 .stepGrid {
@@ -169,20 +95,17 @@
   margin-top: 1rem;
   padding: 0.75rem 1rem;
   border-radius: 0.4rem;
-  background: #e8f5e9;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
   font-weight: 600;
   font-size: 0.95rem;
 }
 
 .summaryBox {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid #fff;
-  border-radius: 0.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   padding: 1.5rem;
-}
-
-.summaryBox h3 {
-  color: #fff;
 }
 
 .summaryList {
@@ -201,10 +124,7 @@
 
 .summaryNum {
   font-weight: 700;
-}
-
-.conclusion {
-  background: #ddf1ff;
+  color: var(--color-accent);
 }
 
 .toolFlex {
@@ -229,17 +149,13 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px var(--color-shadow);
 }
 
 .figure figcaption {
   margin-top: 0.5rem;
   text-align: center;
   font-size: 0.85rem;
-  color: #666;
-}
-
-.step .figure figcaption {
-  color: #555;
+  color: var(--color-muted);
 }
