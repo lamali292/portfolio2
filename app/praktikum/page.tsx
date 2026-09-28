@@ -1,4 +1,6 @@
-import Link from "next/link";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
 import TechChips from "@/components/TechChips";
 import OptionSurfacePlot, {
   OptionGridData,
@@ -6,7 +8,6 @@ import OptionSurfacePlot, {
 } from "@/components/OptionSurfacePlot";
 import CodeBlock from "@/components/CodeBlock";
 import optionData from "@/data/american_option_data.json";
-import styles from "./page.module.css";
 
 const TECH_CHIPS = [
   "C",
@@ -72,18 +73,15 @@ const plotData: Record<OptionResolution, OptionGridData> = {
 
 export default function PraktikumPage() {
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <h1>Numerische Optionspreisberechnung</h1>
-        <p className={styles.subtitle}>
-          Bewertung amerikanischer Basket-Optionen per Newton-Krylov-Verfahren
-          mit GMRES &mdash; Praktikum in numerischer Mathematik
-        </p>
+    <ProjectPage>
+      <ProjectHero
+        title="Numerische Optionspreisberechnung"
+        lead="Bewertung amerikanischer Basket-Optionen per Newton-Krylov-Verfahren mit GMRES – Praktikum in numerischer Mathematik"
+      >
         <TechChips items={TECH_CHIPS} />
-      </header>
+      </ProjectHero>
 
-      <section className={styles.section}>
-        <h2>Das Problem</h2>
+      <ProjectSection heading="Das Problem">
         <p>
           Der faire Wert einer amerikanischen Basket-Option &ndash; einer
           Option auf einen Korb mehrerer Basiswerte, die jederzeit bis zur
@@ -106,10 +104,9 @@ export default function PraktikumPage() {
           lineares Komplementaritätsproblem (LCP), das in jedem Zeitschritt
           neu gelöst werden muss.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Interaktive Visualisierung</h2>
+      <ProjectSection heading="Interaktive Visualisierung">
         <p>
           Die folgende 3D-Oberfläche zeigt den berechneten Optionswert in
           Abhängigkeit der beiden Basiswertkurse. Zwischen zwei
@@ -119,10 +116,9 @@ export default function PraktikumPage() {
           Standardabweichung) angezeigt.
         </p>
         <OptionSurfacePlot data={plotData} />
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Lösungsansatz</h2>
+      <ProjectSection heading="Lösungsansatz">
         <p>
           Jeder Zeitschritt wird über ein Newton-Verfahren linearisiert: Aus
           dem nichtlinearen Residuum der diskretisierten PDE inklusive
@@ -146,10 +142,9 @@ export default function PraktikumPage() {
           konvergiert dagegen auch bei größeren, mehrdimensionalen Gittern in
           wenigen Iterationen und lässt sich zudem besser parallelisieren.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Code-Auszüge</h2>
+      <ProjectSection heading="Code-Auszüge">
         <h3>Datenstrukturen</h3>
         <CodeBlock
           code={DATA_STRUCTURE_CODE}
@@ -160,11 +155,7 @@ export default function PraktikumPage() {
           code={SOLVER_CODE}
           caption="Ein Newton-Schritt: Jacobi-Matrix aufstellen, mit GMRES + ARMS lösen, auf das Hindernis projizieren."
         />
-      </section>
-
-      <p>
-        <Link href="/">Zurück zur Startseite</Link>
-      </p>
-    </article>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

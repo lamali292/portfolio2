@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import FeatureImage from "@/components/FeatureImage";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
+import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -93,32 +97,15 @@ const watcherVideos = [
 
 export default function Sts2ModsPage() {
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <h1>STS2 Mods: Downfall &amp; Watcher</h1>
-        <p className={styles.lead}>
-          Ein Community-Modding-Framework für Slay the Spire 2: von Watcher,
-          dem ersten jemals veröffentlichten STS2-Charakter-Mod, bis zu
-          Downfall, einer 10-Charaktere-Mod-Suite, inklusive eines
-          Framework-Beitrags zum zugrunde liegenden BaseLib. Zusammen
-          erreichen beide Mods über <strong>200.000 Downloads</strong> auf
-          dem Steam Workshop.
-        </p>
-      </header>
+    <ProjectPage>
+      <ProjectHero
+        title="STS2 Mods: Downfall & Watcher"
+        lead="Ein Community-Modding-Framework für Slay the Spire 2: von Watcher, dem ersten jemals veröffentlichten STS2-Charakter-Mod, bis zu Downfall, einer 10-Charaktere-Mod-Suite, inklusive eines Framework-Beitrags zum zugrunde liegenden BaseLib. Zusammen erreichen beide Mods über 200.000 Downloads auf dem Steam Workshop."
+      >
+        <TechChips items={technologies} />
+      </ProjectHero>
 
-      <section className={styles.section} aria-label="Verwendete Technologien">
-        <h2>Verwendete Technologien</h2>
-        <ul className={styles.chips}>
-          {technologies.map((tech) => (
-            <li key={tech} className={styles.chip}>
-              {tech}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>Downfall</h2>
+      <ProjectSection heading="Downfall">
         <p>
           Downfall implementiert zehn Charaktere aus dem beliebten Slay the
           Spire 1-Mod &bdquo;Downfall&ldquo; neu für Slay the Spire 2 – jeder
@@ -154,10 +141,9 @@ export default function Sts2ModsPage() {
             <FeatureImage key={image.src} {...image} />
           ))}
         </div>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Watcher</h2>
+      <ProjectSection heading="Watcher">
         <p>
           Watcher war der erste jemals veröffentlichte Charakter-Mod für Slay
           the Spire 2 – zu einem Zeitpunkt, an dem es noch kein etabliertes
@@ -196,10 +182,9 @@ export default function Sts2ModsPage() {
             </div>
           ))}
         </div>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>BaseLib-Beitrag</h2>
+      <ProjectSection heading="BaseLib-Beitrag">
         <p>
           Beide Mods bauen auf <code>Alchyr.Sts2.BaseLib</code> auf, dem von
           der Community geteilten Modding-Framework für Slay the Spire 2.
@@ -217,7 +202,7 @@ export default function Sts2ModsPage() {
             Geschlossene Pull Requests von mir in BaseLib-StS2
           </a>
         </p>
-      </section>
-    </article>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { assetPath } from "@/lib/asset-path";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
+import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -37,32 +40,15 @@ function Figure({ src, alt, caption }: FigureProps) {
 
 export default function MasterarbeitPage() {
   return (
-    <div className={styles.page}>
-      <Link href="/" className={styles.back}>
-        ← Zurück zur Startseite
-      </Link>
+    <ProjectPage>
+      <ProjectHero
+        title="Port-Hamiltonian Neural Networks"
+        lead="Masterarbeit: Physik-informiertes Machine Learning für dynamische Systeme"
+      >
+        <TechChips items={technologies} />
+      </ProjectHero>
 
-      <header className={styles.hero}>
-        <h1>Port-Hamiltonian Neural Networks</h1>
-        <p>
-          Masterarbeit: Physik-informiertes Machine Learning für dynamische
-          Systeme
-        </p>
-      </header>
-
-      <section className={styles.section}>
-        <h2>Verwendete Technologien</h2>
-        <ul className={styles.chips}>
-          {technologies.map((tech) => (
-            <li key={tech} className={styles.chip}>
-              {tech}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>Worum geht es?</h2>
+      <ProjectSection heading="Worum geht es?">
         <p>
           Meine Masterarbeit kombiniert <strong>Physik und Machine
           Learning</strong>, um komplexe dynamische Systeme wie elektrische
@@ -75,10 +61,9 @@ export default function MasterarbeitPage() {
           dann modular zu größeren Netzwerken kombiniert werden, ähnlich wie
           Lego-Bausteine.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Die Herausforderung</h2>
+      <ProjectSection heading="Die Herausforderung">
         <p>
           Traditionelle Machine-Learning-Ansätze ignorieren oft physikalische
           Gesetze wie Energieerhaltung. Das führt zu unrealistischen
@@ -106,10 +91,9 @@ export default function MasterarbeitPage() {
             Paper lesen (arXiv)
           </a>
         </div>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Kernbeiträge meiner Arbeit</h2>
+      <ProjectSection heading="Kernbeiträge meiner Arbeit">
         <div className={styles.contributions}>
           <div className={styles.contribution}>
             <h3>Modulare Skalierung</h3>
@@ -133,10 +117,9 @@ export default function MasterarbeitPage() {
             </p>
           </div>
         </div>
-      </section>
+      </ProjectSection>
 
-      <section className={`${styles.section} ${styles.example}`}>
-        <h2>Praktisches Beispiel</h2>
+      <ProjectSection heading="Praktisches Beispiel" className={styles.example}>
         <p className={styles.exampleIntro}>
           Hoch- und Tiefpassfilter modular trainieren und kombinieren
         </p>
@@ -287,10 +270,9 @@ export default function MasterarbeitPage() {
             </li>
           </ul>
         </div>
-      </section>
+      </ProjectSection>
 
-      <section className={`${styles.section} ${styles.conclusion}`}>
-        <h2>Fazit</h2>
+      <ProjectSection heading="Fazit" className={styles.conclusion}>
         <p>
           Port-Hamiltonian Neural Networks sind ein <strong>vielversprechender
           Ansatz</strong> für die datenbasierte Modellierung physikalischer
@@ -298,10 +280,9 @@ export default function MasterarbeitPage() {
           Machine Learning erfolgreich kombinieren lassen, mit Vorteilen für
           Genauigkeit, Interpretierbarkeit und Skalierbarkeit.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Tool-Entwicklung: RLC-Schaltkreis-Editor</h2>
+      <ProjectSection heading="Tool-Entwicklung: RLC-Schaltkreis-Editor">
         <div className={styles.toolFlex}>
           <div className={styles.toolText}>
             <p>
@@ -326,7 +307,7 @@ export default function MasterarbeitPage() {
             />
           </div>
         </div>
-      </section>
-    </div>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

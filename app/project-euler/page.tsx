@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import Math from "@/components/Math";
 import CodeBlock from "@/components/CodeBlock";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
+import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 import "katex/dist/katex.min.css";
+
+const TECH_CHIPS = ["Java", "Rust", "Python", "Mathematica", "Matlab"];
 
 export const metadata: Metadata = {
   title: "Project Euler | Laurin Maurice Liebhart",
@@ -100,24 +106,15 @@ fn n_pow_2k_mod(n: u64, k: u64, p: u64) -> u64 {
 
 export default function ProjectEulerPage() {
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <h1>Project Euler</h1>
-        <p className={styles.tagline}>
-          150+ gelöste Probleme &middot; Top 0,5% weltweit &middot;
-          algorithmische Mathematik
-        </p>
-        <ul className={styles.chips}>
-          <li>Java</li>
-          <li>Rust</li>
-          <li>Python</li>
-          <li>Mathematica</li>
-          <li>Matlab</li>
-        </ul>
-      </header>
+    <ProjectPage>
+      <ProjectHero
+        title="Project Euler"
+        lead="150+ gelöste Probleme · Top 0,5% weltweit · algorithmische Mathematik"
+      >
+        <TechChips items={TECH_CHIPS} />
+      </ProjectHero>
 
-      <section className={styles.section}>
-        <h2>Was ist Project Euler?</h2>
+      <ProjectSection heading="Was ist Project Euler?">
         <p>
           <a
             href="https://projecteuler.net/"
@@ -134,10 +131,9 @@ export default function ProjectEulerPage() {
           Kombinatorik, Analysis - und sie dann in effizienten Code zu
           übersetzen.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Warum das hierher gehört</h2>
+      <ProjectSection heading="Warum das hierher gehört">
         <p>
           Ich habe über 150 Project-Euler-Probleme gelöst und liege damit
           unter den <strong>Top 0,5% weltweit</strong>. Das ist für mich
@@ -149,10 +145,9 @@ export default function ProjectEulerPage() {
           aus mathematischer Tiefe und algorithmischem Pragmatismus nutze
           ich auch in Numerik, ML und Datenanalyse.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Beispielaufgaben</h2>
+      <ProjectSection heading="Beispielaufgaben">
 
         <div className={styles.problem}>
           <h3>Problem 938 - Exhausting a Colour</h3>
@@ -249,7 +244,7 @@ export default function ProjectEulerPage() {
           </p>
           <CodeBlock code={RUST_SAMPLE} lang="rust" />
         </div>
-      </section>
-    </article>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

@@ -1,5 +1,5 @@
 .card {
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   max-width: 20rem;
@@ -12,7 +12,7 @@
 
 .description {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--color-muted);
   margin: 0 0 0.75rem;
 }
 
@@ -27,8 +27,8 @@
 
 .chip {
   font-size: 0.75rem;
-  color: #333;
-  background: #f0f0f0;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
 }

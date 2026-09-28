@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import TechChips from "@/components/TechChips";
 import DownfallStatsRow from "@/components/DownfallStatsRow";
 import RunsOverTimeChart from "@/components/RunsOverTimeChart";
 import CardRatesChart from "@/components/CardRatesChart";
 import RelicWinRateChart from "@/components/RelicWinRateChart";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
 import { getDownfallSnapshot } from "@/lib/downfall-data";
 import styles from "./page.module.css";
 
@@ -21,20 +23,15 @@ export default function Sts2DataAnalysisPage() {
     getDownfallSnapshot();
 
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <h1>STS2 Data Analysis</h1>
-        <p className={styles.subtitle}>
-          Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods{" "}
-          <em>Downfall</em> &ndash; SQL-Auswertung über Postgres-Materialized-Views
-          und ein SHAP/LightGBM-gestützter Balance-Analyse-Pipeline auf
-          demselben Datensatz.
-        </p>
+    <ProjectPage>
+      <ProjectHero
+        title="STS2 Data Analysis"
+        lead="Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods Downfall – SQL-Auswertung über Postgres-Materialized-Views und eine SHAP/LightGBM-gestützte Balance-Analyse-Pipeline auf demselben Datensatz."
+      >
         <TechChips items={TECH_CHIPS} />
-      </header>
+      </ProjectHero>
 
-      <section className={styles.section}>
-        <h2>Über die Pipeline</h2>
+      <ProjectSection heading="Über die Pipeline">
         <p>
           Downfall sendet nach jeder abgeschlossenen Partie einen Run-Datensatz
           an eine Postgres-Datenbank (Hetzner-gehostet) &ndash; vorausgesetzt,
@@ -65,24 +62,21 @@ export default function Sts2DataAnalysisPage() {
           Bereitstellung eines lesenden DB-Zugangs ein menschlicher Schritt
           ist). {summary.note}
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Kennzahlen</h2>
+      <ProjectSection heading="Kennzahlen">
         <DownfallStatsRow summary={summary} />
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Run-Aktivität über die Zeit</h2>
+      <ProjectSection heading="Run-Aktivität über die Zeit">
         <p>
           Getrackte Runs pro Tag im Snapshot-Zeitraum, aufgeteilt nach Solo-
           und Multiplayer-Sessions.
         </p>
         <RunsOverTimeChart runsOverTime={runsOverTime} />
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Karten: Pick-Rate &amp; Win-Rate je Charakter</h2>
+      <ProjectSection heading="Karten: Pick-Rate & Win-Rate je Charakter">
         <p>
           Für jeden Charakter aufsummiert über alle seine Karten und
           Versionsgruppen: Wie oft wird eine angebotene Karte tatsächlich
@@ -90,10 +84,9 @@ export default function Sts2DataAnalysisPage() {
           Charakters erworben wurde?
         </p>
         <CardRatesChart cardsByCharacter={cardsByCharacter} />
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Relics: Win-Rate-Ranking</h2>
+      <ProjectSection heading="Relics: Win-Rate-Ranking">
         <p>
           Win-Rate je Relic (Runs mit mindestens {relicMinRuns} Vorkommen,
           um Ausreißer bei seltenen Relics zu vermeiden) &ndash; nützlich, um
@@ -105,10 +98,9 @@ export default function Sts2DataAnalysisPage() {
           relicsBottom={relicsBottom}
           minRuns={relicMinRuns}
         />
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Weiterführende Analyse</h2>
+      <ProjectSection heading="Weiterführende Analyse">
         <p>
           Auf demselben Rohdatensatz baut zusätzlich eine SHAP/LightGBM-Pipeline
           auf, die den Einfluss einzelner Karten- und Relic-Entscheidungen auf
@@ -116,11 +108,7 @@ export default function Sts2DataAnalysisPage() {
           Korrelation) &ndash; sie ist hier als Referenz genannt, aber bewusst
           nicht Teil dieser Seite.
         </p>
-      </section>
-
-      <p>
-        <Link href="/">Zurück zur Startseite</Link>
-      </p>
-    </article>
+      </ProjectSection>
+    </ProjectPage>
   );
 }

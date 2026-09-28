@@ -1,38 +1,4 @@
-.page {
-  max-width: 48rem;
-  margin: 4rem auto;
-  padding: 0 1.5rem 3rem;
-}
-
-.hero {
-  margin-bottom: 1.5rem;
-}
-
-.hero h1 {
-  font-size: 2.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 1.25rem;
-}
-
-.section {
-  margin-bottom: 2.5rem;
-}
-
-.section h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.section p {
-  margin-bottom: 1rem;
-}
-
 .note {
   font-size: 0.85rem;
-  color: #555;
+  color: var(--color-muted);
 }

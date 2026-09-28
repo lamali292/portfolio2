@@ -4,9 +4,9 @@
   gap: 1.25rem;
   margin: 0 0 3.5rem;
   padding: 1.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  background: #f7f9fc;
+  background: var(--color-surface);
 }
 
 .stat {
@@ -16,7 +16,7 @@
 .label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #555;
+  color: var(--color-muted);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin-bottom: 0.35rem;
@@ -32,5 +32,5 @@
 .detail {
   margin: 0;
   font-size: 0.8rem;
-  color: #555;
+  color: var(--color-muted);
 }

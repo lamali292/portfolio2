@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import ProjectPage from "@/components/ProjectPage";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectSection from "@/components/ProjectSection";
+import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -11,31 +15,15 @@ const technologies = ["Kotlin", "IntelliJ Platform SDK", "Gradle"];
 
 export default function Sts2ToolingPage() {
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <h1>STS2 Tooling: Rider LocPlugin</h1>
-        <p className={styles.lead}>
-          Ein selbst entwickeltes JetBrains-Rider-Plugin, das die
-          Lokalisierungsdateien der Slay the Spire 2-Mods Downfall und Watcher
-          direkt in der IDE validiert und synchron hält. Entstanden als
-          internes Werkzeug während der Entwicklung, um manuelle, fehleranfällige
-          Lokalisierungsarbeit aus dem Workflow zu nehmen.
-        </p>
-      </header>
+    <ProjectPage>
+      <ProjectHero
+        title="STS2 Tooling: Rider LocPlugin"
+        lead="Ein selbst entwickeltes JetBrains-Rider-Plugin, das die Lokalisierungsdateien der Slay the Spire 2-Mods Downfall und Watcher direkt in der IDE validiert und synchron hält. Entstanden als internes Werkzeug während der Entwicklung, um manuelle, fehleranfällige Lokalisierungsarbeit aus dem Workflow zu nehmen."
+      >
+        <TechChips items={technologies} />
+      </ProjectHero>
 
-      <section className={styles.section} aria-label="Verwendete Technologien">
-        <h2>Verwendete Technologien</h2>
-        <ul className={styles.chips}>
-          {technologies.map((tech) => (
-            <li key={tech} className={styles.chip}>
-              {tech}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>Das Problem</h2>
+      <ProjectSection heading="Das Problem">
         <p>
           Karten, Kräfte (Powers), Relikte und Charaktere in Downfall und
           Watcher bringen jeweils eigene Texte mit – Titel, Beschreibungen,
@@ -46,10 +34,9 @@ export default function Sts2ToolingPage() {
           vergessene Felder, falsche Dateien oder inkonsistente Keys sind die
           Folge.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Die Lösung</h2>
+      <ProjectSection heading="Die Lösung">
         <p>
           Das LocPlugin öffnet automatisch einen Lokalisierungs-Editor im
           Tool-Fenster, sobald eine Karten-, Kraft-, Relikt- oder
@@ -65,10 +52,9 @@ export default function Sts2ToolingPage() {
           wechseln – inklusive Live-Abgleich, welche Felder für eine Klasse
           bereits vorhanden, optional oder noch offen sind.
         </p>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Installation &amp; Konfiguration</h2>
+      <ProjectSection heading="Installation & Konfiguration">
         <ul>
           <li>
             Installation über <strong>File → Settings → Plugins</strong>,
@@ -83,10 +69,9 @@ export default function Sts2ToolingPage() {
             Klassen je Preset-Typ)
           </li>
         </ul>
-      </section>
+      </ProjectSection>
 
-      <section className={styles.section}>
-        <h2>Technische Umsetzung</h2>
+      <ProjectSection heading="Technische Umsetzung">
         <div className={styles.techGrid}>
           <div>
             <h3>Plugin-Architektur</h3>
@@ -131,7 +116,7 @@ export default function Sts2ToolingPage() {
           persönliches Produktivitäts-Tool handelt, wurde dies bewusst nicht
           priorisiert behoben.
         </p>
-      </section>
-    </article>
+      </ProjectSection>
+    </ProjectPage>
   );
 }
