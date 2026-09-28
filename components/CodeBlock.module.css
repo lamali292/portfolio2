@@ -1,5 +1,8 @@
+.figure {
+  margin: 0 0 1.5rem;
+}
+
 .codeBlock {
-  margin: 1.5rem 0;
   overflow-x: auto;
   border-radius: 0.5rem;
   border: 1px solid #e2e2e2;
@@ -9,4 +12,11 @@
 .codeBlock :global(pre) {
   margin: 0;
   padding: 1rem 1.25rem;
+}
+
+.caption {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.4rem;
+  text-align: center;
 }
