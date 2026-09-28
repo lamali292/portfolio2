@@ -35,3 +35,9 @@ main {
 a {
   color: var(--color-accent);
 }
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
