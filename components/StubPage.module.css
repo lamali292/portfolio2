@@ -1,0 +1,15 @@
+.stub {
+  max-width: 40rem;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.stub h1 {
+  margin-bottom: 0.5rem;
+}
+
+.stub p {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
