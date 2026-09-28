@@ -1,0 +1,535 @@
+{
+  "summary": {
+    "trackedRuns": 283930,
+    "spRuns": 189205,
+    "mpRuns": 94725,
+    "usertimeHours": 248438.8,
+    "usertimeYears": 28.34,
+    "avgSessionMinutes": 52.5,
+    "windowStart": "2026-08-09",
+    "windowEnd": "2026-09-28",
+    "sourceSnapshotDate": "2026-09-28",
+    "note": "Statischer Snapshot aus dem Downfall-Data-Dashboard (Postgres, live abgefragt via Wizard-Skript). Zeitraum dieses Snapshots: 2026-08-09 bis 2026-09-28."
+  },
+  "runsOverTime": [
+    {
+      "day": "2026-08-09",
+      "runs": 5112,
+      "sp_runs": 3115,
+      "mp_runs": 1997
+    },
+    {
+      "day": "2026-08-10",
+      "runs": 4614,
+      "sp_runs": 3052,
+      "mp_runs": 1562
+    },
+    {
+      "day": "2026-08-11",
+      "runs": 4717,
+      "sp_runs": 3090,
+      "mp_runs": 1627
+    },
+    {
+      "day": "2026-08-12",
+      "runs": 4457,
+      "sp_runs": 2955,
+      "mp_runs": 1502
+    },
+    {
+      "day": "2026-08-13",
+      "runs": 4688,
+      "sp_runs": 3218,
+      "mp_runs": 1470
+    },
+    {
+      "day": "2026-08-14",
+      "runs": 4728,
+      "sp_runs": 3168,
+      "mp_runs": 1560
+    },
+    {
+      "day": "2026-08-15",
+      "runs": 5645,
+      "sp_runs": 3710,
+      "mp_runs": 1935
+    },
+    {
+      "day": "2026-08-16",
+      "runs": 6558,
+      "sp_runs": 4257,
+      "mp_runs": 2301
+    },
+    {
+      "day": "2026-08-17",
+      "runs": 5867,
+      "sp_runs": 3873,
+      "mp_runs": 1994
+    },
+    {
+      "day": "2026-08-18",
+      "runs": 6138,
+      "sp_runs": 4002,
+      "mp_runs": 2136
+    },
+    {
+      "day": "2026-08-19",
+      "runs": 6151,
+      "sp_runs": 4040,
+      "mp_runs": 2111
+    },
+    {
+      "day": "2026-08-20",
+      "runs": 5965,
+      "sp_runs": 4012,
+      "mp_runs": 1953
+    },
+    {
+      "day": "2026-08-21",
+      "runs": 6212,
+      "sp_runs": 3926,
+      "mp_runs": 2286
+    },
+    {
+      "day": "2026-08-22",
+      "runs": 6653,
+      "sp_runs": 4167,
+      "mp_runs": 2486
+    },
+    {
+      "day": "2026-08-23",
+      "runs": 7048,
+      "sp_runs": 4535,
+      "mp_runs": 2513
+    },
+    {
+      "day": "2026-08-24",
+      "runs": 6450,
+      "sp_runs": 4472,
+      "mp_runs": 1978
+    },
+    {
+      "day": "2026-08-25",
+      "runs": 6226,
+      "sp_runs": 4328,
+      "mp_runs": 1898
+    },
+    {
+      "day": "2026-08-26",
+      "runs": 6366,
+      "sp_runs": 4177,
+      "mp_runs": 2189
+    },
+    {
+      "day": "2026-08-27",
+      "runs": 5984,
+      "sp_runs": 4151,
+      "mp_runs": 1833
+    },
+    {
+      "day": "2026-08-28",
+      "runs": 5927,
+      "sp_runs": 3928,
+      "mp_runs": 1999
+    },
+    {
+      "day": "2026-08-29",
+      "runs": 6791,
+      "sp_runs": 4407,
+      "mp_runs": 2384
+    },
+    {
+      "day": "2026-08-30",
+      "runs": 6625,
+      "sp_runs": 4201,
+      "mp_runs": 2424
+    },
+    {
+      "day": "2026-08-31",
+      "runs": 5540,
+      "sp_runs": 3814,
+      "mp_runs": 1726
+    },
+    {
+      "day": "2026-09-01",
+      "runs": 5532,
+      "sp_runs": 3692,
+      "mp_runs": 1840
+    },
+    {
+      "day": "2026-09-02",
+      "runs": 5397,
+      "sp_runs": 3560,
+      "mp_runs": 1837
+    },
+    {
+      "day": "2026-09-03",
+      "runs": 5141,
+      "sp_runs": 3371,
+      "mp_runs": 1770
+    },
+    {
+      "day": "2026-09-04",
+      "runs": 5423,
+      "sp_runs": 3518,
+      "mp_runs": 1905
+    },
+    {
+      "day": "2026-09-05",
+      "runs": 6168,
+      "sp_runs": 3747,
+      "mp_runs": 2421
+    },
+    {
+      "day": "2026-09-06",
+      "runs": 6053,
+      "sp_runs": 3786,
+      "mp_runs": 2267
+    },
+    {
+      "day": "2026-09-07",
+      "runs": 5593,
+      "sp_runs": 3610,
+      "mp_runs": 1983
+    },
+    {
+      "day": "2026-09-08",
+      "runs": 5031,
+      "sp_runs": 3236,
+      "mp_runs": 1795
+    },
+    {
+      "day": "2026-09-09",
+      "runs": 4881,
+      "sp_runs": 3194,
+      "mp_runs": 1687
+    },
+    {
+      "day": "2026-09-10",
+      "runs": 4687,
+      "sp_runs": 3209,
+      "mp_runs": 1478
+    },
+    {
+      "day": "2026-09-11",
+      "runs": 4775,
+      "sp_runs": 3104,
+      "mp_runs": 1671
+    },
+    {
+      "day": "2026-09-12",
+      "runs": 5253,
+      "sp_runs": 3208,
+      "mp_runs": 2045
+    },
+    {
+      "day": "2026-09-13",
+      "runs": 5269,
+      "sp_runs": 3240,
+      "mp_runs": 2029
+    },
+    {
+      "day": "2026-09-14",
+      "runs": 4094,
+      "sp_runs": 2795,
+      "mp_runs": 1299
+    },
+    {
+      "day": "2026-09-15",
+      "runs": 4058,
+      "sp_runs": 2746,
+      "mp_runs": 1312
+    },
+    {
+      "day": "2026-09-16",
+      "runs": 3828,
+      "sp_runs": 2707,
+      "mp_runs": 1121
+    },
+    {
+      "day": "2026-09-17",
+      "runs": 3636,
+      "sp_runs": 2552,
+      "mp_runs": 1084
+    },
+    {
+      "day": "2026-09-18",
+      "runs": 3899,
+      "sp_runs": 2556,
+      "mp_runs": 1343
+    },
+    {
+      "day": "2026-09-19",
+      "runs": 4497,
+      "sp_runs": 2835,
+      "mp_runs": 1662
+    },
+    {
+      "day": "2026-09-20",
+      "runs": 4552,
+      "sp_runs": 2950,
+      "mp_runs": 1602
+    },
+    {
+      "day": "2026-09-21",
+      "runs": 4649,
+      "sp_runs": 3176,
+      "mp_runs": 1473
+    },
+    {
+      "day": "2026-09-22",
+      "runs": 4362,
+      "sp_runs": 3102,
+      "mp_runs": 1260
+    },
+    {
+      "day": "2026-09-23",
+      "runs": 4687,
+      "sp_runs": 3309,
+      "mp_runs": 1378
+    },
+    {
+      "day": "2026-09-24",
+      "runs": 5346,
+      "sp_runs": 3834,
+      "mp_runs": 1512
+    },
+    {
+      "day": "2026-09-25",
+      "runs": 6722,
+      "sp_runs": 4747,
+      "mp_runs": 1975
+    },
+    {
+      "day": "2026-09-26",
+      "runs": 9433,
+      "sp_runs": 6622,
+      "mp_runs": 2811
+    },
+    {
+      "day": "2026-09-27",
+      "runs": 9872,
+      "sp_runs": 7090,
+      "mp_runs": 2782
+    },
+    {
+      "day": "2026-09-28",
+      "runs": 6630,
+      "sp_runs": 5111,
+      "mp_runs": 1519
+    }
+  ],
+  "cardsByCharacter": [
+    {
+      "character": "AUTOMATON",
+      "offered3c": 501424,
+      "picked3c": 167070,
+      "runsAcquired": 264076,
+      "winsAcquired": 113130
+    },
+    {
+      "character": "AWAKENED",
+      "offered3c": 641745,
+      "picked3c": 213850,
+      "runsAcquired": 344112,
+      "winsAcquired": 146743
+    },
+    {
+      "character": "CHAMP",
+      "offered3c": 441377,
+      "picked3c": 147045,
+      "runsAcquired": 239259,
+      "winsAcquired": 101467
+    },
+    {
+      "character": "GUARDIAN",
+      "offered3c": 603450,
+      "picked3c": 201087,
+      "runsAcquired": 294920,
+      "winsAcquired": 170019
+    },
+    {
+      "character": "HERMIT",
+      "offered3c": 856148,
+      "picked3c": 285363,
+      "runsAcquired": 459991,
+      "winsAcquired": 151168
+    },
+    {
+      "character": "HEXAGHOST",
+      "offered3c": 480080,
+      "picked3c": 159965,
+      "runsAcquired": 266513,
+      "winsAcquired": 89138
+    },
+    {
+      "character": "SLIMEBOSS",
+      "offered3c": 759971,
+      "picked3c": 253284,
+      "runsAcquired": 390497,
+      "winsAcquired": 228787
+    },
+    {
+      "character": "SNECKO",
+      "offered3c": 457549,
+      "picked3c": 152510,
+      "runsAcquired": 238409,
+      "winsAcquired": 113703
+    }
+  ],
+  "relicsTop": [
+    {
+      "relic": "HISTORY_COURSE",
+      "label": "HISTORY_COURSE",
+      "runsWithRelic": 2662,
+      "winsWithRelic": 2363
+    },
+    {
+      "relic": "SWORD_OF_JADE",
+      "label": "SWORD_OF_JADE",
+      "runsWithRelic": 3474,
+      "winsWithRelic": 2868
+    },
+    {
+      "relic": "SLIMEBOSS-SLIMED_TAIL",
+      "label": "Slimed Tail",
+      "runsWithRelic": 750,
+      "winsWithRelic": 605
+    },
+    {
+      "relic": "IRON_CLUB",
+      "label": "IRON_CLUB",
+      "runsWithRelic": 2452,
+      "winsWithRelic": 1956
+    },
+    {
+      "relic": "SLIMEBOSS-JEREMIAHS_BANNER",
+      "label": "Jeremiah's Banner",
+      "runsWithRelic": 2096,
+      "winsWithRelic": 1672
+    },
+    {
+      "relic": "SAI",
+      "label": "SAI",
+      "runsWithRelic": 3840,
+      "winsWithRelic": 3063
+    },
+    {
+      "relic": "CROSSBOW",
+      "label": "CROSSBOW",
+      "runsWithRelic": 2318,
+      "winsWithRelic": 1834
+    },
+    {
+      "relic": "FIDDLE",
+      "label": "FIDDLE",
+      "runsWithRelic": 2404,
+      "winsWithRelic": 1886
+    },
+    {
+      "relic": "BEAUTIFUL_BRACELET",
+      "label": "BEAUTIFUL_BRACELET",
+      "runsWithRelic": 1501,
+      "winsWithRelic": 1153
+    },
+    {
+      "relic": "DIAMOND_DIADEM",
+      "label": "DIAMOND_DIADEM",
+      "runsWithRelic": 1982,
+      "winsWithRelic": 1517
+    },
+    {
+      "relic": "SLIMEBOSS-STONE_OF_NOMAKK",
+      "label": "Stone of Nomakk",
+      "runsWithRelic": 3444,
+      "winsWithRelic": 2614
+    },
+    {
+      "relic": "BRILLIANT_SCARF",
+      "label": "BRILLIANT_SCARF",
+      "runsWithRelic": 2625,
+      "winsWithRelic": 1980
+    },
+    {
+      "relic": "SLIMEBOSS-GOOP_DWELLER",
+      "label": "Goop Dweller",
+      "runsWithRelic": 3299,
+      "winsWithRelic": 2477
+    },
+    {
+      "relic": "FAKE_MERCHANTS_RUG",
+      "label": "FAKE_MERCHANTS_RUG",
+      "runsWithRelic": 242,
+      "winsWithRelic": 180
+    },
+    {
+      "relic": "GUARDIAN-BOTTLED_BLACK_HOLE",
+      "label": "Bottled Black Hole",
+      "runsWithRelic": 1159,
+      "winsWithRelic": 859
+    }
+  ],
+  "relicsBottom": [
+    {
+      "relic": "SWORD_OF_STONE",
+      "label": "SWORD_OF_STONE",
+      "runsWithRelic": 5652,
+      "winsWithRelic": 686
+    },
+    {
+      "relic": "HERMIT-OLD_LOCKET",
+      "label": "Old Locket",
+      "runsWithRelic": 27247,
+      "winsWithRelic": 6949
+    },
+    {
+      "relic": "HEXAGHOST-SPIRIT_BRAND",
+      "label": "Spirit Brand",
+      "runsWithRelic": 13447,
+      "winsWithRelic": 3713
+    },
+    {
+      "relic": "HEFTY_TABLET",
+      "label": "HEFTY_TABLET",
+      "runsWithRelic": 10903,
+      "winsWithRelic": 3516
+    },
+    {
+      "relic": "HERMIT-SHOTGLASS",
+      "label": "Shotglass",
+      "runsWithRelic": 207,
+      "winsWithRelic": 67
+    },
+    {
+      "relic": "AWAKENED-RIPPED_DOLL",
+      "label": "Ripped Doll",
+      "runsWithRelic": 19362,
+      "winsWithRelic": 6357
+    },
+    {
+      "relic": "KALEIDOSCOPE",
+      "label": "KALEIDOSCOPE",
+      "runsWithRelic": 3478,
+      "winsWithRelic": 1157
+    },
+    {
+      "relic": "SCROLL_BOXES",
+      "label": "SCROLL_BOXES",
+      "runsWithRelic": 6973,
+      "winsWithRelic": 2383
+    },
+    {
+      "relic": "LOST_COFFER",
+      "label": "LOST_COFFER",
+      "runsWithRelic": 4554,
+      "winsWithRelic": 1558
+    },
+    {
+      "relic": "ARCANE_SCROLL",
+      "label": "ARCANE_SCROLL",
+      "runsWithRelic": 10597,
+      "winsWithRelic": 3651
+    }
+  ],
+  "relicMinRuns": 200
+}
