@@ -1,4 +1,6 @@
 import { siteConfig } from "@/lib/site-config";
+import { minorProjects } from "@/lib/minor-projects";
+import MinorProjectCard from "@/components/MinorProjectCard";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -41,6 +43,15 @@ export default function Home() {
           <a href={`mailto:${siteConfig.links.email}`}>E-Mail</a>
         </li>
       </ul>
+
+      <section className={styles.otherProjects}>
+        <h2 className={styles.otherProjectsHeading}>Weitere Projekte</h2>
+        <div className={styles.otherProjectsGrid}>
+          {minorProjects.map((project) => (
+            <MinorProjectCard key={project.name} {...project} />
+          ))}
+        </div>
+      </section>
     </section>
   );
 }
