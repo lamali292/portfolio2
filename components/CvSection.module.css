@@ -1,0 +1,96 @@
+.cv {
+  max-width: 40rem;
+  margin: 0 auto 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heading {
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+}
+
+.entryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.entry {
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.entryHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.entryTitle {
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.grade {
+  font-weight: 400;
+  color: var(--color-accent);
+}
+
+.entryPeriod {
+  font-size: 0.85rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+.entryInstitution {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.entryDetail {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.skillGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.25rem;
+}
+
+.skillGroup {
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.skillCategory {
+  font-size: 0.95rem;
+  margin: 0 0 0.6rem;
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skillChip {
+  font-size: 0.8rem;
+  color: #2b5797;
+  background: #eef2f7;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+}
