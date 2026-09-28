@@ -60,13 +60,6 @@ int newton_step(OptionGrid *grid, double tol, int max_gmres_iter) {
 }`;
 
 interface OptionDataset {
-  meta: {
-    placeholder: boolean;
-    note: string;
-    strike: number;
-    assetPriceRange: [number, number];
-    basket: string;
-  };
   N30: OptionGridData;
   N50: OptionGridData;
 }
@@ -126,15 +119,6 @@ export default function PraktikumPage() {
           Standardabweichung) angezeigt.
         </p>
         <OptionSurfacePlot data={plotData} />
-        {typedOptionData.meta.placeholder && (
-          <p className={styles.placeholderNote}>
-            Hinweis: Dieser Datensatz ist ein Platzhalter mit derselben Form
-            wie die echten Berechnungsergebnisse und dient nur der
-            Veranschaulichung der Komponente. Die echten Daten aus dem
-            Praktikum (<code>american_option_data.json</code>) müssen noch
-            eingebunden werden.
-          </p>
-        )}
       </section>
 
       <section className={styles.section}>
