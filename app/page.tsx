@@ -58,8 +58,13 @@ export default function Home() {
       <section className={styles.projects}>
         <h2 className={styles.projectsHeading}>Projekte</h2>
         <div className={styles.projectsGrid}>
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} {...project} />
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.slug}
+              {...project}
+              index={i}
+              featured={i === 0}
+            />
           ))}
         </div>
       </section>

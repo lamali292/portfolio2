@@ -25,6 +25,9 @@
   --space-5: 3rem;
   --space-6: 4rem;
 
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
   --radius: 0.75rem;
   --radius-sm: 0.5rem;
   --page-max-width: 60rem;
