@@ -177,8 +177,9 @@ export default function Sts2ModsPage() {
           Watcher setzt den Watcher aus Slay the Spire 1 für Slay the Spire 2
           um und erschien, als es für das Spiel noch kaum Modding-Ökosystem
           gab. Ich bin der Hauptentwickler; an dem Mod haben{" "}
-          {watcherFacts.contributors} Personen mitgewirkt, vor allem mit
-          Übersetzungen. Der Mod liegt in {watcherFacts.languages} Sprachen
+          {watcherFacts.contributors} Personen aktiv mitgewirkt, vor allem
+          mit Übersetzungen, dazu kommen rund 20 weitere mit kleineren
+          Korrekturen. Der Mod liegt in {watcherFacts.languages} Sprachen
           vor, alle zu über 98 % übersetzt.
         </p>
         <ul className={styles.facts}>
