@@ -6,6 +6,9 @@
 /out/
 next-env.d.ts
 
+# video thumbnails, downloaded at build time
+/public/video-thumbs/
+
 # misc
 .DS_Store
 *.pem
