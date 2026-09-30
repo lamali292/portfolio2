@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MoonIcon, SunIcon } from "@/components/Icons";
 import styles from "./ThemeToggle.module.css";
 
 type Theme = "light" | "dark";
@@ -60,7 +61,7 @@ export default function ThemeToggle() {
       aria-label={theme === "dark" ? "Zu hellem Design wechseln" : "Zu dunklem Design wechseln"}
       title={theme === "dark" ? "Helles Design" : "Dunkles Design"}
     >
-      {theme === "dark" ? "☀️" : "🌙"}
+      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>
   );
 }
