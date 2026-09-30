@@ -1,0 +1,60 @@
+.figure {
+  margin: 0;
+}
+
+.bars {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  height: 14rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0;
+  border-bottom: 3px solid var(--color-fg);
+}
+
+.bar {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  padding-top: 1.5rem;
+  margin: 0;
+}
+
+.value {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.fill {
+  display: block;
+  background: var(--color-accent);
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+}
+
+.bar:last-child .fill {
+  background: var(--highlight);
+  box-shadow: inset 0 0 0 2px var(--color-fg);
+}
+
+.month {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.caption {
+  margin-top: 2.25rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}

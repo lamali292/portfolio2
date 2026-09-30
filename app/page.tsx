@@ -1,10 +1,10 @@
 import { siteConfig } from "@/lib/site-config";
 import { minorProjects } from "@/lib/minor-projects";
 import { projects } from "@/lib/projects";
-import { headlineStats } from "@/lib/headline-stats";
 import MinorProjectCard from "@/components/MinorProjectCard";
 import ProjectCard, { type CardSize } from "@/components/ProjectCard";
-import StatBanner from "@/components/StatBanner";
+import EducationStrip from "@/components/EducationStrip";
+import ImpactStory from "@/components/ImpactStory";
 import CvSection from "@/components/CvSection";
 import styles from "./page.module.css";
 
@@ -66,7 +66,9 @@ export default function Home() {
         </ul>
       </section>
 
-      <StatBanner stats={headlineStats} />
+      <EducationStrip />
+
+      <ImpactStory />
 
       <section id="projekte" className={styles.projects}>
         <h2 className={styles.sectionHeading}>Projekte</h2>
