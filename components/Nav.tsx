@@ -15,7 +15,7 @@ export default function Nav() {
             <Link href="/#projekte">Projekte</Link>
           </li>
           <li>
-            <Link href="/#lebenslauf">Lebenslauf</Link>
+            <Link href="/#ausbildung">Ausbildung</Link>
           </li>
           <li>
             <a href={`mailto:${siteConfig.links.email}`}>Kontakt</a>

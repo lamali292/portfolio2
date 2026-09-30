@@ -32,7 +32,7 @@ export const projects: Project[] = [
     href: "/sts2-mods",
     title: "STS2 Mods: Downfall & Watcher",
     teaser:
-      "Community-Modding-Framework für Slay the Spire 2 - vom ersten jemals veröffentlichten Charakter-Mod bis zum 10-Charaktere-Mod-Suite, inklusive Beitrag zum zugrunde liegenden BaseLib-Framework.",
+      "Community-Modding-Framework für Slay the Spire 2 - von Watcher, einem der ersten Charakter-Mods, bis zur 10-Charaktere-Mod-Suite Downfall, inklusive Beitrag zum zugrunde liegenden BaseLib-Framework.",
     tech: ["C#", "Godot", "BaseLib"],
     highlight: "200.000+ Downloads",
     image: { src: "/sts2-mods/selection.png", alt: "Charakterauswahl der Downfall-Mod in Slay the Spire 2", isPublic: true, position: "center 35%" },

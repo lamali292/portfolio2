@@ -3,7 +3,9 @@ export interface EducationEntry {
   grade: string;
   institution: string;
   period: string;
-  detail: string;
+  detail?: string;
+  /** Final thesis, shown next to the degree so both grades are visible. */
+  thesis?: { title: string; grade: string };
 }
 
 export interface ExperienceEntry {
@@ -30,16 +32,18 @@ export const education: EducationEntry[] = [
     grade: "Note 1,7",
     institution: "TU Braunschweig",
     period: "Okt 2022 – Mai 2025",
-    detail:
-      'Schwerpunkt: Numerik, Analysis und Data Science. Masterarbeit (Note 1,0): "Untersuchungen zu Port-Hamiltonian Neural Networks."',
+    detail: "Schwerpunkt: Numerik, Analysis und Data Science.",
+    thesis: {
+      title: "Untersuchungen zu Port-Hamiltonian Neural Networks",
+      grade: "1,0",
+    },
   },
   {
     degree: "B.Sc. Mathematik",
     grade: "Note 1,6",
     institution: "TU Braunschweig",
     period: "Okt 2019 – Okt 2022",
-    detail:
-      'Bachelorarbeit (Note 1,1): "Einführung in Deep Learning."',
+    thesis: { title: "Einführung in Deep Learning", grade: "1,1" },
   },
   {
     degree: "Abitur",
