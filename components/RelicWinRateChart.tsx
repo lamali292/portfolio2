@@ -64,7 +64,7 @@ export default function RelicWinRateChart({
               x: rates,
               y: labels,
               customdata: runs,
-              marker: { color: view === "top" ? "#2b5797" : "#c0392b" },
+              marker: { color: view === "top" ? "#0b6e66" : "#c0392b" },
               hovertemplate:
                 "%{y}<br>Win-Rate: %{x:.1f}%<br>Runs: %{customdata}<extra></extra>",
             },

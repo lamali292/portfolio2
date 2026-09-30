@@ -26,14 +26,14 @@ export default function RunsOverTimeChart({
               name: "Solo",
               x: days,
               y: solo,
-              marker: { color: "#2b5797" },
+              marker: { color: "#0b6e66" },
             },
             {
               type: "bar",
               name: "Multiplayer",
               x: days,
               y: multi,
-              marker: { color: "#6fa8dc" },
+              marker: { color: "#5fb3a8" },
             },
           ]}
           layout={{

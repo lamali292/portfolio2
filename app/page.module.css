@@ -1,61 +1,81 @@
 .page {
   max-width: 72rem;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding: 2rem 1.5rem 4rem;
 }
 
 .hero {
-  max-width: 40rem;
-  margin: 0 auto 3.5rem;
+  margin-bottom: 3.5rem;
 }
 
-.hero h1 {
-  font-size: 2.25rem;
-  margin-bottom: 0.25rem;
+.name {
+  font-size: clamp(2.6rem, 9.5vw, 6.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+  max-width: 14ch;
 }
 
 .title {
-  font-size: 1.1rem;
-  color: var(--color-muted);
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.75rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.title span {
+  background: var(--highlight);
+  color: var(--highlight-fg);
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .bio {
-  font-size: 1rem;
-  margin-bottom: 2rem;
+  font-size: 1.15rem;
+  max-width: 38rem;
+  margin: 0 0 1.75rem;
 }
 
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 0.5rem 1.75rem;
   list-style: none;
   margin: 0;
   padding: 0;
+  font-weight: 600;
+}
+
+.links a {
+  color: var(--color-fg);
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.25em;
+}
+
+.links a:hover {
+  color: var(--color-accent);
+}
+
+.sectionHeading {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 1.5rem;
 }
 
 .projects {
-  margin-bottom: 3.5rem;
-}
-
-.projectsHeading {
-  font-size: 1.5rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 4.5rem;
 }
 
 .projectsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.25rem;
 }
 
 .otherProjects {
-  margin-top: 3rem;
-}
-
-.otherProjectsHeading {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 4.5rem;
 }
 
 .otherProjectsGrid {

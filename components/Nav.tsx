@@ -1,21 +1,25 @@
 import Link from "next/link";
-import { navLinks } from "@/lib/nav-links";
+import { siteConfig } from "@/lib/site-config";
 import ThemeToggle from "@/components/ThemeToggle";
 import styles from "./Nav.module.css";
 
 export default function Nav() {
   return (
-    <nav className={styles.nav} aria-label="Projekte">
+    <nav className={styles.nav} aria-label="Hauptnavigation">
       <Link href="/" className={styles.brand}>
-        Laurin Maurice Liebhart
+        {siteConfig.name}
       </Link>
       <div className={styles.right}>
         <ul className={styles.list}>
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ))}
+          <li>
+            <Link href="/#projekte">Projekte</Link>
+          </li>
+          <li>
+            <Link href="/#lebenslauf">Lebenslauf</Link>
+          </li>
+          <li>
+            <a href={`mailto:${siteConfig.links.email}`}>Kontakt</a>
+          </li>
         </ul>
         <ThemeToggle />
       </div>
