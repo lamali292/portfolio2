@@ -57,9 +57,9 @@ export default function Home() {
         </ul>
       </section>
 
-      <ImpactStory />
-
       <EducationStrip />
+
+      <ImpactStory />
 
       <SkillsStrip />
 

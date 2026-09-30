@@ -10,6 +10,8 @@
   --color-accent-soft: #dcece7;
   --color-accent-2: #7a4a1d;
   --color-shadow: rgba(15, 35, 33, 0.10);
+  --highlight: #cfe5de;
+  --highlight-fg: #0f2321;
 
   --font-size-hero: 2.25rem;
   --font-size-h2: 1.4rem;
@@ -27,8 +29,6 @@
 
   --font-display: "Young Serif", Georgia, "Times New Roman", serif;
   --font-body: "Schibsted Grotesk Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --highlight: #f5d547;
-  --highlight-fg: #1b1700;
 
   --radius: 0.75rem;
   --radius-sm: 0.5rem;
@@ -51,6 +51,8 @@
     --color-accent-soft: #15302d;
     --color-accent-2: #e0b27a;
     --color-shadow: rgba(0, 0, 0, 0.4);
+    --highlight: #1f4a44;
+    --highlight-fg: #e9f0ec;
     color-scheme: dark;
   }
 }
@@ -67,6 +69,8 @@
   --color-accent-soft: #15302d;
   --color-accent-2: #e0b27a;
   --color-shadow: rgba(0, 0, 0, 0.4);
+  --highlight: #1f4a44;
+  --highlight-fg: #e9f0ec;
   color-scheme: dark;
 }
 

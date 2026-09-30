@@ -39,12 +39,12 @@
   color: var(--color-fg);
   text-decoration: none;
   padding: 0.25rem 0;
-  background: linear-gradient(var(--highlight), var(--highlight)) no-repeat 0 100% / 0 0.4em;
+  background: linear-gradient(var(--color-accent), var(--color-accent)) no-repeat 0 100% / 0 3px;
 }
 
 .list a:hover,
 .list a:focus-visible {
-  background-size: 100% 0.4em;
+  background-size: 100% 3px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
