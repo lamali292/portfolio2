@@ -9,7 +9,13 @@ import styles from "./VideoEmbed.module.css";
  * light with many videos and avoids contacting YouTube (privacy-enhanced
  * youtube-nocookie domain) before the visitor chooses to play.
  */
-export default function VideoEmbed({ id, start, title, caption }: Video) {
+export default function VideoEmbed({
+  id,
+  start,
+  title,
+  caption,
+  thumbnail,
+}: Video & { thumbnail?: string }) {
   const [active, setActive] = useState(false);
   const params = new URLSearchParams({ autoplay: "1", rel: "0" });
   if (start) params.set("start", String(start));
@@ -31,6 +37,15 @@ export default function VideoEmbed({ id, start, title, caption }: Video) {
             onClick={() => setActive(true)}
             aria-label={`${title} abspielen`}
           >
+            {thumbnail && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={thumbnail}
+                alt=""
+                loading="lazy"
+                className={styles.thumb}
+              />
+            )}
             <span className={styles.icon} aria-hidden="true" />
             <span className={styles.hint}>
               Video abspielen. Dabei werden Daten an YouTube übertragen.

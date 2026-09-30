@@ -14,6 +14,7 @@ import {
   downfallTotals,
   watcherFacts,
 } from "@/lib/downfall-facts";
+import { thumbnailFor } from "@/lib/video-thumbs";
 import { modVideos, watcherVideos } from "@/lib/videos";
 import styles from "./page.module.css";
 
@@ -211,7 +212,11 @@ export default function Sts2ModsPage() {
         </ul>
         <div className={styles.videoGrid}>
           {watcherVideos.map((video) => (
-            <VideoEmbed key={video.id} {...video} />
+            <VideoEmbed
+              key={video.id}
+              {...video}
+              thumbnail={thumbnailFor(video.id)}
+            />
           ))}
         </div>
       </ProjectSection>
@@ -221,7 +226,11 @@ export default function Sts2ModsPage() {
           von YouTube geladen.</p>
         <div className={styles.videoGrid}>
           {modVideos.map((video) => (
-            <VideoEmbed key={video.id} {...video} />
+            <VideoEmbed
+              key={video.id}
+              {...video}
+              thumbnail={thumbnailFor(video.id)}
+            />
           ))}
         </div>
       </ProjectSection>
