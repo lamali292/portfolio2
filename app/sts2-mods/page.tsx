@@ -53,9 +53,6 @@ const watcherVideos = [
 ];
 
 export default function Sts2ModsPage() {
-  const mineShare = Math.round(
-    (downfallTotals.commitsMine / downfallTotals.commitsTotal) * 100,
-  );
   return (
     <ProjectPage>
       <ProjectHero
@@ -67,9 +64,10 @@ export default function Sts2ModsPage() {
 
       <ProjectSection heading="Downfall in Zahlen">
         <p className={styles.note}>
-          Downfall ist ein Teamprojekt. Ich bin Hauptentwickler und stehe für{" "}
-          {mineShare} % der {downfallTotals.commitsTotal.toLocaleString("de-DE")}{" "}
-          Commits. Alle Zahlen stammen aus dem{" "}
+          Downfall ist ein Teamprojekt mit Beiträgen aus der Community. Den
+          C#-Code habe ich zu rund {downfallTotals.codeSharePercent} %
+          geschrieben (gemessen an allen hinzugefügten Zeilen). Alle Zahlen
+          stammen aus dem{" "}
           <a
             href="https://github.com/lamali292/Downfall"
             target="_blank"
@@ -105,6 +103,20 @@ export default function Sts2ModsPage() {
           <li className={styles.fact}>
             <span className={styles.factValue}>144.305</span>
             <span className={styles.factLabel}>Abonnenten insgesamt</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>
+              {downfallTotals.languages}
+            </span>
+            <span className={styles.factLabel}>
+              Sprachen, Japanisch und Chinesisch zu über 97 % übersetzt
+            </span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>
+              {downfallTotals.commitsTotal.toLocaleString("de-DE")}
+            </span>
+            <span className={styles.factLabel}>Commits, davon ca. 1.375 von mir</span>
           </li>
         </ul>
       </ProjectSection>
@@ -165,8 +177,9 @@ export default function Sts2ModsPage() {
           Watcher setzt den Watcher aus Slay the Spire 1 für Slay the Spire 2
           um und erschien, als es für das Spiel noch kaum Modding-Ökosystem
           gab. Ich bin der Hauptentwickler; an dem Mod haben{" "}
-          {watcherFacts.contributors} Personen mitgewirkt, unter anderem mit
-          Übersetzungen ins {watcherFacts.localizations.join(", ")}.
+          {watcherFacts.contributors} Personen mitgewirkt, vor allem mit
+          Übersetzungen. Der Mod liegt in {watcherFacts.languages} Sprachen
+          vor, alle zu über 98 % übersetzt.
         </p>
         <ul className={styles.facts}>
           <li className={styles.fact}>
@@ -188,6 +201,14 @@ export default function Sts2ModsPage() {
             <span className={styles.factLabel}>
               Stances: {watcherFacts.stances.join(", ")}
             </span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>{watcherFacts.languages}</span>
+            <span className={styles.factLabel}>Sprachen</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>{watcherFacts.commits}</span>
+            <span className={styles.factLabel}>Commits</span>
           </li>
           <li className={styles.fact}>
             <span className={styles.factValue}>77.127</span>

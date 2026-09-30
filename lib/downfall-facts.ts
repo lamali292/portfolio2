@@ -40,6 +40,10 @@ export const downfallTotals = {
   since: "14. Apr. 2026",
   until: "30. Sep. 2026",
   stars: 22,
+  /** Share of all C# lines added in the history that came from lamali / lamali292. */
+  codeSharePercent: 94,
+  /** Languages with their own localization folder; ja, zh(s) and fr are above 94 % of the English keys. */
+  languages: 11,
 };
 
 /** Commits by lamali / lamali292 in Downfall, per calendar month of 2026. */
@@ -60,7 +64,8 @@ export const watcherFacts = {
   commits: 270,
   stars: 50,
   contributors: 12,
-  localizations: ["Koreanisch", "Chinesisch", "Russisch", "Japanisch", "Italienisch"],
+  /** English, German, French, Italian, Polish, Russian, Chinese, Japanese, Korean; all at 98 %+ of the English keys. */
+  languages: 9,
 };
 
 export const baseLibFacts = {
