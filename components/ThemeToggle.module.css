@@ -4,17 +4,24 @@
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-fg);
   border-radius: 50%;
-  background: var(--color-surface);
-  font-size: 1.05rem;
+  background: transparent;
+  color: var(--color-fg);
   line-height: 1;
   cursor: pointer;
   transition: border-color 0.15s ease, transform 0.1s ease;
 }
 
+.toggle svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
 .toggle:hover {
-  border-color: var(--color-accent);
+  background: var(--highlight);
+  color: var(--highlight-fg);
+  border-color: var(--color-fg);
 }
 
 .toggle:active {

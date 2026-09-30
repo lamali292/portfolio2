@@ -1,6 +1,6 @@
 .cv {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 40rem);
   gap: 3rem 3rem;
   margin: 0 0 2rem;
 }
@@ -65,39 +65,4 @@
 .entryDetail {
   margin: 0;
   font-size: 0.9rem;
-}
-
-.skillGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1.25rem;
-}
-
-.skillGroup {
-  border-top: 2px solid var(--color-fg);
-  padding-top: 0.9rem;
-}
-
-.skillCategory {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1rem;
-  margin: 0 0 0.6rem;
-}
-
-.skillList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.skillChip {
-  font-size: 0.8rem;
-  color: var(--color-fg);
-  background: var(--color-bg-alt);
-  border-radius: 3px;
-  padding: 0.2rem 0.6rem;
 }

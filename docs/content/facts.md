@@ -5,7 +5,7 @@ Canonical source content for the site. Agents building any page should pull fact
 ## Identity & contact
 
 - Name: Laurin Maurice Liebhart
-- Title: M.Sc. Mathematik - Schwerpunkt ML & Numerik (TU Braunschweig)
+- Title: M.Sc. Mathematik - Schwerpunkt Numerik, Analysis & ML (TU Braunschweig)
 - Email: laurin@familie-liebhart.de
 - GitHub: https://github.com/lamali292
 - LinkedIn: https://linkedin.com/in/laurin-liebhart-78bb84255

@@ -9,7 +9,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Laurin Maurice Liebhart",
   description:
-    "Portfolio von Laurin Maurice Liebhart, M.Sc. Mathematik - Schwerpunkt ML & Numerik.",
+    "Portfolio von Laurin Maurice Liebhart, M.Sc. Mathematik - Schwerpunkt Numerik, Analysis & ML.",
 };
 
 export default function RootLayout({

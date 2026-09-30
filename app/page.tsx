@@ -6,7 +6,16 @@ import ProjectCard, { type CardSize } from "@/components/ProjectCard";
 import EducationStrip from "@/components/EducationStrip";
 import ImpactStory from "@/components/ImpactStory";
 import CvSection from "@/components/CvSection";
+import SkillsStrip from "@/components/SkillsStrip";
+import { GithubIcon, LinkedinIcon, MailIcon, XingIcon } from "@/components/Icons";
 import styles from "./page.module.css";
+
+const contactLinks = [
+  { label: "GitHub", href: siteConfig.links.github, Icon: GithubIcon, external: true },
+  { label: "LinkedIn", href: siteConfig.links.linkedin, Icon: LinkedinIcon, external: true },
+  { label: "Xing", href: siteConfig.links.xing, Icon: XingIcon, external: true },
+  { label: "E-Mail", href: `mailto:${siteConfig.links.email}`, Icon: MailIcon, external: false },
+];
 
 const cardSizes: CardSize[] = [
   "feature",
@@ -31,42 +40,26 @@ export default function Home() {
         </p>
         <p className={styles.bio}>{siteConfig.bio}</p>
         <ul className={styles.links}>
-          <li>
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a
-              href={siteConfig.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a
-              href={siteConfig.links.xing}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Xing
-            </a>
-          </li>
-          <li>
-            <a href={`mailto:${siteConfig.links.email}`}>
-              {siteConfig.links.email}
-            </a>
-          </li>
+          {contactLinks.map(({ label, href, Icon, external }) => (
+            <li key={label}>
+              <a
+                href={href}
+                className={styles.link}
+                {...(external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                <Icon className={styles.linkIcon} />
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </section>
 
       <EducationStrip />
+
+      <SkillsStrip />
 
       <ImpactStory />
 
