@@ -9,7 +9,7 @@ import styles from "./CvSection.module.css";
  */
 export default function CvSection() {
   return (
-    <section className={styles.cv}>
+    <section id="lebenslauf" className={styles.cv}>
       <div className={styles.block}>
         <h2 className={styles.heading}>Ausbildung</h2>
         <ul className={styles.entryList}>

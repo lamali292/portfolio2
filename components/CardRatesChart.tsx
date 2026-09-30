@@ -39,7 +39,7 @@ export default function CardRatesChart({
               name: "Pick-Rate",
               x: characters,
               y: pick,
-              marker: { color: "#2b5797" },
+              marker: { color: "#0b6e66" },
               hovertemplate: "%{x}<br>Pick-Rate: %{y:.1f}%<extra></extra>",
             },
             {

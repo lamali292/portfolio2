@@ -3,6 +3,8 @@ import styles from "./ProjectCard.module.css";
 import type { Project } from "@/lib/projects";
 import { assetPath } from "@/lib/asset-path";
 
+export type CardSize = "feature" | "half" | "third";
+
 /**
  * Clickable project tile for the homepage grid: a cover on top (a real
  * screenshot when the project has one, otherwise a typographic cover made
@@ -15,15 +17,10 @@ export default function ProjectCard({
   tech,
   highlight,
   image,
-  index,
-  featured,
-}: Project & { index: number; featured?: boolean }) {
-  const number = String(index + 1).padStart(2, "0");
+  size = "third",
+}: Project & { size?: CardSize }) {
   return (
-    <Link
-      href={href}
-      className={`${styles.card} ${featured ? styles.featured : ""}`}
-    >
+    <Link href={href} className={`${styles.card} ${styles[size]}`}>
       <div
         className={`${styles.cover} ${image?.fit === "contain" ? styles.contain : ""}`}
       >
@@ -37,12 +34,9 @@ export default function ProjectCard({
           />
         ) : (
           <div className={styles.typeCover} aria-hidden="true">
-            <span className={styles.typeMain}>
-              {highlight ?? tech[0]}
-            </span>
+            <span>{highlight ?? tech[0]}</span>
           </div>
         )}
-        <span className={styles.number}>{number}</span>
         {image && highlight && (
           <span className={styles.highlight}>{highlight}</span>
         )}
@@ -50,10 +44,7 @@ export default function ProjectCard({
       <div className={styles.body}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.teaser}>{teaser}</p>
-        <p className={styles.tech}>{tech.join(" / ")}</p>
-        <span className={styles.cta}>
-          Projekt ansehen <span aria-hidden="true">→</span>
-        </span>
+        <p className={styles.tech}>{tech.join(", ")}</p>
       </div>
     </Link>
   );

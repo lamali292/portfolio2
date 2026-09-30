@@ -7,7 +7,7 @@ export interface MinorProject {
 /**
  * Small side projects that don't warrant a full project page (see issue #7).
  * Rendered as compact cards in the "Weitere Projekte" section, unlike the
- * full case-study pages linked from lib/nav-links.ts.
+ * full case-study pages listed in lib/projects.ts.
  */
 export const minorProjects: MinorProject[] = [
   {
