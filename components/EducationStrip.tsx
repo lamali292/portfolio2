@@ -2,18 +2,22 @@ import { education } from "@/lib/cv";
 import styles from "./EducationStrip.module.css";
 
 /**
- * Compact education overview for the top of the homepage. Oldest first so
- * the grades read left to right (1,9, 1,6, 1,7) with the thesis grades
- * (1,1 and 1,0) attached to their degree.
+ * Compact education overview for the top of the homepage. Newest degree
+ * first and largest, with the thesis grades (1,0 and 1,1) attached to
+ * their degree.
  */
 export default function EducationStrip() {
-  const entries = [...education].reverse();
+  // Newest degree first, so the eye lands on the M.Sc.
+  const entries = education;
   return (
     <section id="ausbildung" className={styles.section} aria-label="Ausbildung">
       <h2 className={styles.heading}>Ausbildung</h2>
       <ol className={styles.list}>
-        {entries.map((entry) => (
-          <li key={entry.degree} className={styles.item}>
+        {entries.map((entry, i) => (
+          <li
+            key={entry.degree}
+            className={`${styles.item} ${i === 0 ? styles.primary : ""}`}
+          >
             <p className={styles.grade}>
               <span className={styles.gradeValue}>
                 {entry.grade.replace("Note ", "")}

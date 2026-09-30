@@ -1,41 +1,40 @@
-import { downfallTotals } from "@/lib/downfall-facts";
+/**
+ * The homepage headline for the STS2 work. The one figure that matters to a
+ * non-gamer is how much time people have spent with the product, so usertime
+ * leads and the two figures it is derived from follow as the explanation.
+ *
+ * Figures come from CONTEXT.md / docs/content/facts.md (Steam, telemetry).
+ * Terminology: active subscribers, tracked runs, usertime (cumulative play
+ * time of all tracked runs, each roughly 45-60 minutes).
+ */
+export const usertime = {
+  value: "25+",
+  unit: "Jahre",
+  label: "Spielzeit auf meinem Produkt",
+  detail:
+    "Summe der Spielzeit aller getrackten Runs von Downfall, meinem Mod für Slay the Spire 2.",
+};
 
-export interface ImpactStage {
-  title: string;
+export interface ImpactStep {
   value: string;
   label: string;
   detail: string;
 }
 
-/**
- * The homepage story for the STS2 work: build it, ship it, watch it being
- * played, learn from the data. Each figure comes from CONTEXT.md /
- * docs/content/facts.md (Steam, telemetry) or lib/downfall-facts.ts (repo).
- * Terminology follows CONTEXT.md: active subscribers, tracked runs, usertime.
- */
-export const impactStages: ImpactStage[] = [
+export const impactSteps: ImpactStep[] = [
   {
-    title: "Gebaut",
-    value: String(downfallTotals.characters),
-    label: "Charaktere in Downfall",
-    detail: `${downfallTotals.cards} Karten, ${downfallTotals.relics} Relikte, rund ${downfallTotals.linesOfCode} Zeilen C#`,
-  },
-  {
-    title: "Veröffentlicht",
     value: "166.999+",
     label: "aktive Abonnenten",
     detail: "Downfall und Watcher im Steam Workshop",
   },
   {
-    title: "Gespielt",
     value: "283.930",
     label: "getrackte Runs",
     detail: "9. Aug. – 28. Sep. 2026, jeder Run etwa 45–60 Minuten",
   },
   {
-    title: "Ausgewertet",
     value: "25+ Jahre",
     label: "Usertime",
-    detail: "SQL-Analysen und SHAP/LightGBM für die Balance-Auswertung",
+    detail: "Ausgewertet mit SQL, SHAP und LightGBM",
   },
 ];

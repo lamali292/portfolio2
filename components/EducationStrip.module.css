@@ -9,7 +9,8 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.5fr 1fr 1fr;
+  align-items: start;
   gap: 1.5rem;
   list-style: none;
   margin: 0;
@@ -19,6 +20,18 @@
 .item {
   border-top: 4px solid var(--color-accent);
   padding-top: 0.9rem;
+}
+
+.primary {
+  border-top-width: 8px;
+}
+
+.primary .gradeValue {
+  font-size: clamp(4rem, 9vw, 6.5rem);
+}
+
+.primary .degree {
+  font-size: 1.3rem;
 }
 
 .grade {
@@ -76,6 +89,14 @@
 }
 
 @media (max-width: 48rem) {
+  .primary .gradeValue {
+    font-size: clamp(2.6rem, 6vw, 4rem);
+  }
+
+  .primary {
+    border-top-width: 4px;
+  }
+
   .list {
     grid-template-columns: 1fr;
     gap: 1.25rem;

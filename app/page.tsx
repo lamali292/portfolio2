@@ -57,11 +57,11 @@ export default function Home() {
         </ul>
       </section>
 
+      <ImpactStory />
+
       <EducationStrip />
 
       <SkillsStrip />
-
-      <ImpactStory />
 
       <section id="projekte" className={styles.projects}>
         <h2 className={styles.sectionHeading}>Projekte</h2>
