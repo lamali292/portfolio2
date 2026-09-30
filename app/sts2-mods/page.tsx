@@ -5,6 +5,7 @@ import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
 import ProjectSection from "@/components/ProjectSection";
 import TechChips from "@/components/TechChips";
+import VideoEmbed from "@/components/VideoEmbed";
 import { assetPath } from "@/lib/asset-path";
 import {
   baseLibFacts,
@@ -13,6 +14,7 @@ import {
   downfallTotals,
   watcherFacts,
 } from "@/lib/downfall-facts";
+import { modVideos, watcherVideos } from "@/lib/videos";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -36,19 +38,6 @@ const links = [
   {
     href: "https://github.com/Alchyr/BaseLib-StS2/pulls?q=is%3Apr+state%3Aclosed+author%3Alamali292",
     label: "Meine Pull Requests in BaseLib-StS2",
-  },
-];
-
-const watcherVideos = [
-  {
-    src: "https://www.youtube.com/embed/PoqpDPO3UkA",
-    title: "Watcher Gameplay – 4-Spieler-Match",
-    caption: "Gameplay-Video: 4-Spieler-Match mit dem Watcher",
-  },
-  {
-    src: "https://www.youtube.com/embed/r5F5pL5k218",
-    title: "Watcher Gameplay – Video 2",
-    caption: "Gameplay-Video 2",
   },
 ];
 
@@ -222,19 +211,17 @@ export default function Sts2ModsPage() {
         </ul>
         <div className={styles.videoGrid}>
           {watcherVideos.map((video) => (
-            <div key={video.src}>
-              <div className={styles.videoWrapper}>
-                <div className={styles.videoFrame}>
-                  <iframe
-                    src={video.src}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-              <p className={styles.videoCaption}>{video.caption}</p>
-            </div>
+            <VideoEmbed key={video.id} {...video} />
+          ))}
+        </div>
+      </ProjectSection>
+
+      <ProjectSection heading="Videos">
+        <p>Weitere Videos zu den Mods. Das Video wird erst nach einem Klick
+          von YouTube geladen.</p>
+        <div className={styles.videoGrid}>
+          {modVideos.map((video) => (
+            <VideoEmbed key={video.id} {...video} />
           ))}
         </div>
       </ProjectSection>
