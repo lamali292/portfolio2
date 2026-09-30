@@ -1,32 +1,35 @@
 import Link from "next/link";
-import { impactStages } from "@/lib/impact";
+import { impactSteps, usertime } from "@/lib/impact";
 import styles from "./ImpactStory.module.css";
 
 /**
- * The STS2 work as a four-step sequence (build, ship, play, analyse), one
- * figure per step. The steps really are a sequence, so they are numbered
- * and joined by a line.
+ * Homepage headline: the usertime figure first, then the three steps it is
+ * derived from (subscribers, tracked runs, usertime). The steps really are
+ * a sequence, so they are numbered and joined by a line.
  */
 export default function ImpactStory() {
   return (
     <section className={styles.section} aria-label="Slay the Spire 2 in Zahlen">
-      <h2 className={styles.heading}>Von der Mod zur Datenanalyse</h2>
-      <p className={styles.intro}>
-        Ich baue Mods für Slay the Spire 2, veröffentliche sie, sehe über
-        Telemetrie wie sie gespielt werden und werte das mit SQL und ML aus.{" "}
-        <Link href="/sts2-mods">Mods</Link>,{" "}
-        <Link href="/sts2-data-analysis">Datenanalyse</Link>.
-      </p>
-      <ol className={styles.stages}>
-        {impactStages.map((stage, i) => (
-          <li key={stage.title} className={styles.stage}>
+      <div className={styles.lead}>
+        <p className={styles.number}>
+          <span>{usertime.value}</span> {usertime.unit}
+        </p>
+        <h2 className={styles.heading}>{usertime.label}</h2>
+        <p className={styles.detail}>{usertime.detail}</p>
+        <p className={styles.links}>
+          <Link href="/sts2-mods">Die Mods</Link>
+          <Link href="/sts2-data-analysis">Die Datenanalyse</Link>
+        </p>
+      </div>
+      <ol className={styles.steps}>
+        {impactSteps.map((step, i) => (
+          <li key={step.label} className={styles.step}>
             <span className={styles.marker} aria-hidden="true">
               {i + 1}
             </span>
-            <h3 className={styles.title}>{stage.title}</h3>
-            <p className={styles.value}>{stage.value}</p>
-            <p className={styles.label}>{stage.label}</p>
-            <p className={styles.detail}>{stage.detail}</p>
+            <p className={styles.value}>{step.value}</p>
+            <p className={styles.label}>{step.label}</p>
+            <p className={styles.stepDetail}>{step.detail}</p>
           </li>
         ))}
       </ol>

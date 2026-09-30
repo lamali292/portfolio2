@@ -68,8 +68,24 @@ export default function Sts2ModsPage() {
         </p>
         <ul className={styles.facts}>
           <li className={styles.fact}>
-            <span className={styles.factValue}>{downfallTotals.characters}</span>
-            <span className={styles.factLabel}>Charaktere</span>
+            <span className={styles.factValue}>89.872</span>
+            <span className={styles.factLabel}>aktive Abonnenten</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>144.305</span>
+            <span className={styles.factLabel}>Abonnenten insgesamt</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>
+              {downfallTotals.commitsTotal.toLocaleString("de-DE")}
+            </span>
+            <span className={styles.factLabel}>Commits, davon ca. 1.375 von mir</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>
+              {downfallTotals.linesOfCode}
+            </span>
+            <span className={styles.factLabel}>Zeilen C#</span>
           </li>
           <li className={styles.fact}>
             <span className={styles.factValue}>{downfallTotals.cards}</span>
@@ -80,18 +96,8 @@ export default function Sts2ModsPage() {
             <span className={styles.factLabel}>Relikte</span>
           </li>
           <li className={styles.fact}>
-            <span className={styles.factValue}>
-              {downfallTotals.linesOfCode}
-            </span>
-            <span className={styles.factLabel}>Zeilen C#</span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>89.872</span>
-            <span className={styles.factLabel}>aktive Abonnenten</span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>144.305</span>
-            <span className={styles.factLabel}>Abonnenten insgesamt</span>
+            <span className={styles.factValue}>{downfallTotals.characters}</span>
+            <span className={styles.factLabel}>Charaktere</span>
           </li>
           <li className={styles.fact}>
             <span className={styles.factValue}>
@@ -100,12 +106,6 @@ export default function Sts2ModsPage() {
             <span className={styles.factLabel}>
               Sprachen, Japanisch und Chinesisch zu über 97 % übersetzt
             </span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>
-              {downfallTotals.commitsTotal.toLocaleString("de-DE")}
-            </span>
-            <span className={styles.factLabel}>Commits, davon ca. 1.375 von mir</span>
           </li>
         </ul>
       </ProjectSection>
