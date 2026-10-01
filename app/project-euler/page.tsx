@@ -154,6 +154,9 @@ function simulate822(n: number, m: number) {
   const list: bigint[] = [];
   for (let x = 2; x <= n; x++) list.push(BigInt(x));
   const counts = new Array<number>(size).fill(0);
+  // log2(log2(x)) of every number; one squaring adds exactly 1.
+  const start: number[] = [];
+  for (let x = 2; x <= n; x++) start.push(Math_log2(Math_log2(x)));
   const rows: {
     round: number;
     block: number;
@@ -190,6 +193,7 @@ function simulate822(n: number, m: number) {
     k += 1;
   } while (counts.some((c) => c === 0));
   const afterPhase1 = [...counts];
+  const loglogAfter1 = start.map((v, i) => v + counts[i]);
   const cycle = rows.slice(-size).map((r) => r.orig);
 
   // Phase 2: the remaining m mod (n-1) rounds.
@@ -209,15 +213,20 @@ function simulate822(n: number, m: number) {
     }
   });
 
-  return { rows, k, rest, blocks, cycle, afterPhase1, afterPhase2, final: [...counts], list };
+  return { rows, k, rest, blocks, cycle, start, loglogAfter1, afterPhase1, afterPhase2, final: [...counts], list };
 }
 
 const Math_floor = (x: number) => x - (x % 1);
+const Math_log2 = (x: number) => globalThis.Math.log2(x);
+const Math_min = (...xs: number[]) => globalThis.Math.min(...xs);
+const de = (x: number, d = 3) => x.toFixed(d).replace(".", ",");
 
 const EX_N = 5;
 const EX_M = 21;
 const example = simulate822(EX_N, EX_M);
 const exampleSum = example.list.reduce((a, b) => a + b, BigInt(0));
+const size = EX_N - 1;
+const phase2Who = example.rows[example.k * size]?.orig;
 const startRows = example.rows.filter((r) => r.phase !== 3);
 
 export default function ProjectEulerPage() {
@@ -403,6 +412,67 @@ export default function ProjectEulerPage() {
           </li>
         </ul>
 
+        <h3>Warum der Zyklus entsteht: die Zahlen log₂(log₂ x)</h3>
+        <p>
+          Jede Zahl <Math tex="x" /> bekommt den Wert{" "}
+          <Math tex="\log_2(\log_2 x)" />. Quadrieren erhöht diesen Wert
+          um genau 1, und die kleinste Zahl ist immer die mit dem kleinsten
+          Wert. Jeder Wert besteht aus einem <strong>ganzzahligen Anteil</strong>{" "}
+          und einem <strong>Nachkommaanteil</strong>. Der Nachkommaanteil ändert
+          sich nie, er ist der Fingerabdruck der Zahl. Nur der ganzzahlige
+          Anteil wächst, jedes Mal um 1, wenn die Zahl quadriert wird.
+        </p>
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Zahl</th>
+                <th>Wert am Anfang</th>
+                <th>Nachkommaanteil</th>
+                <th>Wert nach Runde {example.k * size}</th>
+                <th>davon ganzzahlig</th>
+              </tr>
+            </thead>
+            <tbody>
+              {example.start.map((v, i) => (
+                <tr key={i}>
+                  <td className={styles.who}>{i + 2}</td>
+                  <td>{de(v)}</td>
+                  <td>{de(v - Math_floor(v + 1e-9))}</td>
+                  <td>{de(example.loglogAfter1[i])}</td>
+                  <td>{Math_floor(example.loglogAfter1[i] + 1e-9)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <ul className={styles.points}>
+          <li>
+            <strong>Die Werte rücken zusammen.</strong> Wer quadriert wird, war
+            gerade der Kleinste und landet höchstens 1 über dem bisherigen
+            Minimum. Sobald jede Zahl einmal dran war, liegen deshalb alle Werte
+            in einem Fenster der Breite 1 (hier von{" "}
+            {de(Math_min(...example.loglogAfter1))} bis{" "}
+            {de(Math_min(...example.loglogAfter1) + 1)}). Die ganzzahligen
+            Anteile unterscheiden sich nur noch um höchstens 1, und die
+            Reihenfolge der Werte ergibt sich aus den Nachkommaanteilen.
+          </li>
+          <li>
+            <strong>Dann läuft es wie am Band.</strong> Dran ist die Zahl mit dem
+            kleinsten Wert. Sie bekommt +1 auf den ganzzahligen Anteil, ihr
+            Nachkommaanteil bleibt, und sie steht jetzt ganz hinten. Danach ist
+            die nächste Zahl die kleinste, dann die nächste, und so weiter.
+            Nach {EX_N - 1} Runden hat jede Zahl genau +1 bekommen, alle
+            Abstände sind unverändert, und es beginnt dieselbe Folge von vorn.
+            Das ist der Zyklus: <strong>{example.cycle.join(", ")}</strong>.
+          </li>
+          <li>
+            <strong>Der Zyklus ist die Sortierung der Werte nach der Anlaufphase.</strong>{" "}
+            Man liest sie von klein nach groß ab. Bei gleichem Wert (hier 2
+            und 4) ist die kleinere Zahl zuerst dran.
+          </li>
+        </ul>
+
         <h3>Wie der schnelle Algorithmus die {EX_M} Runden zerlegt</h3>
         <ol className={styles.points}>
           <li>
@@ -411,9 +481,17 @@ export default function ProjectEulerPage() {
             Runden).
           </li>
           <li>
-            <strong>Phase 2:</strong> Die übrigen{" "}
-            <Math tex={`m \\bmod (n-1) = ${EX_M} \\bmod ${EX_N - 1} = ${example.rest}`} />{" "}
-            Runde{example.rest === 1 ? "" : "n"} simulieren.
+            <strong>Phase 2:</strong> Die {EX_M} Runden passen nicht in ganze
+            Blöcke: <Math tex={`m = ${EX_M} = ${Math_floor(EX_M / size)} \\cdot ${size} + ${example.rest}`} />.
+            Es bleibt ein <em>angebrochener Block</em> von{" "}
+            <Math tex={`m \\bmod (n-1) = ${EX_M} \\bmod ${size} = ${example.rest}`} />{" "}
+            Runde{example.rest === 1 ? "" : "n"}. In ihm bekommen nicht alle
+            Zahlen +1, sondern nur die ersten {example.rest} der Zyklus-Folge{" "}
+            ({example.cycle.slice(0, example.rest || 1).join(", ")}
+            {example.rest === 0 ? ", hier keine" : ""}). Diese Runden simuliert
+            man einzeln. Das geht direkt nach Phase 1, weil die übersprungenen
+            vollen Blöcke an der Reihenfolge nichts ändern. Im Beispiel ist
+            das Runde {example.k * size + 1}: Die {phase2Who} ist dran.
           </li>
           <li>
             <strong>Phase 3:</strong> Die restlichen{" "}
@@ -487,42 +565,15 @@ export default function ProjectEulerPage() {
           rund 40 Schritten (denn <Math tex="10^{12} \approx 2^{40}" />).
           Dann bleibt pro Zahl eine einzige schnelle modulare Potenz.
         </p>
-        <p className={styles.note}>
-          Warum <Math tex="\log_2(\log_2 x)" /> der richtige Blickwinkel ist:
-          Es gilt <Math tex="\log_2(\log_2(x^2)) = 1 + \log_2(\log_2 x)" />,
-          eine Quadrierung verschiebt die Zahl also genau um 1. Zahlen mit
-          kleinerem Wert dort sind dran, und die Reihenfolge ändert sich nicht.
-          So lassen sich auch riesige Zahlen vergleichen, ohne sie
-          auszuschreiben.
-        </p>
-      </ProjectSection>
 
-      <ProjectSection heading="Für Interessierte: Details und Code">
+        <h3>Code und weitere Aufgaben</h3>
         <details className={styles.details}>
-          <summary>Aufgabe 822 mathematisch erklärt, mit vollständigem Rust-Code</summary>
+          <summary>Vollständiger Rust-Code zu Aufgabe 822</summary>
           <div className={styles.problem}>
             <p>
-              <Math tex="S(n,m)" /> ist die Summe aller Zahlen nach{" "}
-              <Math tex="m" /> Runden. Beispiel für <Math tex="n=5" />:
-            </p>
-            <Math
-              display
-              tex="[2,3,4,5] \to [4,3,4,5] \to [4,9,4,5] \to [16,9,4,5]"
-            />
-            <p>
-              Gegeben: <Math tex="S(5,3) = 34" />,{" "}
+              Gegeben in der Aufgabe: <Math tex="S(5,3) = 34" /> und{" "}
               <Math tex="S(10,100) \equiv 845339386 \pmod{1234567891}" />.
-              Gesucht: <Math tex="S(10^4, 10^{16})" /> modulo{" "}
-              <Math tex="1234567891" />.
-            </p>
-            <p>
-              Verfolgt wird nur <Math tex="\log_2(\log_2(x))" />: Eine
-              Quadrierung <Math tex="x \to x^2" /> erhöht diesen Wert um{" "}
-              <Math tex="1" />. Nach anfänglichem Chaos stabilisiert sich die
-              Reihenfolge der Quadrierungen zu einem Zyklus. Für die finale
-              modulare Exponentiation mit astronomisch großen Exponenten
-              lässt sich der Exponent dank des kleinen Satzes von Fermat
-              modulo <Math tex="p-1" /> reduzieren.
+              Der Code folgt den vier Phasen von oben.
             </p>
             <CodeBlock code={RUST_SAMPLE} lang="rust" />
           </div>
