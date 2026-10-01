@@ -130,3 +130,26 @@ html {
   overflow-y: hidden;
   padding: 0.25rem 0;
 }
+
+/* Images with separate light and dark versions: both are in the page, CSS
+   shows the one that matches the active theme (system preference or toggle). */
+.theme-dark-only {
+  display: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-light-only {
+    display: none !important;
+  }
+  :root:not([data-theme="light"]) .theme-dark-only {
+    display: block !important;
+  }
+}
+
+:root[data-theme="dark"] .theme-light-only {
+  display: none !important;
+}
+
+:root[data-theme="dark"] .theme-dark-only {
+  display: block !important;
+}

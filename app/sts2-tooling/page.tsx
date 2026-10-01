@@ -108,6 +108,7 @@ export default function Sts2ToolingPage() {
         <div className={styles.shot}>
           <FeatureImage
             src="/sts2-tooling/ancients-tool.png"
+            darkSrc="/sts2-tooling/ancients-tool-dark.png"
             alt="Dialog-Tool mit Live-Vorschau der Sprechblasen, Format-Knöpfen und Lokalisierungs-IDs"
             caption="Das Dialog-Tool mit den Originalzeilen von Darv und dem Ironclad (gesperrt): Live-Vorschau als Sprechblase, Format-Knöpfe, Stilhinweis und feste Lokalisierungs-IDs."
           />

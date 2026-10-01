@@ -25,13 +25,27 @@ export default function ProjectCard({
         className={`${styles.cover} ${image?.fit === "contain" ? styles.contain : ""}`}
       >
         {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={image.isPublic ? assetPath(image.src) : image.src}
-            alt={image.alt}
-            loading="lazy"
-            style={{ objectPosition: image.position }}
-          />
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={image.isPublic ? assetPath(image.src) : image.src}
+              alt={image.alt}
+              loading="lazy"
+              className={image.darkSrc ? "theme-light-only" : undefined}
+              style={{ objectPosition: image.position }}
+            />
+            {image.darkSrc && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={image.isPublic ? assetPath(image.darkSrc) : image.darkSrc}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="theme-dark-only"
+                style={{ objectPosition: image.position }}
+              />
+            )}
+          </>
         ) : (
           <div className={styles.typeCover} aria-hidden="true">
             <span>{highlight ?? tech[0]}</span>
