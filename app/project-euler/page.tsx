@@ -146,22 +146,24 @@ fn n_pow_2k_mod(n: u64, k: u64, p: u64) -> u64 {
 /**
  * Exact simulation of problem 822 for small n and m (BigInt), used to build
  * the worked example: in every round the smallest number is squared (first
- * one on ties). Also reproduces the phases of the fast algorithm below.
+ * one on ties). It also reproduces the phases of the fast algorithm and
+ * checks at build time that the squaring order really is a repeating cycle.
  */
 function simulate822(n: number, m: number) {
+  const size = n - 1;
   const list: bigint[] = [];
   for (let x = 2; x <= n; x++) list.push(BigInt(x));
-  const size = n - 1;
   const counts = new Array<number>(size).fill(0);
   const rows: {
     round: number;
-    list: string;
+    block: number;
+    orig: number;
     squared: string;
+    list: string;
+    counts: number[];
     phase: 1 | 2 | 3;
   }[] = [];
 
-  // Phase 1: blocks of n-1 rounds until every number was squared at least once.
-  let k = 0;
   let round = 0;
   const step = (phase: 1 | 2 | 3) => {
     let idx = 0;
@@ -172,16 +174,23 @@ function simulate822(n: number, m: number) {
     round += 1;
     rows.push({
       round,
-      list: `[${list.join(", ")}]`,
+      block: Math_floor((round - 1) / size) + 1,
+      orig: idx + 2,
       squared: `${before} → ${list[idx]}`,
+      list: `[${list.join(", ")}]`,
+      counts: [...counts],
       phase,
     });
   };
+
+  // Phase 1: blocks of n-1 rounds until every number was squared at least once.
+  let k = 0;
   do {
     for (let i = 0; i < size; i++) step(1);
     k += 1;
   } while (counts.some((c) => c === 0));
   const afterPhase1 = [...counts];
+  const cycle = rows.slice(-size).map((r) => r.orig);
 
   // Phase 2: the remaining m mod (n-1) rounds.
   const rest = m % size;
@@ -191,17 +200,25 @@ function simulate822(n: number, m: number) {
   // Phase 3: the remaining full blocks. Each one squares every number exactly
   // once; the example simulates them to show that, the real algorithm skips them.
   const blocks = Math_floor(m / size) - k;
-  for (let b = 0; b < blocks; b++) for (let i = 0; i < size; i++) step(3);
-  const final = counts.map((c) => c);
-  return { rows, k, rest, blocks, afterPhase1, afterPhase2, final, list };
+  for (let b = 0; b < blocks * size; b++) step(3);
+
+  // Build-time check: from the end of phase 1 on, the order repeats the cycle.
+  rows.slice(k * size).forEach((r, j) => {
+    if (r.orig !== cycle[j % size]) {
+      throw new Error("Problem 822 example: squaring order is not cyclic");
+    }
+  });
+
+  return { rows, k, rest, blocks, cycle, afterPhase1, afterPhase2, final: [...counts], list };
 }
 
 const Math_floor = (x: number) => x - (x % 1);
 
 const EX_N = 5;
-const EX_M = 13;
+const EX_M = 21;
 const example = simulate822(EX_N, EX_M);
 const exampleSum = example.list.reduce((a, b) => a + b, BigInt(0));
+const startRows = example.rows.filter((r) => r.phase !== 3);
 
 export default function ProjectEulerPage() {
   return (
@@ -284,8 +301,8 @@ export default function ProjectEulerPage() {
         <p>
           Damit die vier Schritte greifbar werden, rechne ich die Aufgabe
           einmal mit kleinen Zahlen durch: <Math tex="n = 5" />, also die
-          Liste <Math tex="[2, 3, 4, 5]" />, und <Math tex="m = 13" /> Runden.
-          Die Tabelle zeigt jede Runde exakt, ohne Abkürzung.
+          Liste <Math tex="[2, 3, 4, 5]" />, und <Math tex={`m = ${EX_M}`} />{" "}
+          Runden. Zuerst die ersten Runden mit den echten Zahlen:
         </p>
 
         <div className={styles.tableWrap}>
@@ -305,11 +322,54 @@ export default function ProjectEulerPage() {
                 <td>[2, 3, 4, 5]</td>
                 <td>Start</td>
               </tr>
-              {example.rows.map((row) => (
+              {startRows.map((row) => (
                 <tr key={row.round} className={styles[`phase${row.phase}`]}>
                   <td>{row.round}</td>
                   <td>{row.squared}</td>
                   <td>{row.list}</td>
+                  <td>{row.phase === 1 ? "1: Anlauf" : "2: Rest"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Ab hier werden die Zahlen schnell riesig (nach Runde {EX_M} hat die
+          größte schon {String(example.list[EX_N - 2]).length} Stellen). Deshalb
+          zeigt die nächste Tabelle nur noch, <em>welche der ursprünglichen
+          Zahlen</em> in jeder Runde quadriert wird. Der Zähler einer Zahl ist, wie
+          oft sie schon quadriert wurde. Die dicken Linien trennen Blöcke aus
+          je {EX_N - 1} Runden.
+        </p>
+
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Runde</th>
+                <th>Block</th>
+                <th>Dran ist</th>
+                <th>Zähler 2</th>
+                <th>Zähler 3</th>
+                <th>Zähler 4</th>
+                <th>Zähler 5</th>
+                <th>Phase</th>
+              </tr>
+            </thead>
+            <tbody>
+              {example.rows.map((row) => (
+                <tr
+                  key={row.round}
+                  className={`${styles[`phase${row.phase}`]} ${
+                    (row.round - 1) % (EX_N - 1) === 0 ? styles.blockStart : ""
+                  }`}
+                >
+                  <td>{row.round}</td>
+                  <td>{row.block}</td>
+                  <td className={styles.who}>{row.orig}</td>
+                  {row.counts.map((c, i) => (
+                    <td key={i}>{c}</td>
+                  ))}
                   <td>
                     {row.phase === 1 && "1: Anlauf"}
                     {row.phase === 2 && "2: Rest"}
@@ -320,25 +380,21 @@ export default function ProjectEulerPage() {
             </tbody>
           </table>
         </div>
-        <p className={styles.note}>
-          Die Summe der Liste nach Runde {EX_M} ist{" "}
-          {exampleSum.toString()}.
-        </p>
 
-        <h3>Was in der Tabelle auffällt</h3>
+        <h3>Was in der Spalte „Dran ist“ auffällt</h3>
         <ul className={styles.points}>
           <li>
             <strong>Anlauf (Runden 1 bis {example.k * (EX_N - 1)}):</strong>{" "}
-            Am Anfang geht es unordentlich zu. Die ursprüngliche 2 wird schon
-            zweimal quadriert (2 → 4 → 16), bevor die 5 zum ersten Mal dran
-            ist. Der Anlauf endet, sobald jede Zahl einmal dran war.
+            Am Anfang geht es unordentlich zu: Die 2 ist schon zweimal dran
+            (2 → 4 → 16), bevor die 5 zum ersten Mal an der Reihe ist. Der
+            Anlauf endet, sobald jede Zahl einmal dran war.
           </li>
           <li>
-            <strong>Danach ein Zyklus:</strong> Sobald jede Zahl mindestens
-            einmal quadriert wurde, wird in jedem Block von{" "}
-            {EX_N - 1} Runden jede Zahl <em>genau einmal</em> quadriert, in der
-            Reihenfolge ihrer Größe. In der Tabelle sieht man das in den
-            Runden 5 bis 8 und noch einmal in 10 bis 13.
+            <strong>Danach ein Zyklus:</strong> Ab Runde{" "}
+            {(example.k - 1) * (EX_N - 1) + 1} wiederholt sich immer dieselbe
+            Folge <strong>{example.cycle.join(", ")}</strong>. In jedem Block
+            von {EX_N - 1} Runden ist jede Zahl genau einmal dran, in der
+            Reihenfolge ihrer Größe.
           </li>
           <li>
             <strong>Das spart die Arbeit:</strong> Einen vollen Block muss man
@@ -362,8 +418,9 @@ export default function ProjectEulerPage() {
           <li>
             <strong>Phase 3:</strong> Die restlichen{" "}
             <Math tex={`\\lfloor m/(n-1) \\rfloor - k = ${Math_floor(EX_M / (EX_N - 1))} - ${example.k} = ${example.blocks}`} />{" "}
-            Block{example.blocks === 1 ? "" : "s"} überspringen: Jede Zahl
-            bekommt einfach eine Quadrierung dazu.
+            Blöcke überspringen: Jede Zahl bekommt dafür einfach{" "}
+            {example.blocks} Quadrierungen dazu (in der Tabelle sind das die
+            Runden {example.k * (EX_N - 1) + example.rest + 1} bis {EX_M}).
           </li>
         </ol>
 
@@ -404,12 +461,16 @@ export default function ProjectEulerPage() {
         <p>
           Eine Zahl <Math tex="x" />, die <Math tex="c" />-mal quadriert wurde,
           ist <Math tex="x^{2^c}" />. Die Summe ergibt sich also direkt aus
-          den Zählern:
+          den Zählern, ohne dass man die Runden einzeln durchgehen muss:
         </p>
         <Math
           display
-          tex={`S(5,13) = 2^{2^{${example.final[0]}}} + 3^{2^{${example.final[1]}}} + 4^{2^{${example.final[2]}}} + 5^{2^{${example.final[3]}}} = ${exampleSum.toString()}`}
+          tex={`S(5,${EX_M}) = 2^{2^{${example.final[0]}}} + 3^{2^{${example.final[1]}}} + 4^{2^{${example.final[2]}}} + 5^{2^{${example.final[3]}}}`}
         />
+        <p className={styles.note}>
+          Ausgerechnet: {exampleSum.toString()}. Das ist genau die Summe der
+          Liste nach Runde {EX_M} in der Simulation.
+        </p>
 
         <h3>Und im großen Fall?</h3>
         <p>
