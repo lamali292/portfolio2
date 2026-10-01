@@ -42,7 +42,7 @@ export default function MasterarbeitPage() {
     <ProjectPage>
       <ProjectHero
         title="Port-Hamiltonian Neural Networks"
-        lead="Masterarbeit am Institut für Numerische Mathematik der TU Braunschweig, betreut von Prof. Dr. Heike Faßbender (März 2025). Ich habe untersucht, wie gut neuronale Netze mit eingebauter Physik größere und kompliziertere Systeme lernen: Federschwinger und elektrische Schaltkreise."
+        lead="Masterarbeit am Institut für Numerische Mathematik der TU Braunschweig (März 2025). Ich habe untersucht, wie gut neuronale Netze mit eingebauter Physik größere und kompliziertere Systeme lernen: Federschwinger und elektrische Schaltkreise."
       >
         <TechChips items={technologies} />
         <ul className={styles.facts}>
