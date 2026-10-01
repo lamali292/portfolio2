@@ -3,6 +3,8 @@ import spotifyCover from "@/app/spotify/images/search1.png";
 /** A real screenshot/figure from the project's own page, used as the card cover. */
 export interface ProjectImage {
   src: string;
+  /** Optional dark-theme version of the same image. */
+  darkSrc?: string;
   alt: string;
   /** "cover" crops to fill; "contain" shows the whole figure on a light backdrop. */
   fit?: "cover" | "contain";
@@ -54,7 +56,7 @@ export const projects: Project[] = [
     teaser:
       "Dialog-Tool für Autor:innen, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel und ein Test-Framework.",
     tech: ["C#", "Kotlin", "Google Sheets API"],
-    image: { src: "/sts2-tooling/ancients-tool.png", alt: "Dialog-Tool für Autor:innen mit Live-Vorschau der Sprechblasen, Format-Knöpfen und Lokalisierungs-IDs", isPublic: true, position: "left top" },
+    image: { src: "/sts2-tooling/ancients-tool.png", darkSrc: "/sts2-tooling/ancients-tool-dark.png", alt: "Dialog-Tool für Autor:innen mit Live-Vorschau der Sprechblasen, Format-Knöpfen und Lokalisierungs-IDs", isPublic: true, position: "left top" },
   },
   {
     slug: "masterarbeit",
