@@ -13,10 +13,10 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "STS2 Data Analysis | Laurin Maurice Liebhart",
   description:
-    "SQL- und ML-gestützte Auswertung von Gameplay-Telemetrie aus dem Slay the Spire 2 Mod Downfall: Pick- und Win-Rates, Relic-Balance und Run-Aktivität über die Zeit.",
+    "SQL-gestützte Auswertung von Gameplay-Telemetrie aus dem Slay the Spire 2 Mod Downfall: Pick- und Win-Rates, Relic-Balance und Run-Aktivität über die Zeit.",
 };
 
-const TECH_CHIPS = ["SQL", "Postgres", "Python", "Plotly", "SHAP", "LightGBM"];
+const TECH_CHIPS = ["SQL", "PostgreSQL", "Python", "Plotly", "GitHub Actions"];
 
 export default function Sts2DataAnalysisPage() {
   const { summary, runsOverTime, cardsByCharacter, relicsTop, relicsBottom, relicMinRuns } =
@@ -26,7 +26,7 @@ export default function Sts2DataAnalysisPage() {
     <ProjectPage>
       <ProjectHero
         title="STS2 Data Analysis"
-        lead="Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods Downfall – SQL-Auswertung über Postgres-Materialized-Views und eine SHAP/LightGBM-gestützte Balance-Analyse-Pipeline auf demselben Datensatz."
+        lead="Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods Downfall – SQL-Auswertung über Postgres-Materialized-Views mit einem automatisch aktualisierten Dashboard."
       >
         <TechChips items={TECH_CHIPS} />
       </ProjectHero>
@@ -98,16 +98,6 @@ export default function Sts2DataAnalysisPage() {
           relicsBottom={relicsBottom}
           minRuns={relicMinRuns}
         />
-      </ProjectSection>
-
-      <ProjectSection heading="Weiterführende Analyse">
-        <p>
-          Auf demselben Rohdatensatz baut zusätzlich eine SHAP/LightGBM-Pipeline
-          auf, die den Einfluss einzelner Karten- und Relic-Entscheidungen auf
-          den Run-Ausgang modelliert (Feature Importance statt reiner
-          Korrelation) &ndash; sie ist hier als Referenz genannt, aber bewusst
-          nicht Teil dieser Seite.
-        </p>
       </ProjectSection>
     </ProjectPage>
   );

@@ -13,7 +13,7 @@ The cumulative Steam Workshop subscriber count including people who have since u
 _Avoid_: total downloads (Steam doesn't expose a true download counter; this is the closest available figure)
 
 **Tracked run**:
-One completed or logged Slay the Spire 2 play session recorded by the Downfall telemetry pipeline (Supabase/Postgres), only sent when Downfall is the sole modded content active. On average a run is 52.8 minutes of play (as of 1 Oct 2026).
+One completed or logged Slay the Spire 2 play session recorded by the Downfall telemetry pipeline (Postgres), only sent when Downfall is the sole modded content active. On average a run is 52.8 minutes of play (as of 1 Oct 2026).
 _Avoid_: session, data point, game
 
 **Usertime**:
@@ -25,7 +25,7 @@ The project page covering the Downfall mod (10-character suite), the Watcher mod
 _Avoid_: Downfall page (too narrow — this page covers more than just Downfall)
 
 **STS2 Data Analysis**:
-The project page covering the Downfall-Data pipeline, SQL analytics, and the SHAP/LightGBM balance-analysis work — the data-science side of the ecosystem, kept separate from STS2 Mods because it demonstrates a different skill set.
+The project page covering the Downfall-Data pipeline and SQL analytics — the data-science side of the ecosystem, kept separate from STS2 Mods because it demonstrates a different skill set.
 
 **STS2 Tooling**:
 The project page covering the Rider LocPlugin, a JetBrains IDE plugin for localization-file management used during Downfall/Watcher development.

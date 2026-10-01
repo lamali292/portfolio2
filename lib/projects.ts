@@ -42,8 +42,8 @@ export const projects: Project[] = [
     href: "/sts2-data-analysis",
     title: "STS2 Data Analysis",
     teaser:
-      "SQL- und ML-gestützte Auswertung von Gameplay-Telemetrie aus dem Downfall-Mod - Pick- und Win-Rates, SHAP-Analysen und ein Live-Dashboard.",
-    tech: ["SQL", "Python", "SHAP", "LightGBM"],
+      "SQL-gestützte Auswertung von Gameplay-Telemetrie aus dem Downfall-Mod - Pick- und Win-Rates, Relic-Balance und ein Dashboard.",
+    tech: ["SQL", "PostgreSQL", "Python", "Plotly"],
     highlight: "304.225 getrackte Runs",
   },
   {
