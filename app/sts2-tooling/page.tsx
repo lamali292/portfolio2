@@ -8,16 +8,16 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "STS2 Tooling | Laurin Maurice Liebhart",
   description:
-    "Werkzeuge für ein Modding-Team: Web-Tools für die Voiceline-Lokalisierung, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel, Test-Framework und eine eigene API für Downfall.",
+    "Werkzeuge für ein Modding-Team: Dialog-Tool für Autor:innen, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel, Test-Framework und eine eigene API für Downfall.",
 };
 
 const technologies = ["C#", "Kotlin", "Google Sheets API", "Gradle", "Caddy"];
 
 const tools = [
   {
-    title: "Web-Tools für Voicelines",
-    tech: "Eigene Webseiten auf api.downfall-sts2.org",
-    text: "Künstler:innen lokalisieren Voicelines über Webseiten statt über JSON-Dateien. Formatierung sowie die geforderte Anzahl und der Stil sind fest eingebaut, deshalb lässt sich nichts falsch ausfüllen.",
+    title: "Dialog-Tool für Autor:innen",
+    tech: "Eine Webseite, HTML und JavaScript ohne Framework",
+    text: "Autor:innen und Künstler:innen schreiben die Dialoge zwischen den Spielfiguren (den Ancients) und jedem der 15 Charaktere auf einer Webseite statt in JSON-Dateien. Eine Live-Vorschau zeigt die Zeilen als Sprechblase mit den Originalfarben. Format-Knöpfe fügen nur gültige Tags ein (Fett, Kursiv, 8 Farben, 4 Effekte), neben jeder Figur steht der Stil der Originalzeilen, und Aufbau und Zeilen-IDs der Begegnungen sind vorgegeben. Heraus kommen fertige Lokalisierungszeilen zum Kopieren, vorhandene Zeilen lassen sich importieren. 359 Zeilen aus dem Basisspiel dienen als Referenz.",
     link: {
       href: "https://api.downfall-sts2.org/tools/architect-voicelines/",
       label: "Beispiel: Architect-Voicelines",
@@ -65,7 +65,7 @@ export default function Sts2ToolingPage() {
     <ProjectPage>
       <ProjectHero
         title="STS2 Tooling: Werkzeuge für ein Modding-Team"
-        lead="Downfall entsteht im Team mit Künstler:innen und Übersetzer:innen, die nicht programmieren. Ich habe die Werkzeuge gebaut, mit denen sie fehlerfrei arbeiten können: Web-Tools, Lokalisierungs-Formatierer, ein IDE-Plugin, eine Bild-Pipeline, ein Test-Framework und eine eigene API."
+        lead="Downfall entsteht im Team mit Künstler:innen und Übersetzer:innen, die nicht programmieren. Ich habe die Werkzeuge gebaut, mit denen sie fehlerfrei arbeiten können: Dialog-Tool, Lokalisierungs-Formatierer, ein IDE-Plugin, eine Bild-Pipeline, ein Test-Framework und eine eigene API."
       >
         <TechChips items={technologies} />
       </ProjectHero>
@@ -81,7 +81,7 @@ export default function Sts2ToolingPage() {
           >
             Downfall-Repository
           </a>{" "}
-          und stammen fast vollständig von mir. Die Web-Tools und die API
+          und stammen fast vollständig von mir. Das Dialog-Tool und die API
           betreibe ich selbst.
         </p>
         <ul className={styles.tools}>
