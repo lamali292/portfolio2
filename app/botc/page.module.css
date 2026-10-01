@@ -1,17 +1,36 @@
 .featureBody {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   flex-direction: column;
 }
 
 .featureText {
-  flex: 1;
+  max-width: 42rem;
 }
 
+/* Phone screenshots: three side by side on desktop, swipeable on mobile. */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 48rem) {
+  .gallery {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 68%;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.75rem;
+    margin-right: -1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .gallery > * {
+    scroll-snap-align: start;
+  }
 }
 
 .techGrid {
@@ -28,15 +47,4 @@
 .techGrid li {
   margin-bottom: 0.4rem;
   color: var(--color-muted);
-}
-
-@media (min-width: 48rem) {
-  .featureBody {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .featureText {
-    max-width: 22rem;
-  }
 }
