@@ -29,7 +29,8 @@ export const impactStats: ImpactStat[] = [
   {
     value: "304.225",
     label: "getrackte Runs",
-    detail: "7. Aug. – 1. Okt. 2026, nur Runs ganz ohne andere Mods",
+    detail:
+      "7. Aug. – 1. Okt. 2026: über 5.000 Runs pro Tag, Spitze fast 10.000. Gezählt werden nur Runs ganz ohne andere Mods.",
   },
   {
     value: "166.999+",
