@@ -61,9 +61,9 @@ export const projects: Project[] = [
   {
     slug: "botc",
     href: "/botc",
-    title: "Blood on the Clocktower Tool",
+    title: "Blood on the Clocktower App",
     teaser:
-      "Grimoire- und Skriptverwaltungs-App für das Gesellschaftsspiel Blood on the Clocktower - Skriptauswahl, Online-Suche und Spielerverwaltung.",
+      "Android-App für Spielleiter von Blood on the Clocktower: digitales Grimoire mit Spielerrollen, Status und Nacht-Reihenfolge, Skript-Bibliothek, Online-Suche über die botcscripts.com-API, PDF-Export und JSON-Import.",
     tech: ["Kotlin", "Python", "REST"],
     image: { src: "/botc/grimoire.png", alt: "Grimoire der Blood-on-the-Clocktower-App: Spieler im Kreis mit ihren Rollen", isPublic: true, position: "50% 15%" },
   },
@@ -80,9 +80,9 @@ export const projects: Project[] = [
   {
     slug: "spotify",
     href: "/spotify",
-    title: "Spotify Card Game & SongQuiz",
+    title: "Songquiz Website mit Spotify-Integration",
     teaser:
-      "Spotify-integriertes Karten-/Song-Ratespiel mit OAuth2-Anbindung an die Spotify Web API und Wiedergabesteuerung.",
+      "Musikquiz im Browser: Spieler ordnen Songs chronologisch in ihre Zeitlinie ein. Playlist-Suche, OAuth-Login und Wiedergabe laufen über die Spotify Web API, die digitalen Karten decken Titel, Interpret und Jahr auf.",
     tech: ["Flask", "Python", "Spotify API"],
     image: { src: spotifyCover.src, alt: "Playlist-Suche im Spotify-Kartenspiel mit Albumcovern", position: "center 5%" },
   },

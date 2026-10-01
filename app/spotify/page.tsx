@@ -18,7 +18,7 @@ export default function SpotifyPage() {
   return (
     <ProjectPage>
       <ProjectHero
-        title="Webapp – Spotify Musikquiz"
+        title="Songquiz Website mit Spotify-Integration"
         lead="Eine browserbasierte Webanwendung für das Musikratespiel Hitster. Die App digitalisiert das physische Kartenspiel und integriert Spotify für nahtlose Musikwiedergabe: Spieler ordnen Songs chronologisch in ihre persönliche Zeitlinie ein, während die App die passenden Songs automatisch über die Spotify Web API abspielt."
       >
         <TechChips items={technologies} />
