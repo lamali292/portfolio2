@@ -60,7 +60,7 @@ export const projects: Project[] = [
     href: "/masterarbeit",
     title: "Masterarbeit: Port-Hamiltonian Neural Networks",
     teaser:
-      "Physik-informiertes Machine Learning für dynamische Systeme - energieerhaltende, modular kombinierbare neuronale Netze für elektrische Schaltkreise.",
+      "Neuronale Netze mit eingebauter Physik für Federschwinger und elektrische Schaltkreise. Drei Fragestellungen zu Skalierung, impliziten Lösern und impliziten Systemen, umgesetzt in Python und JAX.",
     tech: ["Python", "JAX", "Numerik"],
     highlight: "Note 1,0",
     image: { src: "/assets/master/hoti_sep.png", alt: "Schaltkreis-Diagramme aus der Masterarbeit", isPublic: true, fit: "contain" },
