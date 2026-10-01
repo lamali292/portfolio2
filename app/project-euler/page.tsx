@@ -4,16 +4,55 @@ import CodeBlock from "@/components/CodeBlock";
 import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
 import ProjectSection from "@/components/ProjectSection";
+import PipelineFlow from "@/components/PipelineFlow";
 import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 import "katex/dist/katex.min.css";
 
 const TECH_CHIPS = ["Java", "Rust", "Python", "Mathematica", "Matlab"];
 
+const skills = [
+  {
+    title: "Problem in Mathematik übersetzen",
+    text: "Aus einer Textaufgabe wird ein sauberes Modell: Wahrscheinlichkeiten, Zahlentheorie oder Kombinatorik.",
+  },
+  {
+    title: "Passende Methode wählen",
+    text: "Geschlossene Formel, Sieb, dynamische Programmierung oder modulare Arithmetik, je nachdem, was die Struktur hergibt.",
+  },
+  {
+    title: "Effizient programmieren",
+    text: "Die Idee wird in schnellen Code übersetzt (Java, Rust, Python), damit die Antwort in Sekunden da ist.",
+  },
+];
+
+const exampleSteps = [
+  {
+    title: "Das Problem",
+    tech: "Warum Ausprobieren scheitert",
+    text: "10¹⁶ Runden zu simulieren dauert selbst bei einer Milliarde Runden pro Sekunde fast vier Monate. Und durch das Quadrieren werden die Zahlen riesig.",
+  },
+  {
+    title: "Die Idee",
+    tech: "Logarithmus des Logarithmus",
+    text: "Statt der Zahlen selbst merke ich mir log₂(log₂(x)). Quadrieren erhöht diesen Wert genau um 1, und die Reihenfolge der Zahlen bleibt erhalten.",
+  },
+  {
+    title: "Das Muster",
+    tech: "Zyklus erkennen",
+    text: "Nach einer Anlaufphase wiederholt sich die Reihenfolge, in der die Zahlen quadriert werden. Ich simuliere nur die Anlaufphase, den Rest liefert der Zyklus.",
+  },
+  {
+    title: "Das Ergebnis",
+    tech: "Kleiner Satz von Fermat",
+    text: "Die riesigen Exponenten werden mit dem kleinen Satz von Fermat verkleinert. Rechenzeit: etwa 0,3 Sekunden statt Monaten.",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Project Euler | Laurin Maurice Liebhart",
   description:
-    "150+ gelöste Project-Euler-Probleme, Top 0,5% weltweit - algorithmische Mathematik in Java, Rust, Python, Mathematica und Matlab.",
+    "Über 150 mathematische Rätsel gelöst, Top 0,5 % weltweit. Wie aus Monaten Rechenzeit Sekunden werden, erklärt an einem Beispiel.",
 };
 
 const RUST_SAMPLE = `use my_macros::problem;
@@ -109,9 +148,25 @@ export default function ProjectEulerPage() {
     <ProjectPage>
       <ProjectHero
         title="Project Euler"
-        lead="150+ gelöste Probleme · Top 0,5% weltweit · algorithmische Mathematik"
+        lead="Über 150 mathematische Rätsel gelöst, Top 0,5 % weltweit. Gewinnen kann man sie nicht mit mehr Rechenleistung, sondern nur mit einer Idee."
       >
         <TechChips items={TECH_CHIPS} />
+        <ul className={styles.facts}>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>150+</span>
+            <span className={styles.factLabel}>gelöste Aufgaben</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>Top 0,5 %</span>
+            <span className={styles.factLabel}>weltweit</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>0,3 s</span>
+            <span className={styles.factLabel}>
+              Laufzeit meiner Lösung zu Aufgabe 822 (naiv: Monate)
+            </span>
+          </li>
+        </ul>
       </ProjectHero>
 
       <ProjectSection heading="Was ist Project Euler?">
@@ -123,32 +178,81 @@ export default function ProjectEulerPage() {
           >
             Project Euler
           </a>{" "}
-          ist eine Sammlung mathematisch-algorithmischer Probleme, die reines
-          Ausprobieren gezielt bestraft: Eine naive Lösung braucht oft
-          Jahrhunderte Rechenzeit, eine mathematisch fundierte Lösung
-          dagegen wenige Sekunden. Jedes Problem verlangt daher, zuerst die
-          zugrunde liegende Struktur zu verstehen - Zahlentheorie,
-          Kombinatorik, Analysis - und sie dann in effizienten Code zu
-          übersetzen.
+          ist eine Website mit über 900 Mathe- und Programmieraufgaben. Jede
+          Aufgabe hat als Antwort genau eine Zahl.
         </p>
-      </ProjectSection>
-
-      <ProjectSection heading="Warum das hierher gehört">
         <p>
-          Ich habe über 150 Project-Euler-Probleme gelöst und liege damit
-          unter den <strong>Top 0,5% weltweit</strong>. Das ist für mich
-          kein Selbstzweck, sondern trainiertes Handwerk: die Fähigkeit,
-          ein unscharfes Problem in ein sauberes mathematisches Modell zu
-          überführen, die richtige Methode zu wählen (geschlossene Formel,
-          Sieb, Dynamische Programmierung, modulare Arithmetik) und das
-          Ergebnis in performanten Code zu gießen. Genau diese Kombination
-          aus mathematischer Tiefe und algorithmischem Pragmatismus nutze
-          ich auch in Numerik, ML und Datenanalyse.
+          Das Besondere: Die Aufgaben sind so gebaut, dass stures Ausprobieren
+          nicht funktioniert. Wer es trotzdem versucht, wartet Jahrhunderte.
+          Wer die mathematische Struktur erkennt, bekommt die Antwort in
+          Sekunden.
         </p>
       </ProjectSection>
 
-      <ProjectSection heading="Beispielaufgaben">
+      <ProjectSection heading="Was ich dabei trainiere">
+        <ul className={styles.skills}>
+          {skills.map((skill) => (
+            <li key={skill.title} className={styles.skill}>
+              <h3>{skill.title}</h3>
+              <p>{skill.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p>
+          Genau diese Kombination aus mathematischer Tiefe und
+          algorithmischem Pragmatismus nutze ich auch in Numerik, ML und
+          Datenanalyse.
+        </p>
+      </ProjectSection>
 
+      <ProjectSection heading="Ein Beispiel: Aufgabe 822 in vier Schritten">
+        <p>
+          <strong>Die Aufgabe:</strong> Eine Liste enthält die Zahlen 2, 3,
+          …, 10 000. In jeder Runde wird die kleinste Zahl durch ihr Quadrat
+          ersetzt. Wie groß ist die Summe aller Zahlen nach 10 Billiarden
+          (10¹⁶) Runden? Gesucht ist die Antwort modulo 1 234 567 891.
+        </p>
+        <PipelineFlow steps={exampleSteps} />
+        <p className={styles.note}>
+          Gemessen mit meiner Rust-Lösung als Release-Build auf einem
+          Cloud-Rechner. Die Lösung stimmt mit den Beispielwerten der Aufgabe
+          überein.
+        </p>
+      </ProjectSection>
+
+      <ProjectSection heading="Für Interessierte: Details und Code">
+        <details className={styles.details}>
+          <summary>Aufgabe 822 mathematisch erklärt, mit vollständigem Rust-Code</summary>
+          <div className={styles.problem}>
+            <p>
+              <Math tex="S(n,m)" /> ist die Summe aller Zahlen nach{" "}
+              <Math tex="m" /> Runden. Beispiel für <Math tex="n=5" />:
+            </p>
+            <Math
+              display
+              tex="[2,3,4,5] \to [4,3,4,5] \to [4,9,4,5] \to [16,9,4,5]"
+            />
+            <p>
+              Gegeben: <Math tex="S(5,3) = 34" />,{" "}
+              <Math tex="S(10,100) \equiv 845339386 \pmod{1234567891}" />.
+              Gesucht: <Math tex="S(10^4, 10^{16})" /> modulo{" "}
+              <Math tex="1234567891" />.
+            </p>
+            <p>
+              Verfolgt wird nur <Math tex="\log_2(\log_2(x))" />: Eine
+              Quadrierung <Math tex="x \to x^2" /> erhöht diesen Wert um{" "}
+              <Math tex="1" />. Nach anfänglichem Chaos stabilisiert sich die
+              Reihenfolge der Quadrierungen zu einem Zyklus. Für die finale
+              modulare Exponentiation mit astronomisch großen Exponenten
+              lässt sich der Exponent dank des kleinen Satzes von Fermat
+              modulo <Math tex="p-1" /> reduzieren.
+            </p>
+            <CodeBlock code={RUST_SAMPLE} lang="rust" />
+          </div>
+        </details>
+
+        <details className={styles.details}>
+          <summary>Zwei weitere Aufgaben: 938 (Kartenspiel) und 926 (Rundheit)</summary>
         <div className={styles.problem}>
           <h3>Problem 938 - Exhausting a Colour</h3>
           <p>
@@ -198,52 +302,12 @@ export default function ProjectEulerPage() {
             <Math tex="R(10!) = 312" />.
           </p>
           <p>
-            Gesucht: <Math tex="R(10\\,000\\,000!)" /> modulo{" "}
+            Gesucht: <Math tex="R(10\,000\,000!)" /> modulo{" "}
             <Math tex="10^9 + 7" />.
           </p>
         </div>
 
-        <div className={styles.problem}>
-          <h3>Problem 822 - Square the Smallest</h3>
-          <p>
-            Eine Liste enthält anfangs die Zahlen{" "}
-            <Math tex="2, 3, \\ldots, n" />. In jeder Runde wird die{" "}
-            <strong>kleinste Zahl</strong> der Liste durch ihr{" "}
-            <strong>Quadrat</strong> ersetzt (bei mehreren gleich kleinen
-            Zahlen nur eine). Beispiel für <Math tex="n=5" />:
-          </p>
-          <Math
-            display
-            tex="[2,3,4,5] \\to [4,3,4,5] \\to [4,9,4,5] \\to [16,9,4,5]"
-          />
-          <p>
-            <Math tex="S(n,m)" /> ist die Summe aller Zahlen nach{" "}
-            <Math tex="m" /> Runden. Gegeben: <Math tex="S(5,3) = 34" />,{" "}
-            <Math tex="S(10,100) \\equiv 845339386 \\pmod{1234567891}" />.
-          </p>
-          <p>
-            Gesucht: <Math tex="S(10^4, 10^{16})" /> modulo{" "}
-            <Math tex="1234567891" /> - naiv simuliert wären das{" "}
-            <Math tex="10^{16}" /> Runden, also praktisch unmöglich.
-          </p>
-          <p>
-            Der Trick: Statt die (schnell riesig werdenden) Zahlen selbst zu
-            speichern, wird nur{" "}
-            <Math tex="\\log_2(\\log_2(x))" /> verfolgt - eine Quadrierung{" "}
-            <Math tex="x \\to x^2" /> erhöht diesen Wert einfach um{" "}
-            <Math tex="1" />, und die Sortierreihenfolge bleibt erhalten.
-            Nach anfänglichem Chaos stabilisiert sich die Reihenfolge, in
-            der Elemente quadriert werden, zu einem sich wiederholenden
-            Zyklus, sodass sich <Math tex="10^{16}" /> Runden auf wenige
-            hundert simulierte Runden plus eine geschlossene Formel für den
-            Rest reduzieren. Für die finale modulare Exponentiation mit
-            astronomisch großen Exponenten sorgt der kleine Satz von Fermat
-            dafür, dass sich der Exponent modulo <Math tex="p-1" />{" "}
-            reduzieren lässt. Der folgende Ausschnitt (Rust) zeigt die
-            vollständige Lösung:
-          </p>
-          <CodeBlock code={RUST_SAMPLE} lang="rust" />
-        </div>
+        </details>
       </ProjectSection>
     </ProjectPage>
   );

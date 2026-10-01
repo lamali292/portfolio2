@@ -1,14 +1,18 @@
-import { pipelineSteps } from "@/lib/pipeline";
+import { pipelineSteps, type PipelineStep } from "@/lib/pipeline";
 import styles from "./PipelineFlow.module.css";
 
 /**
  * The data pipeline as a numbered sequence of steps joined by a line. The
  * steps really are a sequence (data flows from one to the next).
  */
-export default function PipelineFlow() {
+export default function PipelineFlow({
+  steps = pipelineSteps,
+}: {
+  steps?: PipelineStep[];
+}) {
   return (
     <ol className={styles.flow}>
-      {pipelineSteps.map((step, i) => (
+      {steps.map((step, i) => (
         <li key={step.title} className={styles.step}>
           <span className={styles.marker} aria-hidden="true">
             {i + 1}
