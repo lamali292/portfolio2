@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import FeatureImage from "@/components/FeatureImage";
 import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
 import ProjectSection from "@/components/ProjectSection";
@@ -104,6 +105,13 @@ export default function Sts2ToolingPage() {
             </li>
           ))}
         </ul>
+        <div className={styles.shot}>
+          <FeatureImage
+            src="/sts2-tooling/ancients-tool.png"
+            alt="Dialog-Tool mit Live-Vorschau der Sprechblasen, Format-Knöpfen und Lokalisierungs-IDs"
+            caption="Das Dialog-Tool mit den Originalzeilen von Darv und dem Ironclad (gesperrt): Live-Vorschau als Sprechblase, Format-Knöpfe, Stilhinweis und feste Lokalisierungs-IDs."
+          />
+        </div>
       </ProjectSection>
 
       <ProjectSection heading="Rider-Plugin: das Problem">

@@ -54,6 +54,7 @@ export const projects: Project[] = [
     teaser:
       "Dialog-Tool für Autor:innen, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel und ein Test-Framework.",
     tech: ["C#", "Kotlin", "Google Sheets API"],
+    image: { src: "/sts2-tooling/ancients-tool.png", alt: "Dialog-Tool für Autor:innen mit Live-Vorschau der Sprechblasen, Format-Knöpfen und Lokalisierungs-IDs", isPublic: true, position: "left top" },
   },
   {
     slug: "masterarbeit",

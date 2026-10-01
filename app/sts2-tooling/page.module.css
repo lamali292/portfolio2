@@ -48,3 +48,8 @@ section ul.tools > li.tool {
   font-weight: 700;
   color: var(--color-accent);
 }
+
+.shot {
+  margin-top: 2rem;
+  max-width: 56rem;
+}
