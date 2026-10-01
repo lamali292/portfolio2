@@ -142,3 +142,12 @@ section ol.points {
 section .points > li {
   margin-bottom: 0.55rem;
 }
+
+.table tr.blockStart td {
+  border-top: 3px solid var(--color-fg);
+}
+
+.table td.who {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
