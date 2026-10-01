@@ -21,3 +21,30 @@
   font-size: 0.95rem;
   margin-top: var(--space-2);
 }
+
+section ul.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2rem 2rem;
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+
+section ul.tools > li.tool {
+  margin: 0;
+  border-top: 4px solid var(--color-accent);
+  padding-top: 0.75rem;
+}
+
+.tool h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.25rem;
+}
+
+.tool .toolTech {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
