@@ -1,16 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
+import Plot from "./Plot";
 import styles from "./OptionSurfacePlot.module.css";
-
-// Plotly touches `window`/`document` at import time, so it can only be
-// loaded on the client. next/dynamic with ssr:false keeps it out of the
-// static export build.
-const Plot = dynamic(() => import("react-plotly.js"), {
-  ssr: false,
-  loading: () => <p className={styles.loading}>Lade Plot…</p>,
-});
 
 export interface OptionGridData {
   x: number[];
@@ -72,9 +64,9 @@ export default function OptionSurfacePlot({ data }: OptionSurfacePlotProps) {
             height: 480,
             margin: { l: 0, r: 0, t: 20, b: 0 },
             scene: {
-              xaxis: { title: "S1 (Basiswert 1)" },
-              yaxis: { title: "S2 (Basiswert 2)" },
-              zaxis: { title: "Optionswert" },
+              xaxis: { title: { text: "Kurs Basiswert 1" } },
+              yaxis: { title: { text: "Kurs Basiswert 2" } },
+              zaxis: { title: { text: "Optionswert" } },
             },
           }}
           style={{ width: "100%" }}

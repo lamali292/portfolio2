@@ -73,8 +73,9 @@ export const projects: Project[] = [
     href: "/praktikum",
     title: "Praktikum: Optionspreisberechnung",
     teaser:
-      "Numerische Bewertung amerikanischer Basket-Optionen mit einem selbst implementierten Newton-Krylov-GMRES-Löser.",
+      "Fairer Preis einer amerikanischen Basket-Option: ein selbst in C geschriebener Newton-Krylov-Löser rechnet ihn auf einem Gitter aus, dazu eine interaktive 3D-Grafik.",
     tech: ["C", "Numerik", "GMRES"],
+    image: { src: "/praktikum/surface.png", darkSrc: "/praktikum/surface-dark.png", alt: "3D-Fläche: berechneter Optionswert in Abhängigkeit von den Kursen zweier Aktien", isPublic: true },
   },
   {
     slug: "project-euler",

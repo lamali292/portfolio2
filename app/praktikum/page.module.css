@@ -1,0 +1,45 @@
+ul.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.fact {
+  border-top: 4px solid var(--color-accent);
+  padding-top: 0.5rem;
+  min-width: 6rem;
+  max-width: 16rem;
+}
+
+.factValue {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.factLabel {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.details {
+  border-top: 2px solid var(--color-fg);
+  padding: 0.9rem 0;
+}
+
+.details summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.25rem 0;
+}
+
+.details[open] summary {
+  margin-bottom: 1rem;
+}

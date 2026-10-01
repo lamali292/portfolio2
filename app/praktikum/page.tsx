@@ -1,6 +1,8 @@
 import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
+import PipelineFlow from "@/components/PipelineFlow";
 import ProjectSection from "@/components/ProjectSection";
+import styles from "./page.module.css";
 import TechChips from "@/components/TechChips";
 import OptionSurfacePlot, {
   OptionGridData,
@@ -15,6 +17,29 @@ const TECH_CHIPS = [
   "Newton-Krylov",
   "GMRES",
   "Sparse Matrices",
+];
+
+const steps = [
+  {
+    title: "Gitter bauen",
+    tech: "Finite Differenzen",
+    text: "Die Kurse beider Aktien werden in ein Gitter gelegt (bis zu 50 × 50 Punkte). Die Preisgleichung (Black-Scholes) wird auf diesem Gitter umgesetzt.",
+  },
+  {
+    title: "Linearisieren",
+    tech: "Newton-Verfahren",
+    text: "Das nichtlineare Problem wird in jedem Zeitschritt durch eine Folge linearer Probleme angenähert.",
+  },
+  {
+    title: "Gleichungssystem lösen",
+    tech: "GMRES mit ARMS-Präkonditionierer",
+    text: "Das große, dünn besetzte System löst GMRES. Ein Präkonditionierer macht es handlicher, damit wenige Iterationen genügen.",
+  },
+  {
+    title: "Ausübung beachten",
+    tech: "Projektion auf das Hindernis",
+    text: "Nach jedem Schritt wird der Wert nach unten auf den Gewinn bei sofortiger Ausübung begrenzt.",
+  },
 ];
 
 const DATA_STRUCTURE_CODE = `/* CSR-Speicherung (Compressed Sparse Row) fuer den
@@ -76,85 +101,90 @@ export default function PraktikumPage() {
     <ProjectPage>
       <ProjectHero
         title="Numerische Optionspreisberechnung"
-        lead="Bewertung amerikanischer Basket-Optionen per Newton-Krylov-Verfahren mit GMRES – Praktikum in numerischer Mathematik"
+        lead="Praktikum in numerischer Mathematik: Ich habe in C einen Löser geschrieben, der den fairen Preis einer amerikanischen Basket-Option berechnet."
       >
         <TechChips items={TECH_CHIPS} />
+        <ul className={styles.facts}>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>C</span>
+            <span className={styles.factLabel}>Löser selbst implementiert</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>2</span>
+            <span className={styles.factLabel}>Aktien im Korb</span>
+          </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>2.500</span>
+            <span className={styles.factLabel}>
+              Gitterpunkte pro Zeitschritt (feinste Auflösung, 50 × 50)
+            </span>
+          </li>
+        </ul>
       </ProjectHero>
 
-      <ProjectSection heading="Das Problem">
+      <ProjectSection heading="Worum geht es?">
         <p>
-          Der faire Wert einer amerikanischen Basket-Option &ndash; einer
-          Option auf einen Korb mehrerer Basiswerte, die jederzeit bis zur
-          Fälligkeit ausgeübt werden kann &ndash; lässt sich nicht mehr
-          geschlossen berechnen. Für europäische Optionen liefert die
-          Black-Scholes-Gleichung eine analytische Formel, doch das
-          vorzeitige Ausübungsrecht amerikanischer Optionen macht daraus ein
-          freies Randwertproblem: Der Optionswert muss zu jedem Zeitpunkt
-          sowohl die Black-Scholes-PDE erfüllen als auch mindestens so groß
-          sein wie der sofortige Ausübungsgewinn (die Payoff-Funktion).
+          Eine Option ist ein Vertrag, der das Recht gibt, später etwas zu
+          einem festen Preis zu kaufen oder zu verkaufen. Eine{" "}
+          <strong>Basket-Option</strong> bezieht sich auf einen Korb mehrerer
+          Aktien, hier auf zwei. Bei einer <strong>amerikanischen</strong>{" "}
+          Option darf man jederzeit bis zum Ablauf ausüben, bei einer
+          europäischen nur am Ende. Die Frage: Was ist so ein Vertrag heute
+          fairerweise wert?
         </p>
         <p>
-          Um dieses Problem numerisch zu lösen, wird die PDE über ein
-          Finite-Differenzen-Verfahren auf einem Gitter der Basiswertpreise
-          diskretisiert. Für eine Basket-Option mit mehreren Basiswerten
-          ergibt sich daraus ein mehrdimensionales Gitter und ein
-          entsprechend großes, aber dünn besetztes (sparse) Gleichungssystem
-          pro Zeitschritt. Die Nebenbedingung des vorzeitigen Ausübens macht
-          dieses System zusätzlich nichtlinear &ndash; es handelt sich um ein
-          lineares Komplementaritätsproblem (LCP), das in jedem Zeitschritt
-          neu gelöst werden muss.
+          Für europäische Optionen gibt es dafür eine Formel
+          (Black-Scholes). Das Recht auf vorzeitige Ausübung macht es
+          schwerer: Der Wert muss in jedem Moment mindestens so hoch sein wie
+          der Gewinn bei sofortiger Ausübung. Eine geschlossene Formel gibt
+          es dann nicht mehr, man muss rechnen: Kurse in ein Gitter legen und
+          Zeitschritt für Zeitschritt vorgehen. Pro Zeitschritt entsteht ein
+          großes, dünn besetztes und zusätzlich nichtlineares
+          Gleichungssystem.
         </p>
       </ProjectSection>
 
-      <ProjectSection heading="Interaktive Visualisierung">
+      <ProjectSection heading="Mein Lösungsweg in vier Schritten">
+        <PipelineFlow steps={steps} />
+      </ProjectSection>
+
+      <ProjectSection heading="Ergebnis: der Optionswert als Fläche">
         <p>
-          Die folgende 3D-Oberfläche zeigt den berechneten Optionswert in
-          Abhängigkeit der beiden Basiswertkurse. Zwischen zwei
-          Gitterauflösungen (N&nbsp;=&nbsp;30 und N&nbsp;=&nbsp;50 Punkte pro
-          Dimension) kann umgeschaltet werden; darunter werden die
-          zugehörigen Kennzahlen (Minimum, Maximum, Mittelwert,
-          Standardabweichung) angezeigt.
+          Die Fläche zeigt den berechneten Optionswert in Abhängigkeit von den
+          Kursen der beiden Aktien. Je niedriger beide Kurse sind, desto höher
+          der Wert (die Spitze), zu hohen Kursen hin fällt er auf fast null.
+          Zwischen zwei Gitterauflösungen (30 und 50 Punkte pro Dimension)
+          kann umgeschaltet werden, die Grafik lässt sich drehen und zoomen.
         </p>
         <OptionSurfacePlot data={plotData} />
       </ProjectSection>
 
-      <ProjectSection heading="Lösungsansatz">
-        <p>
-          Jeder Zeitschritt wird über ein Newton-Verfahren linearisiert: Aus
-          dem nichtlinearen Residuum der diskretisierten PDE inklusive
-          Hindernisbedingung wird eine Jacobi-Matrix aufgestellt, und das
-          resultierende dünn besetzte lineare System wird mit dem
-          Krylov-Unterraumverfahren GMRES (Generalized Minimal Residual)
-          gelöst. Damit GMRES bei den hier auftretenden schlecht
-          konditionierten, großen Systemen in vertretbar wenigen Iterationen
-          konvergiert, kommt ein ARMS-Präkonditionierer (Algebraic Recursive
-          Multilevel Solver) zum Einsatz, der die Matrix rekursiv in
-          unabhängige Blöcke zerlegt und so die Konditionierung deutlich
-          verbessert.
-        </p>
-        <p>
-          Der klassische Lösungsansatz für amerikanische Optionen &ndash; das
-          projizierte SOR-Verfahren (PSOR) &ndash; wurde bewusst nicht
-          verwendet: PSOR konvergiert für einzelne Basiswerte zuverlässig,
-          skaliert aber schlecht mit der Dimension des Basiskorbs und der
-          Gitterauflösung, da es sich um ein sequentielles, punktweises
-          Verfahren handelt. Newton-Krylov-GMRES mit ARMS-Präkonditionierer
-          konvergiert dagegen auch bei größeren, mehrdimensionalen Gittern in
-          wenigen Iterationen und lässt sich zudem besser parallelisieren.
-        </p>
-      </ProjectSection>
-
-      <ProjectSection heading="Code-Auszüge">
-        <h3>Datenstrukturen</h3>
-        <CodeBlock
-          code={DATA_STRUCTURE_CODE}
-          caption="Sparse-Matrix (CSR) und Gitterzustand für die diskretisierte Basket-Option."
-        />
-        <h3>Newton-Krylov-Solver</h3>
-        <CodeBlock
-          code={SOLVER_CODE}
-          caption="Ein Newton-Schritt: Jacobi-Matrix aufstellen, mit GMRES + ARMS lösen, auf das Hindernis projizieren."
-        />
+      <ProjectSection heading="Für Interessierte: Details und Code">
+        <details className={styles.details}>
+          <summary>Warum Newton-Krylov mit GMRES statt PSOR?</summary>
+          <p>
+            Der klassische Ansatz für amerikanische Optionen ist das
+            projizierte SOR-Verfahren (PSOR). Es arbeitet Punkt für Punkt
+            nacheinander und wird bei mehreren Aktien und feinen Gittern
+            langsam. Newton-Krylov-GMRES mit ARMS-Präkonditionierer
+            (Algebraic Recursive Multilevel Solver, zerlegt die Matrix
+            rekursiv in unabhängige Blöcke) eignet sich besser für größere,
+            mehrdimensionale Gitter und lässt sich leichter parallelisieren.
+          </p>
+        </details>
+        <details className={styles.details}>
+          <summary>C-Code: Datenstrukturen und ein Newton-Schritt</summary>
+          <h3>Datenstrukturen</h3>
+          <CodeBlock
+            code={DATA_STRUCTURE_CODE}
+            caption="Sparse-Matrix (CSR) und Gitterzustand für die diskretisierte Basket-Option."
+          />
+          <h3>Newton-Krylov-Solver</h3>
+          <CodeBlock
+            code={SOLVER_CODE}
+            caption="Ein Newton-Schritt: Jacobi-Matrix aufstellen, mit GMRES + ARMS lösen, auf das Hindernis projizieren."
+          />
+        </details>
       </ProjectSection>
     </ProjectPage>
   );
