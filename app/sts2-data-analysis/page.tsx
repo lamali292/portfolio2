@@ -14,7 +14,7 @@ import { getDownfallSnapshot } from "@/lib/downfall-data";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "STS2 Data Analysis | Laurin Maurice Liebhart",
+  title: "Datenanalyse: Spieltelemetrie | Laurin Maurice Liebhart",
   description:
     "SQL-gestützte Auswertung von Gameplay-Telemetrie aus dem Slay the Spire 2 Mod Downfall: Pick- und Win-Rates, Relic-Balance und Run-Aktivität über die Zeit.",
 };
@@ -28,7 +28,7 @@ export default function Sts2DataAnalysisPage() {
   return (
     <ProjectPage>
       <ProjectHero
-        title="STS2 Data Analysis"
+        title="Datenanalyse: Spieltelemetrie"
         lead="Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods Downfall – SQL-Auswertung über Postgres-Materialized-Views mit einem Dashboard, das sich alle drei Stunden automatisch aktualisiert."
       >
         <TechChips items={TECH_CHIPS} />
