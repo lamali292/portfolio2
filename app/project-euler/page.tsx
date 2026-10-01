@@ -218,7 +218,6 @@ function simulate822(n: number, m: number) {
 
 const Math_floor = (x: number) => x - (x % 1);
 const Math_log2 = (x: number) => globalThis.Math.log2(x);
-const Math_min = (...xs: number[]) => globalThis.Math.min(...xs);
 const de = (x: number, d = 3) => x.toFixed(d).replace(".", ",");
 
 const EX_N = 5;
@@ -308,10 +307,10 @@ export default function ProjectEulerPage() {
 
       <ProjectSection heading="Im Detail: Aufgabe 822 mit kleinen Zahlen">
         <p>
-          Damit die vier Schritte greifbar werden, rechne ich die Aufgabe
-          einmal mit kleinen Zahlen durch: <Math tex="n = 5" />, also die
-          Liste <Math tex="[2, 3, 4, 5]" />, und <Math tex={`m = ${EX_M}`} />{" "}
-          Runden. Zuerst die ersten Runden mit den echten Zahlen:
+          Ich rechne die Aufgabe einmal mit kleinen Zahlen durch:{" "}
+          <Math tex="n = 5" />, also die Liste <Math tex="[2, 3, 4, 5]" />, und{" "}
+          <Math tex={`m = ${EX_M}`} /> Runden. Die ersten {startRows.length}{" "}
+          Runden mit den echten Zahlen:
         </p>
 
         <div className={styles.tableWrap}>
@@ -321,184 +320,62 @@ export default function ProjectEulerPage() {
                 <th>Runde</th>
                 <th>Quadriert wird</th>
                 <th>Liste danach</th>
-                <th>Phase</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>0</td>
-                <td>–</td>
-                <td>[2, 3, 4, 5]</td>
-                <td>Start</td>
-              </tr>
               {startRows.map((row) => (
                 <tr key={row.round} className={styles[`phase${row.phase}`]}>
                   <td>{row.round}</td>
-                  <td>{row.squared}</td>
+                  <td className={styles.who}>{row.squared}</td>
                   <td>{row.list}</td>
-                  <td>{row.phase === 1 ? "1: Anlauf" : "2: Rest"}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        <h3>1. Das Muster</h3>
         <p>
-          Ab hier werden die Zahlen schnell riesig (nach Runde {EX_M} hat die
-          größte schon {String(example.list[EX_N - 2]).length} Stellen). Deshalb
-          zeigt die nächste Tabelle nur noch, <em>welche der ursprünglichen
-          Zahlen</em> in jeder Runde quadriert wird. Der Zähler einer Zahl ist, wie
-          oft sie schon quadriert wurde. Die dicken Linien trennen Blöcke aus
-          je {EX_N - 1} Runden.
+          Nach {example.k * size} Runden war jede Zahl einmal dran. Seitdem
+          kommt immer dieselbe Folge: <strong>{example.cycle.join(", ")}</strong>,
+          dann wieder von vorn. Nach jeweils {size} Runden hat jede Zahl also
+          genau einmal mehr ihr Quadrat gebildet.
+        </p>
+        <p>
+          Der Grund steckt in <Math tex="\log_2(\log_2 x)" />. Das ist eine Zahl
+          mit Nachkommastellen, und Quadrieren addiert genau 1 dazu. Nach dem
+          Anlauf liegen alle Werte innerhalb eines Abstands von 1 (hier{" "}
+          {example.cycle
+            .map((x) => de(example.loglogAfter1[x - 2]))
+            .join(" ≤ ")}
+          ). Die kleinste Zahl ist dran, bekommt +1 und steht danach ganz hinten.
+          Dann ist die nächste dran, und so weiter. Nach {size} Runden stehen
+          alle wieder in derselben Reihenfolge, also wiederholt sich die Folge.
         </p>
 
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Runde</th>
-                <th>Block</th>
-                <th>Dran ist</th>
-                <th>Zähler 2</th>
-                <th>Zähler 3</th>
-                <th>Zähler 4</th>
-                <th>Zähler 5</th>
-                <th>Phase</th>
-              </tr>
-            </thead>
-            <tbody>
-              {example.rows.map((row) => (
-                <tr
-                  key={row.round}
-                  className={`${styles[`phase${row.phase}`]} ${
-                    (row.round - 1) % (EX_N - 1) === 0 ? styles.blockStart : ""
-                  }`}
-                >
-                  <td>{row.round}</td>
-                  <td>{row.block}</td>
-                  <td className={styles.who}>{row.orig}</td>
-                  {row.counts.map((c, i) => (
-                    <td key={i}>{c}</td>
-                  ))}
-                  <td>
-                    {row.phase === 1 && "1: Anlauf"}
-                    {row.phase === 2 && "2: Rest"}
-                    {row.phase === 3 && "3: Zyklus"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Was in der Spalte „Dran ist“ auffällt</h3>
-        <ul className={styles.points}>
-          <li>
-            <strong>Anlauf (Runden 1 bis {example.k * (EX_N - 1)}):</strong>{" "}
-            Am Anfang geht es unordentlich zu: Die 2 ist schon zweimal dran
-            (2 → 4 → 16), bevor die 5 zum ersten Mal an der Reihe ist. Der
-            Anlauf endet, sobald jede Zahl einmal dran war.
-          </li>
-          <li>
-            <strong>Danach ein Zyklus:</strong> Ab Runde{" "}
-            {(example.k - 1) * (EX_N - 1) + 1} wiederholt sich immer dieselbe
-            Folge <strong>{example.cycle.join(", ")}</strong>. In jedem Block
-            von {EX_N - 1} Runden ist jede Zahl genau einmal dran, in der
-            Reihenfolge ihrer Größe.
-          </li>
-          <li>
-            <strong>Das spart die Arbeit:</strong> Einen vollen Block muss man
-            nicht mehr simulieren. Man merkt sich nur, dass jede Zahl einmal
-            öfter quadriert wurde.
-          </li>
-        </ul>
-
-        <h3>Warum der Zyklus entsteht: die Zahlen log₂(log₂ x)</h3>
+        <h3>2. Die Abkürzung</h3>
         <p>
-          Jede Zahl <Math tex="x" /> bekommt den Wert{" "}
-          <Math tex="\log_2(\log_2 x)" />. Quadrieren erhöht diesen Wert
-          um genau 1, und die kleinste Zahl ist immer die mit dem kleinsten
-          Wert. Jeder Wert besteht aus einem <strong>ganzzahligen Anteil</strong>{" "}
-          und einem <strong>Nachkommaanteil</strong>. Der Nachkommaanteil ändert
-          sich nie, er ist der Fingerabdruck der Zahl. Nur der ganzzahlige
-          Anteil wächst, jedes Mal um 1, wenn die Zahl quadriert wird.
+          Die restlichen Runden müssen nicht einzeln gerechnet werden. Man
+          zählt nur, wie oft jede Zahl quadriert wird:
         </p>
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Zahl</th>
-                <th>Wert am Anfang</th>
-                <th>Nachkommaanteil</th>
-                <th>Wert nach Runde {example.k * size}</th>
-                <th>davon ganzzahlig</th>
-              </tr>
-            </thead>
-            <tbody>
-              {example.start.map((v, i) => (
-                <tr key={i}>
-                  <td className={styles.who}>{i + 2}</td>
-                  <td>{de(v)}</td>
-                  <td>{de(v - Math_floor(v + 1e-9))}</td>
-                  <td>{de(example.loglogAfter1[i])}</td>
-                  <td>{Math_floor(example.loglogAfter1[i] + 1e-9)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <ul className={styles.points}>
-          <li>
-            <strong>Die Werte rücken zusammen.</strong> Wer quadriert wird, war
-            gerade der Kleinste und landet höchstens 1 über dem bisherigen
-            Minimum. Sobald jede Zahl einmal dran war, liegen deshalb alle Werte
-            in einem Fenster der Breite 1 (hier von{" "}
-            {de(Math_min(...example.loglogAfter1))} bis{" "}
-            {de(Math_min(...example.loglogAfter1) + 1)}). Die ganzzahligen
-            Anteile unterscheiden sich nur noch um höchstens 1, und die
-            Reihenfolge der Werte ergibt sich aus den Nachkommaanteilen.
-          </li>
-          <li>
-            <strong>Dann läuft es wie am Band.</strong> Dran ist die Zahl mit dem
-            kleinsten Wert. Sie bekommt +1 auf den ganzzahligen Anteil, ihr
-            Nachkommaanteil bleibt, und sie steht jetzt ganz hinten. Danach ist
-            die nächste Zahl die kleinste, dann die nächste, und so weiter.
-            Nach {EX_N - 1} Runden hat jede Zahl genau +1 bekommen, alle
-            Abstände sind unverändert, und es beginnt dieselbe Folge von vorn.
-            Das ist der Zyklus: <strong>{example.cycle.join(", ")}</strong>.
-          </li>
-          <li>
-            <strong>Der Zyklus ist die Sortierung der Werte nach der Anlaufphase.</strong>{" "}
-            Man liest sie von klein nach groß ab. Bei gleichem Wert (hier 2
-            und 4) ist die kleinere Zahl zuerst dran.
-          </li>
-        </ul>
-
-        <h3>Wie der schnelle Algorithmus die {EX_M} Runden zerlegt</h3>
         <ol className={styles.points}>
           <li>
-            <strong>Phase 1:</strong> {example.k} Blöcke zu {EX_N - 1} Runden
-            simulieren, bis jede Zahl einmal dran war ({example.k * (EX_N - 1)}{" "}
-            Runden).
+            <strong>Anlauf:</strong> {example.k * size} Runden simulieren, bis
+            sich der Zyklus zeigt.
           </li>
           <li>
-            <strong>Phase 2:</strong> Die {EX_M} Runden passen nicht in ganze
-            Blöcke: <Math tex={`m = ${EX_M} = ${Math_floor(EX_M / size)} \\cdot ${size} + ${example.rest}`} />.
-            Es bleibt ein <em>angebrochener Block</em> von{" "}
-            <Math tex={`m \\bmod (n-1) = ${EX_M} \\bmod ${size} = ${example.rest}`} />{" "}
-            Runde{example.rest === 1 ? "" : "n"}. In ihm bekommen nicht alle
-            Zahlen +1, sondern nur die ersten {example.rest} der Zyklus-Folge{" "}
-            ({example.cycle.slice(0, example.rest || 1).join(", ")}
-            {example.rest === 0 ? ", hier keine" : ""}). Diese Runden simuliert
-            man einzeln. Das geht direkt nach Phase 1, weil die übersprungenen
-            vollen Blöcke an der Reihenfolge nichts ändern. Im Beispiel ist
-            das Runde {example.k * size + 1}: Die {phase2Who} ist dran.
+            <strong>Rest:</strong> {EX_M} Runden sind{" "}
+            {Math_floor(EX_M / size)} volle Blöcke zu {size} Runden und{" "}
+            {example.rest} Runde übrig (<Math tex={`${EX_M} \\bmod ${size} = ${example.rest}`} />
+            ). In dieser einen Runde ist die erste Zahl der Folge dran, also
+            die {phase2Who} (Runde {example.k * size + 1}). Diese übrigen Runden
+            rechnet man direkt nach dem Anlauf einzeln.
           </li>
           <li>
-            <strong>Phase 3:</strong> Die restlichen{" "}
-            <Math tex={`\\lfloor m/(n-1) \\rfloor - k = ${Math_floor(EX_M / (EX_N - 1))} - ${example.k} = ${example.blocks}`} />{" "}
-            Blöcke überspringen: Jede Zahl bekommt dafür einfach{" "}
-            {example.blocks} Quadrierungen dazu (in der Tabelle sind das die
-            Runden {example.k * (EX_N - 1) + example.rest + 1} bis {EX_M}).
+            <strong>Volle Blöcke:</strong> Von den {Math_floor(EX_M / size)}{" "}
+            Blöcken sind {example.k} schon im Anlauf gerechnet. Die anderen{" "}
+            {example.blocks} überspringt man, jede Zahl bekommt dafür{" "}
+            {example.blocks} Quadrierungen dazu.
           </li>
         </ol>
 
@@ -506,7 +383,7 @@ export default function ProjectEulerPage() {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Anzahl Quadrierungen</th>
+                <th>Quadrierungen</th>
                 <th>Zahl 2</th>
                 <th>Zahl 3</th>
                 <th>Zahl 4</th>
@@ -515,19 +392,19 @@ export default function ProjectEulerPage() {
             </thead>
             <tbody>
               <tr>
-                <td>nach Phase 1</td>
+                <td>nach dem Anlauf</td>
                 {example.afterPhase1.map((c, i) => (
                   <td key={i}>{c}</td>
                 ))}
               </tr>
               <tr>
-                <td>nach Phase 2</td>
+                <td>nach dem Rest</td>
                 {example.afterPhase2.map((c, i) => (
                   <td key={i}>{c}</td>
                 ))}
               </tr>
               <tr>
-                <td>nach Phase 3 (+{example.blocks} je Zahl)</td>
+                <td>nach den vollen Blöcken (+{example.blocks})</td>
                 {example.final.map((c, i) => (
                   <td key={i}>{c}</td>
                 ))}
@@ -538,32 +415,25 @@ export default function ProjectEulerPage() {
 
         <p>
           Eine Zahl <Math tex="x" />, die <Math tex="c" />-mal quadriert wurde,
-          ist <Math tex="x^{2^c}" />. Die Summe ergibt sich also direkt aus
-          den Zählern, ohne dass man die Runden einzeln durchgehen muss:
+          ist <Math tex="x^{2^c}" />. Die Summe folgt direkt aus den Zählern:
         </p>
         <Math
           display
-          tex={`S(5,${EX_M}) = 2^{2^{${example.final[0]}}} + 3^{2^{${example.final[1]}}} + 4^{2^{${example.final[2]}}} + 5^{2^{${example.final[3]}}}`}
+          tex={`S(5,${EX_M}) = 2^{2^{${example.final[0]}}} + 3^{2^{${example.final[1]}}} + 4^{2^{${example.final[2]}}} + 5^{2^{${example.final[3]}}} = ${exampleSum.toString()}`}
         />
         <p className={styles.note}>
-          Ausgerechnet: {exampleSum.toString()}. Das ist genau die Summe der
-          Liste nach Runde {EX_M} in der Simulation.
+          Das stimmt mit der kompletten Simulation aller {EX_M} Runden überein.
         </p>
 
-        <h3>Und im großen Fall?</h3>
+        <h3>3. Im großen Fall</h3>
         <p>
           Für <Math tex="n = 10^4" /> und <Math tex="m = 10^{16}" /> läuft es
-          genauso. Der Anlauf bleibt kurz, aber Phase 3 überspringt rund{" "}
-          <Math tex="10^{12}" /> volle Blöcke auf einmal. Jede Zahl wird also
-          etwa <Math tex="10^{12}" />-mal quadriert, und{" "}
-          <Math tex="x^{2^{10^{12}}}" /> ist eine unvorstellbar große Zahl.
-          Gesucht ist aber nur der Rest modulo <Math tex="p = 1234567891" />.
-          Dafür hilft der kleine Satz von Fermat:{" "}
-          <Math tex="x^{p-1} \equiv 1 \pmod p" />. Der Exponent{" "}
-          <Math tex="2^c" /> muss deshalb nur modulo <Math tex="p-1" />{" "}
-          bekannt sein, und den berechnet man durch wiederholtes Quadrieren in
-          rund 40 Schritten (denn <Math tex="10^{12} \approx 2^{40}" />).
-          Dann bleibt pro Zahl eine einzige schnelle modulare Potenz.
+          genauso, nur überspringt man rund <Math tex="10^{12}" /> Blöcke. Die
+          Zahlen <Math tex="x^{2^c}" /> sind dann riesig, gesucht ist aber nur
+          der Rest modulo <Math tex="p = 1234567891" />. Mit dem kleinen Satz
+          von Fermat (<Math tex="x^{p-1} \equiv 1 \pmod p" />) genügt es, den
+          Exponenten <Math tex="2^c" /> modulo <Math tex="p-1" /> zu kennen.
+          Den berechnet man durch wiederholtes Quadrieren in etwa 40 Schritten.
         </p>
 
         <h3>Code und weitere Aufgaben</h3>
