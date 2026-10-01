@@ -52,7 +52,7 @@ export const projects: Project[] = [
     href: "/sts2-tooling",
     title: "STS2 Tooling: Werkzeuge für ein Modding-Team",
     teaser:
-      "Web-Tools für die Voiceline-Lokalisierung, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel und ein Test-Framework.",
+      "Dialog-Tool für Autor:innen, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel und ein Test-Framework.",
     tech: ["C#", "Kotlin", "Google Sheets API"],
   },
   {
