@@ -81,7 +81,7 @@ export const projects: Project[] = [
     href: "/project-euler",
     title: "Project Euler",
     teaser:
-      "150+ gelöste algorithmisch-mathematische Probleme - Top 0,5% weltweit. Zahlentheorie, Kombinatorik und Optimierung in Java, Rust und Python.",
+      "Über 150 mathematische Rätsel gelöst, Top 0,5 % weltweit. Gewinnen kann man sie nicht mit Rechenleistung, sondern mit einer Idee: aus Monaten Rechenzeit werden Sekunden.",
     tech: ["Java", "Rust", "Python"],
     highlight: "Top 0,5% weltweit",
   },
