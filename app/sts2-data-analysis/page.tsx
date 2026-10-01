@@ -7,6 +7,8 @@ import RelicWinRateChart from "@/components/RelicWinRateChart";
 import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
 import ProjectSection from "@/components/ProjectSection";
+import PipelineFlow from "@/components/PipelineFlow";
+import { pipelineLinks } from "@/lib/pipeline";
 import { getDownfallSnapshot } from "@/lib/downfall-data";
 import styles from "./page.module.css";
 
@@ -26,45 +28,43 @@ export default function Sts2DataAnalysisPage() {
     <ProjectPage>
       <ProjectHero
         title="STS2 Data Analysis"
-        lead="Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods Downfall – SQL-Auswertung über Postgres-Materialized-Views mit einem automatisch aktualisierten Dashboard."
+        lead="Datenanalyse der Gameplay-Telemetrie des Slay-the-Spire-2-Mods Downfall – SQL-Auswertung über Postgres-Materialized-Views mit einem Dashboard, das sich alle drei Stunden automatisch aktualisiert."
       >
         <TechChips items={TECH_CHIPS} />
       </ProjectHero>
 
-      <ProjectSection heading="Über die Pipeline">
+      <ProjectSection heading="So funktioniert die Pipeline">
         <p>
-          Downfall sendet nach jeder abgeschlossenen Partie einen Run-Datensatz
-          an eine Postgres-Datenbank (Hetzner-gehostet) &ndash; vorausgesetzt,
-          Downfall ist der einzige aktive modifizierende Inhalt. Ein
-          GitHub-Actions-Workflow fragt alle drei Stunden mehrere
-          Materialized Views ab (<code>card_stats_by_group</code>,{" "}
-          <code>relic_stats</code>, <code>char_ascension_by_version</code>,{" "}
-          <code>char_daily_by_version</code>, <code>runs_per_day</code>) und
-          schreibt die Ergebnisse als JSON-Snapshots, die ein separates
-          Dashboard mit Plotly rendert.
+          Aus dem Spiel kommen die Daten, nach wenigen automatischen Schritten
+          landen sie in einem Dashboard, das sich alle drei Stunden von selbst
+          aktualisiert. Ich habe alle vier Schritte selbst gebaut und
+          betreibe sie.
         </p>
-        <p>
-          Eine wichtige Design-Entscheidung dieser Pipeline: exportiert werden
-          immer Rohzahlen (Angebote, Picks, Runs, Siege), niemals bereits
-          berechnete Raten. Denn eine Pick- oder Win-Rate über mehrere
-          Versionsgruppen oder Modi hinweg zu mitteln, wäre statistisch
-          falsch &ndash; stattdessen werden zuerst die Rohzahlen aufsummiert
-          und erst danach die Rate gebildet. Diese Seite hält sich an dieselbe
-          Regel.
+        <PipelineFlow />
+        <p className={styles.callout}>
+          <strong>Nur Rohzahlen, nie fertige Raten.</strong> Exportiert werden
+          Angebote, Picks, Runs und Siege. Eine Pick- oder Win-Rate über
+          mehrere Versionen oder Modi zu mitteln wäre statistisch falsch.
+          Stattdessen addiert der Browser zuerst die Rohzahlen und teilt erst
+          danach.
         </p>
-        <p className={styles.note}>
-          Die Zahlen auf dieser Seite stammen aus einem statischen Snapshot
-          der echten Produktionsdaten (siehe{" "}
-          <code>data/downfall/README.md</code> im Repository für die genaue
-          Herkunft), nicht aus einer Live-Abfrage der Datenbank &ndash; eine
-          serverseitige API-Route mit echten Produktions-Zugangsdaten ist
-          bewusst nicht Teil dieser Ausbaustufe (separates Issue, da die
-          Bereitstellung eines lesenden DB-Zugangs ein menschlicher Schritt
-          ist). {summary.note}
-        </p>
+        <ul className={styles.links}>
+          {pipelineLinks.map((link) => (
+            <li key={link.href}>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </ProjectSection>
 
       <ProjectSection heading="Kennzahlen">
+        <p className={styles.note}>
+          Die Kennzahlen und Diagramme darunter stammen aus einem Snapshot der
+          Produktionsdaten ({summary.windowStart} bis {summary.windowEnd}). Das
+          Live-Dashboard oben wird alle drei Stunden neu erzeugt.
+        </p>
         <DownfallStatsRow summary={summary} />
       </ProjectSection>
 

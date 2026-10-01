@@ -1,0 +1,92 @@
+section ol.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 1.25rem;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+section ol.flow > li.step {
+  position: relative;
+  margin: 0;
+  padding-top: 3rem;
+}
+
+/* The line joining the steps, running through the markers. */
+.step::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: -1.25rem;
+  height: 3px;
+  background: var(--color-fg);
+}
+
+.step:last-child::before {
+  right: 0;
+}
+
+.marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
+  border: 3px solid var(--color-fg);
+  border-radius: 50%;
+}
+
+section .step .title {
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+}
+
+section .step .tech {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+section .step .text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+@media (max-width: 52rem) {
+  section ol.flow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  section ol.flow > li.step {
+    padding: 0 0 1.75rem 3rem;
+  }
+
+  .step::before {
+    top: 0;
+    bottom: 0;
+    left: 0.85rem;
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
+
+  .step:last-child {
+    padding-bottom: 0;
+  }
+
+  .step:last-child::before {
+    display: none;
+  }
+}
