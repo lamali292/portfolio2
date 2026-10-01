@@ -24,17 +24,26 @@ export const impactStats: ImpactStat[] = [
   {
     value: "30+ Jahre",
     label: "Usertime",
-    detail: "Summe der Spielzeit aller getrackten Runs, im Schnitt 53 Minuten pro Run",
+    detail: "Summe der Spielzeit aller getrackten Runs von Downfall.",
   },
   {
     value: "304.225",
     label: "getrackte Runs",
-    detail:
-      "7. Aug. – 1. Okt. 2026: über 5.000 Runs pro Tag, Spitze fast 10.000. Gezählt werden nur Runs ganz ohne andere Mods.",
+    detail: "7. Aug. – 1. Okt. 2026, nur Runs ganz ohne andere Mods.",
   },
   {
     value: "166.999+",
     label: "aktive Abonnenten",
-    detail: "Downfall und Watcher im Steam Workshop",
+    detail: "Downfall und Watcher im Steam Workshop.",
+  },
+  {
+    value: "5.000+",
+    label: "Runs pro Tag",
+    detail: "Im Durchschnitt, Spitze fast 10.000 an einem Tag.",
+  },
+  {
+    value: "53 Min.",
+    label: "pro Run",
+    detail: "So lange dauert eine Partie im Schnitt.",
   },
 ];
