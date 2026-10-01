@@ -7,7 +7,7 @@ import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Blood on the Clocktower | Laurin Maurice Liebhart",
+  title: "Blood on the Clocktower App | Laurin Maurice Liebhart",
   description:
     "Android-App zur Unterstützung von Spielleitern bei Blood on the Clocktower: digitales Grimoire, Skriptverwaltung, Online-Skriptsuche und JSON-Import.",
 };
@@ -135,7 +135,7 @@ export default function BotcPage() {
   return (
     <ProjectPage>
       <ProjectHero
-        title="Blood on the Clocktower – Grimoire-App"
+        title="Blood on the Clocktower App"
         lead="Eine Android-App zur Unterstützung beim Spielen von Blood on the Clocktower. Die App ermöglicht es Spielleitern, Skripte und Rollen zu verwalten, Spieler zu organisieren und den Spielstatus effizient zu verfolgen."
       >
         <TechChips items={technologies} />
