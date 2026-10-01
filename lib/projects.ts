@@ -45,6 +45,7 @@ export const projects: Project[] = [
       "SQL-gestützte Auswertung von Gameplay-Telemetrie aus dem Downfall-Mod - Pick- und Win-Rates, Relic-Balance und ein Dashboard.",
     tech: ["SQL", "PostgreSQL", "Python", "Plotly"],
     highlight: "304.225 getrackte Runs",
+    image: { src: "/sts2-data/dashboard-draft.webp", alt: "Dashboard mit Streudiagramm zu Pick-Rate und Win-Rate aller Karten sowie Runs pro Tag und Stunde", isPublic: true, position: "left top" },
   },
   {
     slug: "sts2-tooling",

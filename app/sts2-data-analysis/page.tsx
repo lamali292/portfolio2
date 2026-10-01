@@ -7,6 +7,7 @@ import RelicWinRateChart from "@/components/RelicWinRateChart";
 import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
 import ProjectSection from "@/components/ProjectSection";
+import FeatureImage from "@/components/FeatureImage";
 import PipelineFlow from "@/components/PipelineFlow";
 import { pipelineLinks } from "@/lib/pipeline";
 import { getDownfallSnapshot } from "@/lib/downfall-data";
@@ -57,6 +58,26 @@ export default function Sts2DataAnalysisPage() {
             </li>
           ))}
         </ul>
+      </ProjectSection>
+
+      <ProjectSection heading="Das Dashboard">
+        <p>
+          Das Ergebnis der Pipeline: ein Dashboard, mit dem sich die Balance
+          jeder Karte und jedes Relics nachvollziehen lässt. Alle Diagramme
+          lassen sich nach Charakter, Modus, Version und Seltenheit filtern.
+        </p>
+        <div className={styles.shots}>
+          <FeatureImage
+            src="/sts2-data/dashboard-draft.webp"
+            alt="Streudiagramm mit Pick-Rate und Win-Rate jeder Karte, nach Charakter eingefärbt, darunter die Runs pro Tag und pro Stunde"
+            caption="Pick-Rate gegen Win-Rate jeder Karte, nach Charakter eingefärbt. Darunter die Runs pro Tag und pro Stunde."
+          />
+          <FeatureImage
+            src="/sts2-data/dashboard-winrate.png"
+            alt="Zwei Liniendiagramme: Win-Rate je Charakter nach Ascension-Stufe und nach Tag"
+            caption="Win-Rate je Charakter nach Ascension-Stufe und im Zeitverlauf."
+          />
+        </div>
       </ProjectSection>
 
       <ProjectSection heading="Kennzahlen">
