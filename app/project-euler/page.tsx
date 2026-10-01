@@ -143,6 +143,66 @@ fn n_pow_2k_mod(n: u64, k: u64, p: u64) -> u64 {
 }
 `;
 
+/**
+ * Exact simulation of problem 822 for small n and m (BigInt), used to build
+ * the worked example: in every round the smallest number is squared (first
+ * one on ties). Also reproduces the phases of the fast algorithm below.
+ */
+function simulate822(n: number, m: number) {
+  const list: bigint[] = [];
+  for (let x = 2; x <= n; x++) list.push(BigInt(x));
+  const size = n - 1;
+  const counts = new Array<number>(size).fill(0);
+  const rows: {
+    round: number;
+    list: string;
+    squared: string;
+    phase: 1 | 2 | 3;
+  }[] = [];
+
+  // Phase 1: blocks of n-1 rounds until every number was squared at least once.
+  let k = 0;
+  let round = 0;
+  const step = (phase: 1 | 2 | 3) => {
+    let idx = 0;
+    for (let i = 1; i < size; i++) if (list[i] < list[idx]) idx = i;
+    const before = list[idx];
+    list[idx] = before * before;
+    counts[idx] += 1;
+    round += 1;
+    rows.push({
+      round,
+      list: `[${list.join(", ")}]`,
+      squared: `${before} → ${list[idx]}`,
+      phase,
+    });
+  };
+  do {
+    for (let i = 0; i < size; i++) step(1);
+    k += 1;
+  } while (counts.some((c) => c === 0));
+  const afterPhase1 = [...counts];
+
+  // Phase 2: the remaining m mod (n-1) rounds.
+  const rest = m % size;
+  for (let i = 0; i < rest; i++) step(2);
+  const afterPhase2 = [...counts];
+
+  // Phase 3: the remaining full blocks. Each one squares every number exactly
+  // once; the example simulates them to show that, the real algorithm skips them.
+  const blocks = Math_floor(m / size) - k;
+  for (let b = 0; b < blocks; b++) for (let i = 0; i < size; i++) step(3);
+  const final = counts.map((c) => c);
+  return { rows, k, rest, blocks, afterPhase1, afterPhase2, final, list };
+}
+
+const Math_floor = (x: number) => x - (x % 1);
+
+const EX_N = 5;
+const EX_M = 13;
+const example = simulate822(EX_N, EX_M);
+const exampleSum = example.list.reduce((a, b) => a + b, BigInt(0));
+
 export default function ProjectEulerPage() {
   return (
     <ProjectPage>
@@ -217,6 +277,162 @@ export default function ProjectEulerPage() {
           Gemessen mit meiner Rust-Lösung als Release-Build auf einem
           Cloud-Rechner. Die Lösung stimmt mit den Beispielwerten der Aufgabe
           überein.
+        </p>
+      </ProjectSection>
+
+      <ProjectSection heading="Im Detail: Aufgabe 822 mit kleinen Zahlen">
+        <p>
+          Damit die vier Schritte greifbar werden, rechne ich die Aufgabe
+          einmal mit kleinen Zahlen durch: <Math tex="n = 5" />, also die
+          Liste <Math tex="[2, 3, 4, 5]" />, und <Math tex="m = 13" /> Runden.
+          Die Tabelle zeigt jede Runde exakt, ohne Abkürzung.
+        </p>
+
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Runde</th>
+                <th>Quadriert wird</th>
+                <th>Liste danach</th>
+                <th>Phase</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>–</td>
+                <td>[2, 3, 4, 5]</td>
+                <td>Start</td>
+              </tr>
+              {example.rows.map((row) => (
+                <tr key={row.round} className={styles[`phase${row.phase}`]}>
+                  <td>{row.round}</td>
+                  <td>{row.squared}</td>
+                  <td>{row.list}</td>
+                  <td>
+                    {row.phase === 1 && "1: Anlauf"}
+                    {row.phase === 2 && "2: Rest"}
+                    {row.phase === 3 && "3: Zyklus"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={styles.note}>
+          Die Summe der Liste nach Runde {EX_M} ist{" "}
+          {exampleSum.toString()}.
+        </p>
+
+        <h3>Was in der Tabelle auffällt</h3>
+        <ul className={styles.points}>
+          <li>
+            <strong>Anlauf (Runden 1 bis {example.k * (EX_N - 1)}):</strong>{" "}
+            Am Anfang geht es unordentlich zu. Die ursprüngliche 2 wird schon
+            zweimal quadriert (2 → 4 → 16), bevor die 5 zum ersten Mal dran
+            ist. Der Anlauf endet, sobald jede Zahl einmal dran war.
+          </li>
+          <li>
+            <strong>Danach ein Zyklus:</strong> Sobald jede Zahl mindestens
+            einmal quadriert wurde, wird in jedem Block von{" "}
+            {EX_N - 1} Runden jede Zahl <em>genau einmal</em> quadriert, in der
+            Reihenfolge ihrer Größe. In der Tabelle sieht man das in den
+            Runden 5 bis 8 und noch einmal in 10 bis 13.
+          </li>
+          <li>
+            <strong>Das spart die Arbeit:</strong> Einen vollen Block muss man
+            nicht mehr simulieren. Man merkt sich nur, dass jede Zahl einmal
+            öfter quadriert wurde.
+          </li>
+        </ul>
+
+        <h3>Wie der schnelle Algorithmus die {EX_M} Runden zerlegt</h3>
+        <ol className={styles.points}>
+          <li>
+            <strong>Phase 1:</strong> {example.k} Blöcke zu {EX_N - 1} Runden
+            simulieren, bis jede Zahl einmal dran war ({example.k * (EX_N - 1)}{" "}
+            Runden).
+          </li>
+          <li>
+            <strong>Phase 2:</strong> Die übrigen{" "}
+            <Math tex={`m \\bmod (n-1) = ${EX_M} \\bmod ${EX_N - 1} = ${example.rest}`} />{" "}
+            Runde{example.rest === 1 ? "" : "n"} simulieren.
+          </li>
+          <li>
+            <strong>Phase 3:</strong> Die restlichen{" "}
+            <Math tex={`\\lfloor m/(n-1) \\rfloor - k = ${Math_floor(EX_M / (EX_N - 1))} - ${example.k} = ${example.blocks}`} />{" "}
+            Block{example.blocks === 1 ? "" : "s"} überspringen: Jede Zahl
+            bekommt einfach eine Quadrierung dazu.
+          </li>
+        </ol>
+
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Anzahl Quadrierungen</th>
+                <th>Zahl 2</th>
+                <th>Zahl 3</th>
+                <th>Zahl 4</th>
+                <th>Zahl 5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>nach Phase 1</td>
+                {example.afterPhase1.map((c, i) => (
+                  <td key={i}>{c}</td>
+                ))}
+              </tr>
+              <tr>
+                <td>nach Phase 2</td>
+                {example.afterPhase2.map((c, i) => (
+                  <td key={i}>{c}</td>
+                ))}
+              </tr>
+              <tr>
+                <td>nach Phase 3 (+{example.blocks} je Zahl)</td>
+                {example.final.map((c, i) => (
+                  <td key={i}>{c}</td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Eine Zahl <Math tex="x" />, die <Math tex="c" />-mal quadriert wurde,
+          ist <Math tex="x^{2^c}" />. Die Summe ergibt sich also direkt aus
+          den Zählern:
+        </p>
+        <Math
+          display
+          tex={`S(5,13) = 2^{2^{${example.final[0]}}} + 3^{2^{${example.final[1]}}} + 4^{2^{${example.final[2]}}} + 5^{2^{${example.final[3]}}} = ${exampleSum.toString()}`}
+        />
+
+        <h3>Und im großen Fall?</h3>
+        <p>
+          Für <Math tex="n = 10^4" /> und <Math tex="m = 10^{16}" /> läuft es
+          genauso. Der Anlauf bleibt kurz, aber Phase 3 überspringt rund{" "}
+          <Math tex="10^{12}" /> volle Blöcke auf einmal. Jede Zahl wird also
+          etwa <Math tex="10^{12}" />-mal quadriert, und{" "}
+          <Math tex="x^{2^{10^{12}}}" /> ist eine unvorstellbar große Zahl.
+          Gesucht ist aber nur der Rest modulo <Math tex="p = 1234567891" />.
+          Dafür hilft der kleine Satz von Fermat:{" "}
+          <Math tex="x^{p-1} \equiv 1 \pmod p" />. Der Exponent{" "}
+          <Math tex="2^c" /> muss deshalb nur modulo <Math tex="p-1" />{" "}
+          bekannt sein, und den berechnet man durch wiederholtes Quadrieren in
+          rund 40 Schritten (denn <Math tex="10^{12} \approx 2^{40}" />).
+          Dann bleibt pro Zahl eine einzige schnelle modulare Potenz.
+        </p>
+        <p className={styles.note}>
+          Warum <Math tex="\log_2(\log_2 x)" /> der richtige Blickwinkel ist:
+          Es gilt <Math tex="\log_2(\log_2(x^2)) = 1 + \log_2(\log_2 x)" />,
+          eine Quadrierung verschiebt die Zahl also genau um 1. Zahlen mit
+          kleinerem Wert dort sind dran, und die Reihenfolge ändert sich nicht.
+          So lassen sich auch riesige Zahlen vergleichen, ohne sie
+          auszuschreiben.
         </p>
       </ProjectSection>
 
