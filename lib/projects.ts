@@ -1,4 +1,4 @@
-import spotifyCover from "@/app/spotify/images/spotify.png";
+import spotifyCover from "@/app/spotify/images/search1.png";
 
 /** A real screenshot/figure from the project's own page, used as the card cover. */
 export interface ProjectImage {
@@ -63,7 +63,7 @@ export const projects: Project[] = [
       "Neuronale Netze mit eingebauter Physik für Federschwinger und elektrische Schaltkreise. Drei Fragestellungen zu Skalierung, impliziten Lösern und impliziten Systemen, umgesetzt in Python und JAX.",
     tech: ["Python", "JAX", "Numerik"],
     highlight: "Note 1,0",
-    image: { src: "/assets/master/hoti_sep.png", alt: "Schaltkreis-Diagramme aus der Masterarbeit", isPublic: true, fit: "contain" },
+    image: { src: "/assets/master/scaling_traj.png", alt: "Zustandsverläufe von vier gekoppelten Federschwingern: Testdaten und Vorhersage des neuronalen Netzes", isPublic: true, fit: "contain" },
   },
   {
     slug: "praktikum",
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     teaser:
       "Grimoire- und Skriptverwaltungs-App für das Gesellschaftsspiel Blood on the Clocktower - Skriptauswahl, Online-Suche und Spielerverwaltung.",
     tech: ["Kotlin", "Python", "REST"],
-    image: { src: "/botc/main_screen.png", alt: "Startbildschirm der Blood-on-the-Clocktower-App", isPublic: true, position: "top" },
+    image: { src: "/botc/grimoire.png", alt: "Grimoire der Blood-on-the-Clocktower-App: Spieler im Kreis mit ihren Rollen", isPublic: true, position: "50% 15%" },
   },
   {
     slug: "spotify",
@@ -98,6 +98,6 @@ export const projects: Project[] = [
     teaser:
       "Spotify-integriertes Karten-/Song-Ratespiel mit OAuth2-Anbindung an die Spotify Web API und Wiedergabesteuerung.",
     tech: ["Flask", "Python", "Spotify API"],
-    image: { src: spotifyCover.src, alt: "Spotify-Anmeldung im Kartenspiel" , position: "top" },
+    image: { src: spotifyCover.src, alt: "Playlist-Suche im Spotify-Kartenspiel mit Albumcovern", position: "center 5%" },
   },
 ];
