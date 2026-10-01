@@ -50,10 +50,10 @@ export const projects: Project[] = [
   {
     slug: "sts2-tooling",
     href: "/sts2-tooling",
-    title: "STS2 Tooling: Rider-Plugin",
+    title: "STS2 Tooling: Werkzeuge für ein Modding-Team",
     teaser:
-      "JetBrains-Rider-Plugin zur automatisierten Verwaltung und Live-Synchronisation von Lokalisierungsdateien während der Mod-Entwicklung.",
-    tech: ["Kotlin", "IntelliJ Platform SDK", "Gradle"],
+      "Web-Tools für die Voiceline-Lokalisierung, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel und ein Test-Framework.",
+    tech: ["C#", "Kotlin", "Google Sheets API"],
   },
   {
     slug: "masterarbeit",

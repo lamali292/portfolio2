@@ -28,7 +28,7 @@ _Avoid_: Downfall page (too narrow — this page covers more than just Downfall)
 The project page covering the Downfall-Data pipeline and SQL analytics — the data-science side of the ecosystem, kept separate from STS2 Mods because it demonstrates a different skill set.
 
 **STS2 Tooling**:
-The project page covering the Rider LocPlugin, a JetBrains IDE plugin for localization-file management used during Downfall/Watcher development.
+The project page covering the tooling built for the Downfall team: voiceline web tools, localization formatters, the Rider LocPlugin (a JetBrains IDE plugin), the ImageGen art pipeline with Google Sheets sync, in-game art voting, the card test framework and the api.downfall-sts2.org backend.
 
 **BaseLib**:
 `Alchyr.Sts2.BaseLib`, the shared community modding framework STS2 mods build on. The author is a contributor (~3,000 LoC, primarily custom model/framework code such as the enchantment system).

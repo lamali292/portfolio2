@@ -6,24 +6,107 @@ import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "STS2 Tooling: Rider LocPlugin | Laurin Maurice Liebhart",
+  title: "STS2 Tooling | Laurin Maurice Liebhart",
   description:
-    "Ein selbst entwickeltes JetBrains-Rider-Plugin zur Verwaltung von Lokalisierungsdateien für die Slay the Spire 2-Mods Downfall und Watcher – internes Entwickler-Tooling zur Unterstützung eines größeren Modding-Projekts.",
+    "Werkzeuge für ein Modding-Team: Web-Tools für die Voiceline-Lokalisierung, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel, Test-Framework und eine eigene API für Downfall.",
 };
 
-const technologies = ["Kotlin", "IntelliJ Platform SDK", "Gradle"];
+const technologies = ["C#", "Kotlin", "Google Sheets API", "Gradle", "Caddy"];
+
+const tools = [
+  {
+    title: "Web-Tools für Voicelines",
+    tech: "Eigene Webseiten auf api.downfall-sts2.org",
+    text: "Künstler:innen lokalisieren Voicelines über Webseiten statt über JSON-Dateien. Formatierung sowie die geforderte Anzahl und der Stil sind fest eingebaut, deshalb lässt sich nichts falsch ausfüllen.",
+    link: {
+      href: "https://api.downfall-sts2.org/tools/architect-voicelines/",
+      label: "Beispiel: Architect-Voicelines",
+    },
+  },
+  {
+    title: "Lokalisierung ohne Fehlerquellen",
+    tech: "C#, eigene Formatierer",
+    text: "Die Mod übernimmt, was in jeder Sprache anders ist: Ordnungszahlen mit Geschlecht, Plural-Regeln je Sprache, das Plus bei aufgewerteten Karten und Power-Icons im Text. Übersetzer:innen schreiben nur den Text.",
+  },
+  {
+    title: "Bild-Pipeline mit Google-Sheets-Sync",
+    tech: "C#, Google Sheets API",
+    text: "Ein Kommandozeilentool packt die Bilder von Karten, Powers, Relikten, Tränken und Enchantments samt Umrandung in Atlanten für das Spiel. Ein Google Sheet zeigt den Künstler:innen farbig, welche Bilder fehlen, nur Platzhalter oder fertig sind.",
+  },
+  {
+    title: "Kunst-Voting im Spiel",
+    tech: "C#, Godot-UI, Steam-Login",
+    text: "Spieler:innen reichen Kunst für Karten ein und stimmen darüber ab. Auswahl- und Upload-Dialoge, die Steam-Anmeldung und eine Meldefunktion für unpassende Einreichungen sind direkt im Spiel gebaut.",
+  },
+  {
+    title: "Eigene API unter eigener Domain",
+    tech: "VPS, Caddy, api.downfall-sts2.org",
+    text: "Die Telemetrie der Runs, das Voting und die Web-Tools laufen über eine eigene API, die ich selbst hoste. Ein Reverse-Proxy (Caddy) hält Scraping und Missbrauch fern.",
+  },
+  {
+    title: "Rider-Plugin für Entwickler",
+    tech: "Kotlin, IntelliJ Platform SDK",
+    text: "Öffnet beim Bearbeiten einer Karten-, Power- oder Relikt-Klasse automatisch den passenden Lokalisierungs-Editor und zeigt, welche Felder noch fehlen. Details weiter unten.",
+  },
+  {
+    title: "Automatische Tests für Karten",
+    tech: "C#, eigenes Test-Framework",
+    text: "Ein eigenes Framework prüft die Kartenlogik im simulierten Kampf. Pro Test lassen sich Charakter, Gegner und Spielerzahl festlegen. Über 100 Tests sichern die Charaktere ab.",
+  },
+  {
+    title: "Build und Setup",
+    tech: "PowerShell, GDScript, Python",
+    text: "Skripte für Einrichtung, Asset-Verknüpfung, Tests und das Packen der Mod, damit neue Teammitglieder das Projekt in wenigen Schritten bauen können.",
+  },
+];
 
 export default function Sts2ToolingPage() {
   return (
     <ProjectPage>
       <ProjectHero
-        title="STS2 Tooling: Rider LocPlugin"
-        lead="Ein selbst entwickeltes JetBrains-Rider-Plugin, das die Lokalisierungsdateien der Slay the Spire 2-Mods Downfall und Watcher direkt in der IDE validiert und synchron hält. Entstanden als internes Werkzeug während der Entwicklung, um manuelle, fehleranfällige Lokalisierungsarbeit aus dem Workflow zu nehmen."
+        title="STS2 Tooling: Werkzeuge für ein Modding-Team"
+        lead="Downfall entsteht im Team mit Künstler:innen und Übersetzer:innen, die nicht programmieren. Ich habe die Werkzeuge gebaut, mit denen sie fehlerfrei arbeiten können: Web-Tools, Lokalisierungs-Formatierer, ein IDE-Plugin, eine Bild-Pipeline, ein Test-Framework und eine eigene API."
       >
         <TechChips items={technologies} />
       </ProjectHero>
 
-      <ProjectSection heading="Das Problem">
+      <ProjectSection heading="Was ich gebaut habe">
+        <p className={styles.note}>
+          Bild-Pipeline, Kunst-Voting, Lokalisierungs-Formatierer, Tests und
+          Build-Skripte liegen im öffentlichen{" "}
+          <a
+            href="https://github.com/lamali292/Downfall"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Downfall-Repository
+          </a>{" "}
+          und stammen fast vollständig von mir. Die Web-Tools und die API
+          betreibe ich selbst.
+        </p>
+        <ul className={styles.tools}>
+          {tools.map((tool) => (
+            <li key={tool.title} className={styles.tool}>
+              <h3>{tool.title}</h3>
+              <p className={styles.toolTech}>{tool.tech}</p>
+              <p>{tool.text}</p>
+              {tool.link && (
+                <p>
+                  <a
+                    href={tool.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {tool.link.label}
+                  </a>
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </ProjectSection>
+
+      <ProjectSection heading="Rider-Plugin: das Problem">
         <p>
           Karten, Kräfte (Powers), Relikte und Charaktere in Downfall und
           Watcher bringen jeweils eigene Texte mit – Titel, Beschreibungen,
@@ -36,7 +119,7 @@ export default function Sts2ToolingPage() {
         </p>
       </ProjectSection>
 
-      <ProjectSection heading="Die Lösung">
+      <ProjectSection heading="Rider-Plugin: die Lösung">
         <p>
           Das LocPlugin öffnet automatisch einen Lokalisierungs-Editor im
           Tool-Fenster, sobald eine Karten-, Kraft-, Relikt- oder
@@ -54,7 +137,7 @@ export default function Sts2ToolingPage() {
         </p>
       </ProjectSection>
 
-      <ProjectSection heading="Installation & Konfiguration">
+      <ProjectSection heading="Rider-Plugin: Installation & Konfiguration">
         <ul>
           <li>
             Installation über <strong>File → Settings → Plugins</strong>,
@@ -71,7 +154,7 @@ export default function Sts2ToolingPage() {
         </ul>
       </ProjectSection>
 
-      <ProjectSection heading="Technische Umsetzung">
+      <ProjectSection heading="Rider-Plugin: technische Umsetzung">
         <div className={styles.techGrid}>
           <div>
             <h3>Plugin-Architektur</h3>
@@ -109,13 +192,6 @@ export default function Sts2ToolingPage() {
             </ul>
           </div>
         </div>
-        <p className={styles.note}>
-          Bekannte Einschränkung: In seltenen Fällen können
-          Lokalisierungsdateien beim Autosave zurückgesetzt werden, wenn das
-          Plugin noch nicht vollständig geladen ist. Da es sich um ein
-          persönliches Produktivitäts-Tool handelt, wurde dies bewusst nicht
-          priorisiert behoben.
-        </p>
       </ProjectSection>
     </ProjectPage>
   );
