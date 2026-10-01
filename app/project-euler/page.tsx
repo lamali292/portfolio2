@@ -342,16 +342,54 @@ export default function ProjectEulerPage() {
           genau einmal mehr ihr Quadrat gebildet.
         </p>
         <p>
-          Der Grund steckt in <Math tex="\log_2(\log_2 x)" />. Das ist eine Zahl
-          mit Nachkommastellen, und Quadrieren addiert genau 1 dazu. Nach dem
-          Anlauf liegen alle Werte innerhalb eines Abstands von 1 (hier{" "}
-          {example.cycle
-            .map((x) => de(example.loglogAfter1[x - 2]))
-            .join(" ≤ ")}
-          ). Die kleinste Zahl ist dran, bekommt +1 und steht danach ganz hinten.
-          Dann ist die nächste dran, und so weiter. Nach {size} Runden stehen
-          alle wieder in derselben Reihenfolge, also wiederholt sich die Folge.
+          Warum? Man betrachtet für jede Zahl <Math tex="x" /> den Wert{" "}
+          <Math tex="\log_2(\log_2 x)" />. Das sind Kommazahlen. Quadrieren
+          addiert genau <strong>1</strong> dazu: Der ganzzahlige Anteil wächst,
+          der Nachkommaanteil bleibt für immer gleich.
         </p>
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Zahl</th>
+                <th>Wert am Anfang</th>
+                <th>Wert nach Runde {example.k * size}</th>
+                <th>Nachkommaanteil</th>
+              </tr>
+            </thead>
+            <tbody>
+              {example.cycle.map((x) => {
+                const v = example.loglogAfter1[x - 2];
+                return (
+                  <tr key={x}>
+                    <td className={styles.who}>{x}</td>
+                    <td>{de(example.start[x - 2])}</td>
+                    <td>{de(v)}</td>
+                    <td>,{de(v - Math_floor(v + 1e-9)).slice(2)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <ul className={styles.points}>
+          <li>
+            Wer quadriert wird, war der Kleinste und landet höchstens 1 über dem
+            bisherigen Minimum. Sobald jede Zahl einmal dran war, liegen deshalb
+            alle Werte in einem Fenster der Breite 1: Die ganzzahligen Anteile
+            sind (fast) gleich, die Nachkommaanteile entscheiden.
+          </li>
+          <li>
+            Dran ist immer der kleinste Wert. Er bekommt +1 und steht danach
+            ganz hinten, denn sein Nachkommaanteil ist unverändert. Die Zahlen
+            kommen also nacheinander nach aufsteigendem Nachkommaanteil dran.
+          </li>
+          <li>
+            Nach {size} Runden hat jede Zahl +1, alle Abstände sind gleich
+            geblieben, und es geht in derselben Reihenfolge von vorn los. Das
+            ist der Zyklus.
+          </li>
+        </ul>
 
         <h3>2. Die Abkürzung</h3>
         <p>
