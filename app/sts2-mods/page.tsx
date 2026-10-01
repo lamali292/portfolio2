@@ -17,7 +17,7 @@ import { modVideos, watcherVideos } from "@/lib/videos";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "STS2 Mods: Downfall & Watcher | Laurin Maurice Liebhart",
+  title: "Game-Mods: Downfall & Watcher | Laurin Maurice Liebhart",
   description:
     "Downfall: Mod-Suite mit 10 Charakteren und über 900 Karten für Slay the Spire 2, dazu der Watcher-Mod und 25 Pull Requests im BaseLib-Framework. Über 200.000 Downloads auf dem Steam Workshop.",
 };
@@ -44,7 +44,7 @@ export default function Sts2ModsPage() {
   return (
     <ProjectPage>
       <ProjectHero
-        title="STS2 Mods: Downfall & Watcher"
+        title="Game-Mods: Downfall & Watcher"
         lead="Zwei Mods für Slay the Spire 2, zusammen über 200.000 Downloads auf dem Steam Workshop: Downfall, eine Mod-Suite mit zehn neuen Charakteren, und Watcher, einer der ersten Charakter-Mods für das Spiel. Dazu Beiträge zum Community-Framework BaseLib."
       >
         <TechChips items={technologies} />

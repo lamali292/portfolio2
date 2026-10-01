@@ -7,7 +7,7 @@ import TechChips from "@/components/TechChips";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "STS2 Tooling | Laurin Maurice Liebhart",
+  title: "Werkzeuge für ein Modding-Team | Laurin Maurice Liebhart",
   description:
     "Werkzeuge für ein Modding-Team: Dialog-Tool für Autor:innen, Lokalisierungs-Formatierer, Rider-Plugin, Bild-Pipeline mit Google-Sheets-Sync, Kunst-Voting im Spiel, Test-Framework und eine eigene API für Downfall.",
 };
@@ -65,7 +65,7 @@ export default function Sts2ToolingPage() {
   return (
     <ProjectPage>
       <ProjectHero
-        title="STS2 Tooling: Werkzeuge für ein Modding-Team"
+        title="Werkzeuge für ein Modding-Team"
         lead="Downfall entsteht im Team mit Künstler:innen und Übersetzer:innen, die nicht programmieren. Ich habe die Werkzeuge gebaut, mit denen sie fehlerfrei arbeiten können: Dialog-Tool, Lokalisierungs-Formatierer, ein IDE-Plugin, eine Bild-Pipeline, ein Test-Framework und eine eigene API."
       >
         <TechChips items={technologies} />
