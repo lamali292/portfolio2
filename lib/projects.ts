@@ -44,7 +44,7 @@ export const projects: Project[] = [
     teaser:
       "SQL- und ML-gestützte Auswertung von Gameplay-Telemetrie aus dem Downfall-Mod - Pick- und Win-Rates, SHAP-Analysen und ein Live-Dashboard.",
     tech: ["SQL", "Python", "SHAP", "LightGBM"],
-    highlight: "283.930 getrackte Runs",
+    highlight: "304.225 getrackte Runs",
   },
   {
     slug: "sts2-tooling",

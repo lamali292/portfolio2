@@ -5,7 +5,9 @@
  *
  * Figures come from CONTEXT.md / docs/content/facts.md (Steam, telemetry).
  * Terminology: active subscribers, tracked runs, usertime (cumulative play
- * time of all tracked runs, each roughly 45-60 minutes).
+ * time of all tracked runs, on average 52.8 minutes per run). Only runs
+ * where Downfall is the sole modded content are tracked, so every figure
+ * here is a lower bound.
  */
 export const impactIntro = {
   heading: "Slay the Spire 2: mein Mod in Zahlen",
@@ -25,13 +27,13 @@ export const impactStats: ImpactStat[] = [
     detail: "Downfall und Watcher im Steam Workshop",
   },
   {
-    value: "283.930",
+    value: "304.225",
     label: "getrackte Runs",
-    detail: "9. Aug. – 28. Sep. 2026",
+    detail: "7. Aug. – 1. Okt. 2026, nur Runs ganz ohne andere Mods",
   },
   {
-    value: "25+ Jahre",
+    value: "30+ Jahre",
     label: "Usertime",
-    detail: "Summe der Spielzeit aller getrackten Runs, je etwa 45–60 Minuten",
+    detail: "Summe der Spielzeit aller getrackten Runs, im Schnitt 53 Minuten pro Run",
   },
 ];

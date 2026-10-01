@@ -13,11 +13,11 @@ The cumulative Steam Workshop subscriber count including people who have since u
 _Avoid_: total downloads (Steam doesn't expose a true download counter; this is the closest available figure)
 
 **Tracked run**:
-One completed or logged Slay the Spire 2 play session recorded by the Downfall telemetry pipeline (Supabase/Postgres), only sent when Downfall is the sole modded content active. Each run represents roughly 45–60 minutes of play.
+One completed or logged Slay the Spire 2 play session recorded by the Downfall telemetry pipeline (Supabase/Postgres), only sent when Downfall is the sole modded content active. On average a run is 52.8 minutes of play (as of 1 Oct 2026).
 _Avoid_: session, data point, game
 
 **Usertime**:
-Cumulative player-hours across all tracked runs, computed via SQL over the Postgres run data. Used as the site's headline "25+ years of usertime" stat.
+Cumulative player-hours across all tracked runs, computed via SQL over the Postgres run data. Used as the site's headline "30+ years of usertime" stat.
 _Avoid_: playtime, hours (too generic — usertime specifically means the aggregate derived figure)
 
 **STS2 Mods**:
