@@ -32,7 +32,7 @@ Canonical source content for the site. Agents building any page should pull fact
 - ML & Data Science: Python (JAX, PyTorch, TensorFlow, pandas, NumPy, matplotlib), SQL, Data Analytics, Pipeline-Entwicklung
 - Software Engineering: C#, Java, Kotlin, C, MATLAB, REST-APIs, Git/GitHub, CI/CD (GitHub Actions), Gradle, Rust
 - Sprachen: Deutsch (Muttersprache), Englisch (C1 – Fließend in Wort & Schrift, akademische Nutzung)
-- Sonstiges: Top 0,5% weltweit bei Project Euler (Algorithmische Mathematik)
+- Project Euler: Top 0,5% weltweit (Algorithmische Mathematik) - an achievement, not a skill; shown on the Project Euler project card instead
 
 ## STS2 modding ecosystem stats (as of 2026-09-28)
 
