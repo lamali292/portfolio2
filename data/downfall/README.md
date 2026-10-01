@@ -39,11 +39,10 @@ Aggregations performed:
 - **`summary`** — total tracked runs and solo/multiplayer split, summed
   from `runs_per_day`'s `bucket` column across all characters/version
   groups; `usertimeYears` is derived as `trackedRuns × avgSessionMinutes`,
-  per the site's documented ~45–60 min/run average (see `CONTEXT.md`). This
-  snapshot's window (`windowStart`–`windowEnd`) now matches the window
-  behind the static stat banner's figures in `docs/content/facts.md`
-  (Aug 9 – Sep 28), though the two remain separate data pulls and may drift
-  again if one is refreshed without the other.
+  per the site's documented average session length (see `CONTEXT.md`). This
+  snapshot (Aug 9 – Sep 28, 283,930 runs) is older than the homepage
+  figures in `docs/content/facts.md` (7 Aug – 1 Oct, 304,225 runs); the two
+  are separate data pulls and drift until this snapshot is refreshed.
 - **`runsOverTime`** — `runs_per_day`'s `bucket` column, summed across
   character and version_group per calendar day.
 - **`cardsByCharacter`** — `cards.json` rows summed across all cards and

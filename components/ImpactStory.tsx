@@ -3,8 +3,9 @@ import { impactIntro, impactStats } from "@/lib/impact";
 import styles from "./ImpactStory.module.css";
 
 /**
- * Homepage stats for the STS2 mod: one sentence saying what it is, then
- * three equally weighted figures (reach, tracked runs, usertime).
+ * Homepage stats framed as software development: an intro naming the
+ * example project, then the figures with usertime first and largest (same
+ * pattern as the M.Sc. in EducationStrip).
  */
 export default function ImpactStory() {
   return (
@@ -12,8 +13,11 @@ export default function ImpactStory() {
       <h2 className={styles.heading}>{impactIntro.heading}</h2>
       <p className={styles.intro}>{impactIntro.text}</p>
       <dl className={styles.stats}>
-        {impactStats.map((stat) => (
-          <div key={stat.label} className={styles.stat}>
+        {impactStats.map((stat, i) => (
+          <div
+            key={stat.label}
+            className={`${styles.stat} ${i === 0 ? styles.primary : ""}`}
+          >
             <dd className={styles.value}>{stat.value}</dd>
             <dt className={styles.label}>{stat.label}</dt>
             <p className={styles.detail}>{stat.detail}</p>

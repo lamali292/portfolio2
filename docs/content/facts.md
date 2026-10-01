@@ -39,8 +39,8 @@ Canonical source content for the site. Agents building any page should pull fact
 - Downfall: 89,872 active subscribers / 144,305 all-time subscribers (Steam Workshop)
 - Watcher: 77,127 active subscribers / 163,511 all-time subscribers (Steam Workshop)
 - Combined framing used on the owner's own CV: "200.000+ Downloads"
-- Tracked runs: 287,930, window Aug 9 – Sep 28 2026 (SQL query over Postgres run data)
-- Usertime: ~25+ years cumulative, computed from tracked runs × ~45-60min average session length
+- Tracked runs: 304,225, window 7 Aug – 1 Oct 2026 (SQL query over Postgres run data). Only runs where Downfall is the sole modded content are tracked (any other modded content, even a single relic, filters the run out), so this is a lower bound; the owner estimates the real figure may be about double.
+- Usertime: 30.5 years cumulative (267,596.7 hours = 11,149.9 days), 52.8 minutes average per tracked run. Pulled 2026-10-01 from the Postgres run data.
 - Watcher was the first-ever STS2 character mod; the owner co-built the BaseLib modding framework and Downfall/Watcher modding ecosystem alongside it
 - BaseLib contribution: ~3,000 LoC, primarily custom models/framework additions (e.g. an enchantment framework). Evidence: closed PRs at https://github.com/Alchyr/BaseLib-StS2/pulls?q=is%3Apr+state%3Aclosed+author%3Alamali292
 - Steam Workshop link (Downfall): https://steamcommunity.com/sharedfiles/filedetails/?id=3747508091
