@@ -11,7 +11,7 @@
  */
 export const impactIntro = {
   heading: "Softwareentwicklung: meine Projekte in Zahlen",
-  text: "Ein Beispiel aus der Praxis: Downfall, eine Erweiterung für das Spiel Slay the Spire 2, veröffentlicht im Steam Workshop. Den Code habe ich zu rund 94 % selbst geschrieben, die Telemetrie der gespielten Runs werte ich mit SQL und ML aus.",
+  text: "Ein Beispiel aus der Praxis: Downfall, eine Erweiterung für das Spiel Slay the Spire 2, veröffentlicht im Steam Workshop. Den Code habe ich zu rund 94 % selbst geschrieben, die Telemetrie der gespielten Runs werte ich mit SQL aus.",
 };
 
 export interface ImpactStat {
