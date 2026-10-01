@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import CommitChart from "@/components/CommitChart";
 import FeatureImage from "@/components/FeatureImage";
 import ProjectPage from "@/components/ProjectPage";
 import ProjectHero from "@/components/ProjectHero";
@@ -10,7 +9,6 @@ import { assetPath } from "@/lib/asset-path";
 import {
   baseLibFacts,
   characters,
-  commitsPerMonth,
   downfallTotals,
   watcherFacts,
 } from "@/lib/downfall-facts";
@@ -52,20 +50,19 @@ export default function Sts2ModsPage() {
         <TechChips items={technologies} />
       </ProjectHero>
 
-      <ProjectSection heading="Downfall in Zahlen">
-        <p className={styles.note}>
-          Downfall ist ein Teamprojekt mit Beiträgen aus der Community. Den
-          C#-Code habe ich zu rund {downfallTotals.codeSharePercent} %
-          geschrieben (gemessen an allen hinzugefügten Zeilen). Alle Zahlen
-          stammen aus dem{" "}
-          <a
-            href="https://github.com/lamali292/Downfall"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            öffentlichen Repository
-          </a>
-          .
+      <ProjectSection heading="Downfall">
+        <p>
+          Downfall ist eine große Erweiterung (ein &bdquo;Mod&ldquo;) für das
+          Kartenspiel Slay the Spire 2. Sie bringt zehn neue spielbare
+          Charaktere, jeder mit eigenem Kartenpool, eigenen Relikten und
+          eigener Spielmechanik. Die Charaktere stammen aus dem bekannten
+          Slay-the-Spire-1-Mod gleichen Namens und sind für das neue Spiel
+          komplett neu umgesetzt.
+        </p>
+        <p>
+          Downfall ist ein Teamprojekt mit Künstler:innen, Übersetzer:innen und
+          weiteren Entwickler:innen. Ich bin Hauptentwickler und habe rund{" "}
+          {downfallTotals.codeSharePercent} % des Codes geschrieben.
         </p>
         <ul className={styles.facts}>
           <li className={styles.fact}>
@@ -77,28 +74,12 @@ export default function Sts2ModsPage() {
             <span className={styles.factLabel}>Abonnenten insgesamt</span>
           </li>
           <li className={styles.fact}>
-            <span className={styles.factValue}>
-              {downfallTotals.commitsTotal.toLocaleString("de-DE")}
-            </span>
-            <span className={styles.factLabel}>Commits, davon ca. 1.375 von mir</span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>
-              {downfallTotals.linesOfCode}
-            </span>
-            <span className={styles.factLabel}>Zeilen C#</span>
+            <span className={styles.factValue}>{downfallTotals.characters}</span>
+            <span className={styles.factLabel}>neue Charaktere</span>
           </li>
           <li className={styles.fact}>
             <span className={styles.factValue}>{downfallTotals.cards}</span>
-            <span className={styles.factLabel}>Karten</span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>{downfallTotals.relics}</span>
-            <span className={styles.factLabel}>Relikte</span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>{downfallTotals.characters}</span>
-            <span className={styles.factLabel}>Charaktere</span>
+            <span className={styles.factLabel}>neue Karten</span>
           </li>
           <li className={styles.fact}>
             <span className={styles.factValue}>
@@ -108,19 +89,13 @@ export default function Sts2ModsPage() {
               Sprachen, Japanisch und Chinesisch zu über 97 % übersetzt
             </span>
           </li>
+          <li className={styles.fact}>
+            <span className={styles.factValue}>
+              ~{downfallTotals.codeSharePercent} %
+            </span>
+            <span className={styles.factLabel}>des Codes von mir</span>
+          </li>
         </ul>
-      </ProjectSection>
-
-      <ProjectSection heading="Entwicklungstempo">
-        <p>
-          Jeder Commit steht für ein Stück der Suite. Die Zahl meiner Commits
-          pro Monat ist seit dem Start am {downfallTotals.since} jeden Monat
-          gestiegen, nicht gesunken.
-        </p>
-        <CommitChart
-          data={commitsPerMonth}
-          caption={`Meine Commits in Downfall pro Monat, ${downfallTotals.since} bis ${downfallTotals.until}`}
-        />
       </ProjectSection>
 
       <ProjectSection heading="Zehn Charaktere">
@@ -178,10 +153,6 @@ export default function Sts2ModsPage() {
             <span className={styles.factLabel}>Watcher-Karten</span>
           </li>
           <li className={styles.fact}>
-            <span className={styles.factValue}>{watcherFacts.colorless}</span>
-            <span className={styles.factLabel}>farblose Karten</span>
-          </li>
-          <li className={styles.fact}>
             <span className={styles.factValue}>{watcherFacts.relics}</span>
             <span className={styles.factLabel}>eigene Relikte</span>
           </li>
@@ -196,10 +167,6 @@ export default function Sts2ModsPage() {
           <li className={styles.fact}>
             <span className={styles.factValue}>{watcherFacts.languages}</span>
             <span className={styles.factLabel}>Sprachen</span>
-          </li>
-          <li className={styles.fact}>
-            <span className={styles.factValue}>{watcherFacts.commits}</span>
-            <span className={styles.factLabel}>Commits</span>
           </li>
           <li className={styles.fact}>
             <span className={styles.factValue}>77.127</span>
@@ -239,9 +206,7 @@ export default function Sts2ModsPage() {
         <p>
           Beide Mods bauen auf <code>Alchyr.Sts2.BaseLib</code> auf, dem
           gemeinsamen Modding-Framework der Community. Dort habe ich{" "}
-          {baseLibFacts.pullRequests} Pull Requests eingereicht
-          (+{baseLibFacts.linesAdded} / &minus;{baseLibFacts.linesRemoved}{" "}
-          Zeilen in {baseLibFacts.commits} Commits), damit auch andere Mods
+          {baseLibFacts.pullRequests} Pull Requests eingereicht, damit auch andere Mods
           die Funktionen nutzen können. Unter anderem:
         </p>
         <ul>
