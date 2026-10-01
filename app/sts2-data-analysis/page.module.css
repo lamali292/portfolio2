@@ -25,3 +25,9 @@ section ul.links {
 section ul.links > li {
   margin: 0;
 }
+
+.shots {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
