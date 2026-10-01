@@ -175,7 +175,7 @@ export default function BotcPage() {
             </div>
             <div className={styles.gallery}>
               {feature.images.map((image) => (
-                <FeatureImage key={image.src} {...image} />
+                <FeatureImage key={image.src} {...image} phone />
               ))}
             </div>
           </div>

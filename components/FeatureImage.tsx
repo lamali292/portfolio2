@@ -6,6 +6,8 @@ interface FeatureImageProps {
   darkSrc?: string;
   alt: string;
   caption: string;
+  /** Frame the image like a phone screen (for tall app screenshots). */
+  phone?: boolean;
 }
 
 /**
@@ -18,6 +20,7 @@ export default function FeatureImage({
   darkSrc,
   alt,
   caption,
+  phone,
 }: FeatureImageProps) {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   return (
@@ -26,7 +29,7 @@ export default function FeatureImage({
       <img
         src={`${basePath}${src}`}
         alt={alt}
-        className={`${styles.image}${darkSrc ? " theme-light-only" : ""}`}
+        className={`${styles.image}${phone ? ` ${styles.phone}` : ""}${darkSrc ? " theme-light-only" : ""}`}
         loading="lazy"
       />
       {darkSrc && (
