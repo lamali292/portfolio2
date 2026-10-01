@@ -93,3 +93,52 @@ section p.note {
 .details[open] summary {
   margin-bottom: 1rem;
 }
+
+.tableWrap {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.table th,
+.table td {
+  padding: 0.4rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.table th {
+  border-bottom: 2px solid var(--color-fg);
+  font-weight: 700;
+}
+
+.phase1 td {
+  background: color-mix(in srgb, var(--color-accent) 7%, transparent);
+}
+
+.phase2 td {
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+.phase3 td {
+  background: transparent;
+  color: var(--color-muted);
+}
+
+section ul.points,
+section ol.points {
+  margin: 0 0 1.25rem;
+  padding-left: 1.6rem;
+  max-width: 44rem;
+}
+
+section .points > li {
+  margin-bottom: 0.55rem;
+}
